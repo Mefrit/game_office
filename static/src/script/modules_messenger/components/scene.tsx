@@ -125,7 +125,7 @@ export class Scene extends React.Component<sceneProps, sceneState> {
             })
                 .then((data) => data.json())
                 .then((result) => {
-                    console.log("result from server sentMessage", result);
+                   
                     if (result.status == "ok") {
                         //сообщение что успешно все отправлено
                         this.openDialog(this.state.id_sent, this.state.nick_interlocutor);

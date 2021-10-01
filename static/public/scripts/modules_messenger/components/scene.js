@@ -84,7 +84,6 @@ define(["require", "exports", "react", "./tools", "./chat"], function (require, 
                     })
                         .then(function (data) { return data.json(); })
                         .then(function (result) {
-                        console.log("result from server sentMessage", result);
                         if (result.status == "ok") {
                             _this.openDialog(_this.state.id_sent, _this.state.nick_interlocutor);
                         }

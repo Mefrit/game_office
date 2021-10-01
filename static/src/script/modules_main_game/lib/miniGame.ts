@@ -6,7 +6,7 @@ export class MiniGame {
         this.next_round = false;
     }
     initDom() {
-        console.log("minigame");
+
         let table = document.createElement("table"),
             container: any = document.getElementById("minigame"),
             td,
@@ -52,6 +52,5 @@ export class MiniGame {
             ev.target.classList.add("game__block-cross");
         }
         this.next_round = !this.next_round;
-        console.log("cchose");
     };
 }

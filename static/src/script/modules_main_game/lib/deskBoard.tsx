@@ -27,7 +27,6 @@ class DesckBoardReact extends React.Component<any, any> {
         })
             .then((data) => data.json())
             .then((result) => {
-                console.log("GetRecord!!!!!!!!!!! ", result);
                 if (result.status == "ok") {
                     //сообщение что успешно все отправлено
                     let tasks = result.tasks.map(elem => {
@@ -55,7 +54,6 @@ class DesckBoardReact extends React.Component<any, any> {
         })
             .then((data) => data.json())
             .then((result) => {
-                console.log("GetRecord!!!!!!!!!!! ", result);
                 if (result.status == "ok") {
                     //сообщение что успешно все отправлено
                     let tasks = this.state.task.filter(elem => {
@@ -71,7 +69,6 @@ class DesckBoardReact extends React.Component<any, any> {
 
     }
     rendertask() {
-        console.log("this.state.task", this.state.task)
         return this.state.task.map(elem => {
 
             return <div className="task">
@@ -101,7 +98,6 @@ class DesckBoardReact extends React.Component<any, any> {
         })
             .then((data) => data.json())
             .then((result) => {
-                console.log("result from server sentMessage", result);
                 if (result.status == "ok") {
                     //сообщение что успешно все отправлено
                     task.push({ title: this.state.title, description: this.state.description, owner: this.state.owner, id: result.id_record });
@@ -169,11 +165,10 @@ export class DesckBoard {
         this.init();
     }
     init() {
-        console.log("desck");
+  
         let modal: any = document.getElementById("openModal");
         modal.classList.add("open_modal");
         let modal_content = document.getElementById("modal-content-id");
-        // let close_modal = document.getElementById(close_modal);
         // запрос на данные
         ReactDOM.render(<DesckBoardReact />, modal_content);
     }

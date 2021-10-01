@@ -444,7 +444,6 @@ class Director {
         this.arrPersons = arrPersons;
         this.arrFurniture = arrFurniture
         this.config_skins = config_skins;
-        // this.ai.initScene(this.scene);
         this.start();
     }
     loadScene = (arrPersons, id_curent_user) => {

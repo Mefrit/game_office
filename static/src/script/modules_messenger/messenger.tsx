@@ -57,7 +57,6 @@ export class App extends React.Component<any, any> {
                         return tmp;
                     });
 
-                    console.log("GetAllUsers!!!!!!! ", arrPersons);
                     if (update) {
                         this.props.updateScene(arrPersons, this.state.id_curent_user);
                     } else {

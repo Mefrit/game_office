@@ -33,7 +33,6 @@ define(["require", "exports", "react", "react-dom"], function (require, exports,
                 })
                     .then(function (data) { return data.json(); })
                     .then(function (result) {
-                    console.log("GetRecord!!!!!!!!!!! ", result);
                     if (result.status == "ok") {
                         var tasks = _this.state.task.filter(function (elem) {
                             if (elem.id != id) {
@@ -58,7 +57,6 @@ define(["require", "exports", "react", "react-dom"], function (require, exports,
                 })
                     .then(function (data) { return data.json(); })
                     .then(function (result) {
-                    console.log("result from server sentMessage", result);
                     if (result.status == "ok") {
                         task.push({ title: _this.state.title, description: _this.state.description, owner: _this.state.owner, id: result.id_record });
                         _this.setState({
@@ -107,7 +105,6 @@ define(["require", "exports", "react", "react-dom"], function (require, exports,
             })
                 .then(function (data) { return data.json(); })
                 .then(function (result) {
-                console.log("GetRecord!!!!!!!!!!! ", result);
                 if (result.status == "ok") {
                     var tasks = result.tasks.map(function (elem) {
                         return {
@@ -126,7 +123,6 @@ define(["require", "exports", "react", "react-dom"], function (require, exports,
         };
         DesckBoardReact.prototype.rendertask = function () {
             var _this = this;
-            console.log("this.state.task", this.state.task);
             return this.state.task.map(function (elem) {
                 return React.createElement("div", { className: "task" },
                     React.createElement("div", { className: "task__info" },
@@ -170,7 +166,6 @@ define(["require", "exports", "react", "react-dom"], function (require, exports,
             this.init();
         }
         DesckBoard.prototype.init = function () {
-            console.log("desck");
             var modal = document.getElementById("openModal");
             modal.classList.add("open_modal");
             var modal_content = document.getElementById("modal-content-id");

@@ -32,6 +32,8 @@ class Module_tools:
             cursor.execute( query )
             id_in_history = cursor.fetchall()
             id_in_history = ",".join([str(i[0]) for i in  id_in_history])
+
+            
             query = """SELECT id_user, nick FROM users WHERE id_user NOT IN (%s) ORDER BY id_user DESC""" % (id_in_history)
             cursor.execute( query )
             users = []

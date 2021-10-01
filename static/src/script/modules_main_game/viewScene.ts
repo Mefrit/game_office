@@ -29,10 +29,6 @@ export class ViewScene {
         cnvsElem.style.left = elem.x * 100 - 30 + "px";
         cnvsElem.style.width = 160 + "px";
         cnvsElem.style.height = 160 + "px";
-        // cnvsElem.style.top = elem.y * 120 + "px";
-        // cnvsElem.style.left = elem.x * 120 + "px";
-        // cnvsElem.style.width = 120 + "px";
-        // cnvsElem.style.height = 130 + "px";
 
         ctx = cnvsElem.getContext("2d");
 
@@ -43,8 +39,6 @@ export class ViewScene {
     renderElement = (element) => {
         element.domPerson.style.left = element.getX() * 100 + "px";
         element.domPerson.style.top = element.getY() * 100 + "px";
-        // element.style.left = pos_dif_x + "px";
-        // element.style.top = pos_dif_y + "px";
     };
     drawImage(ctx, img) {
         let width, height, coef;
@@ -109,7 +103,6 @@ export class ViewScene {
         block.style.left = posX + "px";
         block.style.top = posY + "px";
         let random = this.randomInteger(0, 40);
-        // block.src = "src/images/block3.png";
         block.src = "./static/src/images/block1.png";
         this.furniture_collection.getCollection().forEach((element) => {
             if (element.x == i && element.y == j) {

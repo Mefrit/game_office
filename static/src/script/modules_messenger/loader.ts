@@ -68,7 +68,7 @@ export class Downloader {
     isReady() {
         var ready = true;
         for (var k in this.resourceCache) {
-            // console.log(k, this.resourceCache[k]);
+      
             if (this.resourceCache.hasOwnProperty(k) && !this.resourceCache[k]) {
                 ready = false;
             }

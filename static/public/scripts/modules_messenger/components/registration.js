@@ -67,7 +67,6 @@ define(["require", "exports", "react"], function (require, exports, React) {
                 })
                     .then(function (data) { return data.json(); })
                     .then(function (result) {
-                    console.log("result from server onEnter", result);
                     if (result.status == "ok") {
                         _this.props.setEnter(result.id_curent_user);
                     }

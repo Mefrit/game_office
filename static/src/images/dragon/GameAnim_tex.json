@@ -1,0 +1,43 @@
+{
+    "imagePath": "GameAnim_tex.png",
+    "width": 4096,
+    "height": 2048,
+    "name": "GameAnim",
+    "SubTexture": [
+        {
+            "width": 1137,
+            "y": 1,
+            "height": 2036,
+            "name": "c1943f98-e6ea-4c82-8b7c-17bff3e691c5",
+            "x": 1
+        },
+        {
+            "width": 540,
+            "y": 1,
+            "height": 1063,
+            "name": "f384621e-5f15-4394-ab67-ef4bff13edd51",
+            "x": 1140
+        },
+        {
+            "width": 540,
+            "y": 1,
+            "height": 1063,
+            "name": "f384621e-5f15-4394-ab67-ef4bff13edd5",
+            "x": 1682
+        },
+        {
+            "width": 265,
+            "y": 1066,
+            "height": 794,
+            "name": "183a19bf-bdba-4065-b47f-c8a69f895128",
+            "x": 1140
+        },
+        {
+            "width": 265,
+            "y": 1066,
+            "height": 794,
+            "name": "1d3c6acd-b104-4bc7-9bf5-0398b7e87e35",
+            "x": 1407
+        }
+    ]
+}

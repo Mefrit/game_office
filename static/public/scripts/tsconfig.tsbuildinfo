@@ -42,12 +42,12 @@
         "affectsGlobalScope": false
       },
       "../../src/script/modules_main_game/viewscene.ts": {
-        "version": "5e4e876aaa4638fd6fe74672add50af6bb4ba60ed2915558eeceea65dd9d5fee",
+        "version": "74c472366ee9b3fd75ea168838daa94e0becca973160ea016b76eb1ed5c71c30",
         "signature": "f67d4d1ddeffc9922f279bc54a82fe829820dbbff38396cf988c410ffe2d7c16",
         "affectsGlobalScope": false
       },
       "../../src/script/modules_main_game/lib/minigame.ts": {
-        "version": "abc37d4d3039805385655cae0d99c0d9cacfa86af1f1eb9ee7ff3e1f21a6fc3c",
+        "version": "d9b8746013d31947dc6693d4cc58ecf5ef578a9c7c241b322e2df2d41a529f94",
         "signature": "ac4b4a543d73eef677e8e46ed76b9b1d6a80f2c23a1057bd082c5aecb9bebcda",
         "affectsGlobalScope": false
       },
@@ -97,17 +97,17 @@
         "affectsGlobalScope": false
       },
       "../../src/script/modules_main_game/lib/deskboard.tsx": {
-        "version": "f9ade034d5db8bd98a75c6f185c3275de7185c6160a940c4d4273c399a9a4c4d",
+        "version": "0d17a6761de2ff549914cbcaf356cb19c5242c64ac2baedef223a447e88eec38",
         "signature": "b01618fc1dfb4dae00a66e3d6ae2bffe5de9aa0c3ebf60623d1e3983831c98b3",
         "affectsGlobalScope": false
       },
       "../../src/script/modules_main_game/modules/scene.ts": {
-        "version": "13294f503ab8c9ffe75d2e73a199ea008f547961e1ac41570315ecb138235d0b",
+        "version": "1f78304e5ff0e1a3e3f0948b3336f95fec4d1443b7785af2002b44c96315f702",
         "signature": "0b47abcb857c5675df201c64829a6ee9a397e87d20d86aa5bd703446413ab08c",
         "affectsGlobalScope": false
       },
       "../../src/script/modules_messenger/loader.ts": {
-        "version": "97e928c782b65aa367a80e3f6239725286cf001f5b1e910384a2c50cc651b314",
+        "version": "6c9db6b3bb8676008c6e588a6f5bc9e7bbb15c4888a7830164818f19a1d1a2dd",
         "signature": "10febb36156a0c1e3a52b4a5699a758c3062786ebce78d8d834150be0d5b77df",
         "affectsGlobalScope": false
       },
@@ -122,7 +122,7 @@
         "affectsGlobalScope": false
       },
       "../../src/script/modules_messenger/components/registration.tsx": {
-        "version": "24aa347563e69c114e82cd29bbf10a42fcc13c0ad55831bade42a923d0d87ef1",
+        "version": "28df0ef80971337b4cf0f6112795d6d6b2106fd679c0a53904f1e8119b32c1c7",
         "signature": "2a7f0f0bbb514e0b578cc0294146ca033b5015b4bb9a271bd42c1907fcd4d898",
         "affectsGlobalScope": false
       },
@@ -137,18 +137,23 @@
         "affectsGlobalScope": false
       },
       "../../src/script/modules_messenger/components/scene.tsx": {
-        "version": "60b8f955d7fed0022523314c2b538b5bf44fe40df9126cdea8706bbdd5c00d5d",
+        "version": "6b500068d0477135faf397e9581d17ec53e2c3539c7a9b51c9a433be7288cef3",
         "signature": "1e27684ffc67f791575d5c5de8ad5ab99361b2fee6eebb96f717b3f80452b663",
         "affectsGlobalScope": false
       },
       "../../src/script/modules_messenger/messenger.tsx": {
-        "version": "60b4451a856341ec0b2bd7bc07ca3e984b6b9860b2e746c95a9943cacc24dff8",
+        "version": "776b3139511626461cd7aeb27b9b81e8287ae721a2d94fd268ecef3e4ef08d41",
         "signature": "eaa7d2e31f792886bf553782c29a7ffe67cb3dca6026a62d13fec648c4736cb4",
         "affectsGlobalScope": false
       },
       "../../src/script/index.tsx": {
-        "version": "bc548ae15704d70359ff02f384b9a0be5b05292c9bb502ffbafb48731c745a2b",
+        "version": "b8265374f34f7f8546e25008ca357177cb8fd737fa379786e930069522b61c44",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
+        "affectsGlobalScope": false
+      },
+      "../../src/script/modules_level_editor/lever_editor.tsx": {
+        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "affectsGlobalScope": false
       },
       "../../node_modules/@types/scheduler/index.d.ts": {
@@ -343,6 +348,7 @@
       "../../node_modules/csstype/index.d.ts",
       "../../src/script/index.tsx",
       "../../src/script/loader.ts",
+      "../../src/script/modules_level_editor/lever_editor.tsx",
       "../../src/script/modules_main_game/lib/deskboard.tsx",
       [
         "../../src/script/modules_main_game/lib/dragon.ts",
@@ -386,7 +392,7 @@
           },
           {
             "file": "../../src/script/modules_main_game/modules/scene.ts",
-            "start": 9706,
+            "start": 9304,
             "length": 5,
             "messageText": "'desck' is declared but its value is never read.",
             "category": 1,
@@ -395,7 +401,7 @@
           },
           {
             "file": "../../src/script/modules_main_game/modules/scene.ts",
-            "start": 10466,
+            "start": 10064,
             "length": 9,
             "messageText": "'mini_game' is declared but its value is never read.",
             "category": 1,
@@ -404,7 +410,7 @@
           },
           {
             "file": "../../src/script/modules_main_game/modules/scene.ts",
-            "start": 11881,
+            "start": 11479,
             "length": 14,
             "messageText": "'image_domcache' is declared but its value is never read.",
             "category": 1,
@@ -427,7 +433,7 @@
           },
           {
             "file": "../../src/script/modules_main_game/viewscene.ts",
-            "start": 2710,
+            "start": 2405,
             "length": 2,
             "messageText": "'id' is declared but its value is never read.",
             "category": 1,
@@ -436,7 +442,7 @@
           },
           {
             "file": "../../src/script/modules_main_game/viewscene.ts",
-            "start": 3273,
+            "start": 2968,
             "length": 6,
             "messageText": "'radius' is declared but its value is never read.",
             "category": 1,
@@ -445,7 +451,7 @@
           },
           {
             "file": "../../src/script/modules_main_game/viewscene.ts",
-            "start": 3294,
+            "start": 2989,
             "length": 9,
             "messageText": "'posXblock' is declared but its value is never read.",
             "category": 1,
@@ -454,7 +460,7 @@
           },
           {
             "file": "../../src/script/modules_main_game/viewscene.ts",
-            "start": 3318,
+            "start": 3013,
             "length": 9,
             "messageText": "'posYblock' is declared but its value is never read.",
             "category": 1,
@@ -463,7 +469,7 @@
           },
           {
             "file": "../../src/script/modules_main_game/viewscene.ts",
-            "start": 3861,
+            "start": 3556,
             "length": 6,
             "messageText": "'random' is declared but its value is never read.",
             "category": 1,

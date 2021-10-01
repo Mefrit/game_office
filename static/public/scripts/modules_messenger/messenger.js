@@ -68,7 +68,6 @@ define(["require", "exports", "react", "./components/registration", "./component
                         tmp.nick = elem[4];
                         return tmp;
                     });
-                    console.log("GetAllUsers!!!!!!! ", arrPersons);
                     if (update) {
                         _this.props.updateScene(arrPersons, _this.state.id_curent_user);
                     }

@@ -20,13 +20,11 @@ define(["require", "exports"], function (require, exports) {
                     ev.target.classList.add("game__block-cross");
                 }
                 _this.next_round = !_this.next_round;
-                console.log("cchose");
             };
             this.initDom();
             this.next_round = false;
         }
         MiniGame.prototype.initDom = function () {
-            console.log("minigame");
             var table = document.createElement("table"), container = document.getElementById("minigame"), td, tr, input_again = document.createElement("input"), input_cancel = document.createElement("input");
             input_again.type = "button";
             input_again.value = "Заного";

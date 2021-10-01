@@ -23,10 +23,8 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
             this.onMove = function (event) {
                 var posX = event.target.style.left, posY = event.target.style.top;
                 var curent_unit = _this.getActivePerson(_this.canvas)[0];
-                console.log("curent_unit", curent_unit);
                 if (curent_unit.person.id == _this.id_curent_user) {
                     _this.setCoord2Server(parseInt(posX.split("px")) / 100, parseInt(posY.split("px")) / 100, _this.id_curent_user);
-                    console.log(curent_unit);
                     curent_unit.stopAnimation("default_perosn1");
                     curent_unit.playAnimation("walking_perosn1");
                     setTimeout(function () {
@@ -144,7 +142,6 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
                     block = document.createElement("img");
                     block.addEventListener("mouseout", this_1.onOutBlock);
                     block.addEventListener("mouseover", this_1.onBlock);
-                    console.log(typeof this_1.canvas);
                     this_1.furniture_collection.getCollection().forEach(function (element) {
                         if (element.x == i && element.y == j) {
                             is_furniture = true;
@@ -291,7 +288,6 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
                         if (elem.person.id == _this.id_curent_user) {
                             cnvsElem.classList.add("curent_user");
                         }
-                        console.log("cnvsElem", cnvsElem);
                         elem.initDomPerson(cnvsElem);
                         cache_skins.forEach(function (skin) {
                             var dragon = new dragon_1.DragonAnimationUpdate(_this.loader.get(skin.src_json), skin.cahce_image, skin.name, elem);
@@ -346,7 +342,7 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
                         elem.setAnimation(skin.name, dragon);
                     });
                     elem.initImage(img);
-                    var scene = document.getElementById("scene");
+                    var scene = document.getElementById("scene-game");
                     scene.appendChild(cnvsElem);
                     _this.person_collection.addPerson(elem);
                 });

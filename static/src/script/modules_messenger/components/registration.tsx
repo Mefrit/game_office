@@ -66,7 +66,7 @@ export class RegistrationComponent extends React.Component<registrationProps, re
         })
             .then((data) => data.json())
             .then((result) => {
-                console.log("result from server onEnter", result);
+
                 if (result.status == "ok") {
                     this.props.setEnter(result.id_curent_user);
                 } else {

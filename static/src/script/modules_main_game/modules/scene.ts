@@ -100,14 +100,13 @@ export class Scene {
             posY = event.target.style.top;
         //\словие что можно ходить в область
         let curent_unit = this.getActivePerson(this.canvas)[0];
-        console.log("curent_unit", curent_unit);
+
         if (curent_unit.person.id == this.id_curent_user) {
             this.setCoord2Server(
                 parseInt(posX.split("px")) / 100,
                 parseInt(posY.split("px")) / 100,
                 this.id_curent_user
             );
-            console.log(curent_unit);
 
             curent_unit.stopAnimation("default_perosn1");
             curent_unit.playAnimation("walking_perosn1");
@@ -124,9 +123,7 @@ export class Scene {
     getActivePerson(canvas) {
         return this.person_collection.getCollection().filter((elem: any) => {
             if (elem.getId() == canvas.getAttribute("data-id")) {
-                // elem.setCoord(parseInt(posX.split("px")) / 120, parseInt(posY.split("px")) / 120);
                 return elem;
-                // elem.setMoveAction(true);
             }
         });
     }
@@ -134,8 +131,6 @@ export class Scene {
         let activePerson = [];
         canvas.style.left = parseInt(posX.split("px")[0]) - 30 + "px";
         canvas.style.top = parseInt(posY.split("px")[0]) - 60 + "px";
-        // this.canvas.style.top = posY;
-        // this.canvas.style.transition = "transform 500ms ease-out 100s";
         canvas.style.transition = "1.6s";
 
         activePerson = this.person_collection.getCollection().filter((elem: any) => {
@@ -180,7 +175,7 @@ export class Scene {
                 block = document.createElement("img");
                 block.addEventListener("mouseout", this.onOutBlock);
                 block.addEventListener("mouseover", this.onBlock);
-                console.log(typeof this.canvas);
+
                 this.furniture_collection.getCollection().forEach((element) => {
                     if (element.x == i && element.y == j) {
                         is_furniture = true;
@@ -337,29 +332,10 @@ export class Scene {
                     if (elem.person.id == this.id_curent_user) {
                         cnvsElem.classList.add("curent_user");
                     }
-                    console.log("cnvsElem", cnvsElem);
+
                     elem.initDomPerson(cnvsElem);
                     // когда будем делать графику будет сложнее, тк от этого аподхода придется избавиться
                     cache_skins.forEach((skin: any) => {
-                        //         dragon.updateCanvas(elem.domPerson);
-                        //         if (skin.name == "default_archer") {
-                        //             dragon.play();
-                        //         }
-                        //         // setTimeout(() => {
-                        //         //     elem.stopAnimation("default_archer");
-                        //         //     elem.playAnimation("atacke_archer");
-                        //         //     setTimeout(() => {
-                        //         //         elem.stopAnimation("atacke_archer");
-                        //         //         elem.playAnimation("evil_archer_die");
-                        //         //         setTimeout(() => {
-                        //         //             elem.stopAnimation("evil_archer_die");
-                        //         //         }, 750);
-                        //         //     }, 4000);
-                        //         // }, 8000);
-                        //         elem.setAnimation(skin.name, dragon);
-                        //     }
-                        // } else {
-
                         var dragon = new DragonAnimationUpdate(
                             this.loader.get(skin.src_json),
                             skin.cahce_image,
@@ -371,33 +347,6 @@ export class Scene {
                             dragon.play();
                         }
                         elem.setAnimation(skin.name, dragon);
-                        // if (skin.class == "elf_fighter" && elem.person.class == "fighter") {
-                        //     var dragon = new DragonAnimationUpdate(
-                        //         this.loader.get(skin.src_json),
-                        //         skin.cahce_image,
-                        //         skin.name,
-                        //         elem
-                        //     );
-                        //     dragon.updateCanvas(elem.domPerson);
-                        //     if (skin.name == "elf_fighter_default") {
-                        //         dragon.play();
-                        //     }
-                        //     elem.setAnimation(skin.name, dragon);
-                        // }
-                        // if (skin.class == "elf_archer" && elem.person.class == "archer") {
-                        //     var dragon = new DragonAnimationUpdate(
-                        //         this.loader.get(skin.src_json),
-                        //         skin.cahce_image,
-                        //         skin.name,
-                        //         elem
-                        //     );
-                        //     dragon.updateCanvas(elem.domPerson);
-                        //     if (skin.name == "elf_archer_default") {
-                        //         dragon.play();
-                        //     }
-                        //     elem.setAnimation(skin.name, dragon);
-                        // }
-                        // // }
                     });
                     elem.initImage(img);
                     let scene: any = document.getElementById("scene");
@@ -462,44 +411,14 @@ export class Scene {
                     elem.setAnimation(skin.name, dragon);
                 });
                 elem.initImage(img);
-                let scene: any = document.getElementById("scene");
+                let scene: any = document.getElementById("scene-game");
                 scene.appendChild(cnvsElem);
 
                 this.person_collection.addPerson(elem);
             });
         }
     }
-    // contactPersons = (event) => {
-    //     let canvas = event.target,
-    //         img = this.loader.get(event.target.getAttribute("data-image"));
 
-    //     if (typeof this.canvas != "undefined") {
-    //         let id_person = parseInt(this.canvas.getAttribute("data-id"));
-    //         let unit: any = this.person_collection.getPersonById(id_person)[0];
-    //         // console.log(person);
-    //         if (unit.person.class == "fighter") {
-    //             unit.stopAnimation("elf_fighter_default");
-    //             unit.playAnimation("elf_fighter_atacke");
-
-    //             // animation.stop();
-    //             setTimeout(() => {
-    //                 unit.stopAnimation("elf_fighter_atacke");
-    //                 unit.playAnimation("elf_fighter_default");
-    //             }, 750);
-    //         }
-    //         if (unit.person.class == "archer") {
-    //             unit.stopAnimation("elf_archer_default");
-    //             unit.playAnimation("elf_archer_atacke");
-
-    //             // animation.stop();
-    //             setTimeout(() => {
-    //                 unit.stopAnimation("elf_archer_atacke");
-    //                 unit.playAnimation("elf_archer_default");
-    //             }, 750);
-    //         }
-    //         this.view.contactPersonsView(canvas, img, unit.person.damage);
-    //     }
-    // };
     onChangePerson = (event) => {
         let canvas = event.target;
         if (this.canvas != undefined) {
