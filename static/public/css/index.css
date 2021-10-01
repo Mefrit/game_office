@@ -66,9 +66,9 @@ html {
   width: 500px;
   position: absolute;
   left: 750px;
-  height: 370px;
+  height: 170px;
   z-index: 100;
-  top: 720px;
+  top: 520px;
   flex-direction: column;
 }
 .game__block {
