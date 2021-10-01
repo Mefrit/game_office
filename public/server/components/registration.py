@@ -48,7 +48,6 @@ class Module_registration:
             cursor = self.db.cursor()
         
             query = """ SELECT password,id_user FROM users WhERE login = '%s' """ % ( data['login'] )
-            # print("\n\n data['password']=> ",data['password'],data['password'].encode(),"\n\n")
             cursor.execute( query )
             user_data = cursor.fetchall()
 
