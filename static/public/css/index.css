@@ -63,12 +63,12 @@ html {
 }
 .container_game {
   display: flex;
-  width: 500px;
+  width: 200px;
   position: absolute;
-  left: 750px;
+  left: 800px;
   height: 170px;
   z-index: 100;
-  top: 520px;
+  top: 650px;
   flex-direction: column;
 }
 .game__block {
