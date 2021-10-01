@@ -1,0 +1,53 @@
+@import url("./inputs.css");
+.reg {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+}
+.reg__showEnter {
+  cursor: pointer;
+  color: #eeeeee;
+}
+.reg__showReg {
+  cursor: pointer;
+  color: #eeeeee;
+}
+.reg__showEnter,
+.reg__showReg {
+  padding: 6px 12px;
+  margin-bottom: -3px;
+  float: left;
+  z-index: 99;
+  min-width: 175px;
+  text-align: center;
+  border-bottom: 1px solid #3f5062;
+}
+.reg__activeMode {
+  background-color: #fff;
+  border: 1px solid #3f5062;
+  border-bottom: 3px solid #fff;
+  border-radius: 10px 10px 0px 0px;
+  color: black;
+}
+.reg__inf {
+  padding: 20px 30px;
+  background-color: #fff;
+  margin-top: 100px;
+  border: 1px solid #3f5062;
+  border-top: 1px solid #fff;
+  width: 350px;
+  max-width: 450px;
+  min-height: 320px;
+  border-radius: 0px 0px 10px 10px;
+}
+.container-registration {
+  width: 100%;
+  position: absolute;
+  top: -950px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  height: 300px;
+}
