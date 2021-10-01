@@ -31,8 +31,9 @@
     color: black;
 }
 .reg {
-    margin-top: 300px;
+    margin-top: 300px !important;
 }
+
 .reg__inf {
     padding: 20px 30px;
     background-color: #fff;
