@@ -1,4 +1,6 @@
-import * as React from "react";
+
+import React = require('react');
+
 import { ToolsComponent } from "./tools";
 import { ChatComponent } from "./chat";
 import { LevelEditor } from "../../modules_level_editor/level_editor"
@@ -163,9 +165,7 @@ export class Scene extends React.Component<sceneProps, sceneState> {
                 });
         }
     }
-
     render() {
-
         return (
             <div className="container__chat" >
                 {this.state.is_admin ? <LevelEditor updateDesign={this.props.updateDesign} /> : ""}

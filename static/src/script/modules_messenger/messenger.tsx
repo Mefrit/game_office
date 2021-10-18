@@ -1,4 +1,6 @@
-import * as React from "react"
+
+import React = require('react');
+
 
 import { RegistrationComponent } from "./components/registration";
 import { Scene } from "./components/scene";

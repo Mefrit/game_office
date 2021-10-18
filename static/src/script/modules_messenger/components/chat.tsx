@@ -1,4 +1,6 @@
-import * as React from "react";
+
+import React = require('react');
+
 interface chatProps {
     history_message: any[];
     sentMessage: (value: string) => void;

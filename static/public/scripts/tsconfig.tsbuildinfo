@@ -97,7 +97,7 @@
         "affectsGlobalScope": false
       },
       "../../src/script/modules_main_game/lib/deskboard.tsx": {
-        "version": "0d17a6761de2ff549914cbcaf356cb19c5242c64ac2baedef223a447e88eec38",
+        "version": "63defa86f5736241c58c7476226d6bd95352ff101b986cc622b7254dc39662f6",
         "signature": "b01618fc1dfb4dae00a66e3d6ae2bffe5de9aa0c3ebf60623d1e3983831c98b3",
         "affectsGlobalScope": false
       },
@@ -122,23 +122,23 @@
         "affectsGlobalScope": false
       },
       "../../src/script/modules_messenger/components/registration.tsx": {
-        "version": "4cb04c38f2c3d7cb9364c26499b2761d53b81baa95790aa39cfe7815894d9cca",
-        "signature": "2a7f0f0bbb514e0b578cc0294146ca033b5015b4bb9a271bd42c1907fcd4d898",
+        "version": "0cb042eb2ce46fd55e0c797599fd4069062eef6a79d65edbbe3035c9ca8aa077",
+        "signature": "f41fd2eca581a68052a674a74d6be63564d0e20fc58f1d52627e980b6187902c",
         "affectsGlobalScope": false
       },
       "../../src/script/modules_messenger/components/tools.tsx": {
-        "version": "cb2360dcc486ee093036d249dbf4fff215475cecd9e6cfef8899b05012685bbd",
-        "signature": "fc2c121b5832d06fd6ae2c781a616414ccb3ae5667fee532400f1cd2d48cc615",
+        "version": "d98910b315b2f4a1232ca58c4fc2cba616372f8f43466b8158d6b6c6d5f72468",
+        "signature": "276232fd6aa93856cf8b5571154d700cb5e75c742dedfd5ab7a24425d33bf5b4",
         "affectsGlobalScope": false
       },
       "../../src/script/modules_messenger/components/chat.tsx": {
-        "version": "60c4861694f7ec1939601278da4fc3351708385f06c6f50e19df75b8696de3b9",
-        "signature": "facf954e309422ea6a95819bfc14181c40c6c3c36724c70504ccdb13381fbad7",
+        "version": "5c5ed77406edcec83ef02fc0b3ac94c6c1e70e2ed501b1b3a11da5b950c5a56a",
+        "signature": "9c1dd790e9eb039d51430c96d9906ebbf4b8236130f25a4bbd04f78d55b2bcf5",
         "affectsGlobalScope": false
       },
       "../../src/script/modules_level_editor/components/elem_of_category.tsx": {
-        "version": "f4397ca8e870f69ed72a5d39534dea7f986180ece2a26aa9c9e98a1ec637701d",
-        "signature": "1c322697ba5bc29ac94327e725e4c2580dbbb84d83a7955a32957560afb13799",
+        "version": "3520a07d4e610efc8de98e485336cfdd947b1c6e5a67c1c7fb6a2d06126ea106",
+        "signature": "57d0fda80f1600342674ecbde5448fdabf9e698cc45e4b5c1025d87db343c58e",
         "affectsGlobalScope": false
       },
       "../../node_modules/typescript/lib/typescript.d.ts": {
@@ -147,32 +147,32 @@
         "affectsGlobalScope": false
       },
       "../../src/script/modules_level_editor/components/build_area.tsx": {
-        "version": "cd225db0c1229766707cbc1eb643e8330b94dfda1ee00a2df47a031ee771d2d3",
-        "signature": "4001a4a00ecfea0ea1692c1305fe7175b7be46ee02456b60c61452be9654fadb",
+        "version": "72f06b6c4640b1cc5c60b35db9e6d37ae5b243ea2c3c16c89320433ed201c638",
+        "signature": "f94ae50a7069ee3b3c4d7c58593b9ee4583614e7e49a51c1d080816c6f741780",
         "affectsGlobalScope": false
       },
       "../../src/script/modules_level_editor/components/main_interface.tsx": {
-        "version": "0d086696504333b7bcf5f40b75f3cf3ab9667c8454e01c4ee4b8e1857aaedf48",
-        "signature": "43f39cc48e1d73a3611f2d7b0e9a022bc3d56c9ed1654815f1bd701b35db5057",
+        "version": "2b37fb036f68b916c8964fecd79d9aced2632c2f6cdb3d1985d2b8f5404874ff",
+        "signature": "c5faf961658a8bd453e85ff93c7fa5c406be51da7235927c85d965f5f60aade0",
         "affectsGlobalScope": false
       },
       "../../src/script/modules_level_editor/level_editor.tsx": {
-        "version": "28d1b5e80f4e8a3ce2f7e2c3107a984b3e246641b3c5b972fa18c2f02ea93b3a",
-        "signature": "f19eb1499cdf05883becc0ec2e1e767b55e1c8bfbd49370e3821d4447aabdf65",
+        "version": "4fcaed09046f3ccc29fec0869a505554313429d15fb3d290b83cce09de264fc3",
+        "signature": "029e03d4d9ea36fb25707305abd89af43740f79f80a4f4b648ec51b12c92a19f",
         "affectsGlobalScope": false
       },
       "../../src/script/modules_messenger/components/scene.tsx": {
-        "version": "809efc8c53fd113bcb11a055437ef23c456c28d4958d0d035d855565ae7081ea",
-        "signature": "f3de27fd29a93478e1f02720f9d5f14aaeae766267542c5e8eb07bee4cc21a2d",
+        "version": "c7220b1a3fa95949829a6e77943c7006b723677b19d98a5ff0e073b5c3d7ebbd",
+        "signature": "db0fc8861d8175a8f0af47c9dcea9fa59a5b441cf6c6357d421b91f792dc939a",
         "affectsGlobalScope": false
       },
       "../../src/script/modules_messenger/messenger.tsx": {
-        "version": "ce3e8e28b1c9977dc027388741628133849371ffefbf2fa4dda20c8ca15e6e8b",
-        "signature": "eaa7d2e31f792886bf553782c29a7ffe67cb3dca6026a62d13fec648c4736cb4",
+        "version": "360b5db1d1454d44f77cd73b0a593290f9bfaecdebd0d27cb90d67ff92e04159",
+        "signature": "3a1a3d123a3700f92c95cdc4380a7d1c8cf8944e8f13942186368d8a431e2a4c",
         "affectsGlobalScope": false
       },
       "../../src/script/index.tsx": {
-        "version": "e675e724dce48754bff1cdff2937a5ec94032b851e11952ecc51c18d7a8dc3b0",
+        "version": "626f1cfc9d1fd0d38d1a7a87e4b41908945a2daeb6c20f36b9f09d3e7c31d86c",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -400,7 +400,7 @@
         [
           {
             "file": "../../src/script/modules_level_editor/components/build_area.tsx",
-            "start": 33,
+            "start": 38,
             "length": 47,
             "messageText": "'getSourceMapRange' is declared but its value is never read.",
             "category": 1,
@@ -537,7 +537,7 @@
         [
           {
             "file": "../../src/script/modules_messenger/components/chat.tsx",
-            "start": 211,
+            "start": 216,
             "length": 9,
             "messageText": "'chatState' is declared but never used.",
             "category": 1,
@@ -555,7 +555,7 @@
         [
           {
             "file": "../../src/script/modules_messenger/messenger.tsx",
-            "start": 621,
+            "start": 627,
             "length": 3,
             "messageText": "'url' is declared but its value is never read.",
             "category": 1,

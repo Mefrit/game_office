@@ -1,4 +1,6 @@
-import * as React from "react";
+
+import React = require('react');
+
 import { getSourceMapRange } from "typescript";
 
 
@@ -26,7 +28,6 @@ export class BuildArea extends React.Component<any, any>{
                 add = false;
             }
         });
-        // console.log("addElelmentInterface2Cache", add, cache_interface_elements, chosen_element);
         if (add) {
             cache_interface_elements.push(chosen_element);
         }
@@ -42,9 +43,7 @@ export class BuildArea extends React.Component<any, any>{
             cache_interface_elements = this.addElelmentInterface2Cache(chosen_element_from_props, cache_interface_elements);
 
         }
-        console.log("!123", this.props.chosen_element);
         this.props.setCacheElements(cache_interface_elements);
-        // console.log("this.state", cache_interface_elements);
         this.setState({
             chose_ceil_x: x,
             chose_ceil_y: y,
@@ -63,7 +62,6 @@ export class BuildArea extends React.Component<any, any>{
     getCeils(size_w, i) {
         let result: any[] = [];
         let is_chosen = false, src;
-
         for (let j = 0; j < size_w; j++) {
             is_chosen = this.state.chose_ceil_x == j && this.state.chose_ceil_y == i;
             src = this.getSrcCeil(j, i, this.state.cache_interface_elements);
@@ -86,7 +84,6 @@ export class BuildArea extends React.Component<any, any>{
     }
     changeTableSize = (name_param, value) => {
         let cache_interface_elements = this.state.cache_interface_elements;
-
         cache_interface_elements = this.deleteElements(cache_interface_elements, name_param == "size_w" ? "x" : "y", value);
         this.props.setCacheElements(cache_interface_elements);
         this.props.updateSizeArea(name_param, value);

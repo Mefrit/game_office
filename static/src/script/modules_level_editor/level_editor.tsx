@@ -1,4 +1,7 @@
-import * as React from "react";
+
+
+import React = require('react');
+
 import { LevelEditorInterface } from './components/main_interface'
 
 export class LevelEditor extends React.Component<any, any>{

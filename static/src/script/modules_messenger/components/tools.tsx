@@ -1,4 +1,6 @@
-import * as React from "react";
+
+import React = require('react');
+
 interface toolsProps {
     openDialog: (id: number, nick: string) => void;
     searchUser: (nick: string) => void;

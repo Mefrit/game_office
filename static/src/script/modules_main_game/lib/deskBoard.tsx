@@ -1,7 +1,8 @@
 // import * as React from "react";
 // import * as ReactDOM from "react-dom";
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+
+import React = require('react');
+import ReactDOM = require('react-dom');
 
 class DesckBoardReact extends React.Component<any, any> {
     constructor(props) {
@@ -165,7 +166,7 @@ export class DesckBoard {
         this.init();
     }
     init() {
-  
+
         let modal: any = document.getElementById("openModal");
         modal.classList.add("open_modal");
         let modal_content = document.getElementById("modal-content-id");

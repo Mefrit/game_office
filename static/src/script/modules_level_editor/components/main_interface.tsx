@@ -1,4 +1,4 @@
-import * as React from "react";
+import React = require('react');
 import { ElemOfCategory } from "./elem_of_category";
 import { BuildArea } from "./build_area";
 export class LevelEditorInterface extends React.Component<any, any>{
@@ -7,7 +7,7 @@ export class LevelEditorInterface extends React.Component<any, any>{
     size_h: number;
     constructor(props) {
         super(props);
-        console.log(" LevelEditorInterface this.props", this.props);
+
         this.state = {
             chosen_element: false,
             // FIX ME не очень красиво называется
@@ -15,6 +15,7 @@ export class LevelEditorInterface extends React.Component<any, any>{
         }
         this.size_w = this.props.design.size_w;
         this.size_h = this.props.design.size_h;
+
         // FIX ME убрать в файл настройки
         this.categories = [{
             name: "Интерьер",
@@ -181,8 +182,6 @@ export class LevelEditorInterface extends React.Component<any, any>{
         });
     }
     saveВesign = () => {
-        // console.log(this.state.cache_elements);
-
         this.props.saveВesign({ design: this.state.cache_elements, size_w: this.size_w, size_h: this.size_h });
     }
     updateSizeArea = (name, value) => {

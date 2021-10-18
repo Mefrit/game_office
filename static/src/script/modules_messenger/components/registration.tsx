@@ -1,4 +1,6 @@
-import * as React from "react";
+
+import React = require('react');
+
 interface registrationProps {
     setEnter: (id: number) => void;
 
