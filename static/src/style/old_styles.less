@@ -50,7 +50,7 @@ body {
     left: 0;
     top: 0;
     opacity: 0;
-    width: 1110px;
+    width: 1130px;
     height: 820px;
     overflow: auto;
     box-shadow: 0px 0px 20px rgb(255, 255, 255);
@@ -60,7 +60,7 @@ body {
     margin-left: 90px;
     margin-top: 5px;
     background-color: #272e47;
-    border-radius: 20px;
+    border-radius: 5px;
     display: block;
     // transform: scale(0.9);
     border: 4px solid white;
@@ -105,8 +105,12 @@ body {
 } */
 .sence__block {
     // background-color: rgb(131, 131, 131);
-    &-table {
-        z-index: 110 !important;
+    &-table,
+    &-interactive {
+        z-index: 110;
+    }
+    &-wall {
+        z-index: 90;
     }
 }
 .sence__block:hover {

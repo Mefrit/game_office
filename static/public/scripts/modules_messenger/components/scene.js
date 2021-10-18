@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "react", "./tools", "./chat"], function (require, exports, React, tools_1, chat_1) {
+define(["require", "exports", "react", "./tools", "./chat", "../../modules_level_editor/level_editor"], function (require, exports, React, tools_1, chat_1, level_editor_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Scene = void 0;
@@ -106,7 +106,6 @@ define(["require", "exports", "react", "./tools", "./chat"], function (require, 
                     })
                         .then(function (data) { return data.json(); })
                         .then(function (result) {
-                        console.log("result from server sentMessage", result);
                         if (result.status == "ok") {
                             _this.setState({
                                 users: result.users,
@@ -127,6 +126,7 @@ define(["require", "exports", "react", "./tools", "./chat"], function (require, 
                 nick: "",
                 nick_interlocutor: "",
                 users: [],
+                is_admin: true
             };
             return _this;
         }
@@ -165,6 +165,7 @@ define(["require", "exports", "react", "./tools", "./chat"], function (require, 
         };
         Scene.prototype.render = function () {
             return (React.createElement("div", { className: "container__chat" },
+                this.state.is_admin ? React.createElement(level_editor_1.LevelEditor, { updateDesign: this.props.updateDesign }) : "",
                 React.createElement(tools_1.ToolsComponent, { openDialog: this.openDialog, searchUser: this.searchUser, users: this.state.users, nick: this.state.nick, friends_list: this.state.friends_list, id_sent: this.state.id_sent, id_curent_user: this.props.id_curent_user }),
                 React.createElement(chat_1.ChatComponent, { history_message: this.state.open_dialog ? this.state.history_message : [], sentMessage: this.sentMessage, id_curent_user: this.props.id_curent_user, nick_interlocutor: this.state.nick_interlocutor })));
         };

@@ -11,7 +11,7 @@ export class App extends React.Component<any, any> {
         super(props);
         this.state = {
             enter: false,
-            id_curent_user: 25,
+            id_curent_user: -1,
         };
         this.load_scene = false
     }
@@ -82,7 +82,7 @@ export class App extends React.Component<any, any> {
         return (
             <div className="container">
                 {this.state.enter ? (
-                    <Scene id_curent_user={this.state.id_curent_user} />
+                    <Scene id_curent_user={this.state.id_curent_user} updateDesign={this.props.updateDesign} />
                 ) : (
                     <RegistrationComponent setEnter={this.setEnter} />
                 )}

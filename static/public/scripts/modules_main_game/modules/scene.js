@@ -1,10 +1,13 @@
-define(["require", "exports", "./person", "../viewScene", "./person_collection", "../lib/dragon", "../lib/miniGame", "../lib/deskBoard"], function (require, exports, person_1, viewScene_1, person_collection_1, dragon_1, miniGame_1, deskBoard_1) {
+define(["require", "exports", "./person", "../viewScene", "./person_collection", "../lib/dragon", "../lib/deskBoard"], function (require, exports, person_1, viewScene_1, person_collection_1, dragon_1, deskBoard_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Scene = void 0;
     var Scene = (function () {
         function Scene(loader, arrImg, config_skins, arrFurniture, id_curent_user) {
             var _this = this;
+            this.getDesign = function () {
+                return _this.furniture;
+            };
             this.onBlock = function (event) {
                 var block = event.target, posX, posY;
                 if (_this.canvas != undefined) {
@@ -53,12 +56,13 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
             this.config_skins = config_skins;
             this.person_collection = new person_collection_1.Collection(arrImg);
             this.furniture_collection = new person_collection_1.Collection(arrFurniture, "furniture");
+            this.size_w = 14;
+            this.size_h = 10;
             this.wall_blocks = [];
             this.id_curent_user = id_curent_user;
             this.view = new viewScene_1.ViewScene(this.person_collection, this.loader, this.furniture_collection);
             this.curentPerson = undefined;
             this.water_blocks = [];
-            this.play();
         }
         Scene.prototype.updateScene = function (arr_obj, id_curent_user) {
             var _this = this;
@@ -74,6 +78,16 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
                 _this.movePersonByCoord(person.domPerson, element.x * 100 + "px", element.y * 100 + "px");
             });
             this.person_collection;
+        };
+        Scene.prototype.updateDesign = function (arr_furniture, size_w, size_h) {
+            if (size_w === void 0) { size_w = 14; }
+            if (size_h === void 0) { size_h = 10; }
+            this.size_w = size_w;
+            this.size_h = size_h;
+            this.furniture = arr_furniture;
+            console.log("arr_furniture", arr_furniture);
+            this.furniture_collection = new person_collection_1.Collection(arr_furniture, "furniture");
+            this.renderArena();
         };
         Scene.prototype.getCoordFromStyle = function (elem) {
             return parseInt(elem.split("px")[0]);
@@ -134,9 +148,16 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
         Scene.prototype.get = function (name) {
             return this[name];
         };
+        Scene.prototype.deleteBlockScene = function (obj, class_name) {
+            var cache = obj.getElementsByClassName(class_name);
+            [].slice.call(cache).forEach(function (e) {
+                e.remove();
+            });
+        };
         Scene.prototype.renderArena = function () {
             var _this = this;
-            var scence = document.getElementById("scene"), block, posX = 0, posY = 0, position_block, num_rows = 14, is_furniture = false, curent_unit;
+            var scence = document.getElementById("scene"), block, src, posX = 0, posY = 0, position_block, num_rows = 14, is_furniture = false, curent_unit;
+            this.deleteBlockScene(scence, "sence__block");
             var _loop_1 = function (j) {
                 var _loop_2 = function (i) {
                     block = document.createElement("img");
@@ -145,6 +166,17 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
                     this_1.furniture_collection.getCollection().forEach(function (element) {
                         if (element.x == i && element.y == j) {
                             is_furniture = true;
+                            if (element.furniture.src) {
+                                src = element.furniture.src;
+                            }
+                            else {
+                                src = element.furniture.url;
+                            }
+                            block.classList.add("sence__block-interactive");
+                            if (element.furniture.type == "wall") {
+                                block.classList.add("sence__block-wall");
+                            }
+                            block = _this.view.renderBlockView(block, posX, posY, i, j, src);
                             block.addEventListener("click", function () {
                                 if (element.furniture.type == "table") {
                                     block.classList.add("sence__block-table");
@@ -168,12 +200,12 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
                     });
                     if (!is_furniture) {
                         block.addEventListener("click", this_1.onMove);
+                        block = this_1.view.renderBlockView(block, posX, posY, i, j);
                     }
                     is_furniture = false;
                     if (j == 6) {
                         num_rows = 8;
                     }
-                    block = this_1.view.renderBlockView(block, posX, posY, i, j);
                     if (block.src.indexOf("block1.png") != -1) {
                         position_block = block.getAttribute("data-coord").split(";");
                         this_1.wall_blocks.push({ x: position_block[0], y: position_block[1] });
@@ -185,14 +217,14 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
                     scence.appendChild(block);
                     posX += 100;
                 };
-                for (var i = 0; i < num_rows; i++) {
+                for (var i = 0; i < this_1.size_w; i++) {
                     _loop_2(i);
                 }
                 posX = 0;
                 posY += 100;
             };
             var this_1 = this;
-            for (var j = 0; j < 10; j++) {
+            for (var j = 0; j < this.size_h; j++) {
                 _loop_1(j);
             }
         };
@@ -212,7 +244,6 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
             }, 2000);
             if (curent_unit.person.id == this.id_curent_user) {
                 this.setCoord2Server(table.x, table.y, this.id_curent_user);
-                var mini_game = new miniGame_1.MiniGame();
                 this.movePersonByCoord(curent_unit.domPerson, table.x * 100 + "px", table.y * 100 + "px");
             }
         };
@@ -259,7 +290,6 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
         };
         Scene.prototype.play = function () {
             var _this = this;
-            this.renderArena();
             var cache_skins = [], tmp = {};
             this.loader.load(this.person_collection);
             this.loadDragon();

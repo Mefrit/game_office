@@ -79,13 +79,13 @@ define(["require", "exports"], function (require, exports) {
                 posYblock = element.style.top.split("px")[0];
             });
         };
-        ViewScene.prototype.renderBlockView = function (block, posX, posY, i, j) {
+        ViewScene.prototype.renderBlockView = function (block, posX, posY, i, j, src) {
+            if (src === void 0) { src = "./static/src/images/block1.png"; }
             block.setAttribute("data-coord", i + ";" + j);
             block.classList.add("sence__block");
             block.style.left = posX + "px";
             block.style.top = posY + "px";
-            var random = this.randomInteger(0, 40);
-            block.src = "./static/src/images/block1.png";
+            block.src = src;
             this.furniture_collection.getCollection().forEach(function (element) {
                 if (element.x == i && element.y == j) {
                     block.src = element.person.url;

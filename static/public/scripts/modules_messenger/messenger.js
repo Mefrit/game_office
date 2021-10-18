@@ -27,7 +27,7 @@ define(["require", "exports", "react", "./components/registration", "./component
             };
             _this.state = {
                 enter: false,
-                id_curent_user: 25,
+                id_curent_user: -1,
             };
             _this.load_scene = false;
             return _this;
@@ -91,7 +91,7 @@ define(["require", "exports", "react", "./components/registration", "./component
                     _this.loadScene(true);
                 }, 2000);
             }
-            return (React.createElement("div", { className: "container" }, this.state.enter ? (React.createElement(scene_1.Scene, { id_curent_user: this.state.id_curent_user })) : (React.createElement(registration_1.RegistrationComponent, { setEnter: this.setEnter }))));
+            return (React.createElement("div", { className: "container" }, this.state.enter ? (React.createElement(scene_1.Scene, { id_curent_user: this.state.id_curent_user, updateDesign: this.props.updateDesign })) : (React.createElement(registration_1.RegistrationComponent, { setEnter: this.setEnter }))));
         };
         return App;
     }(React.Component));

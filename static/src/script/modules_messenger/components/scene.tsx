@@ -1,8 +1,11 @@
 import * as React from "react";
 import { ToolsComponent } from "./tools";
 import { ChatComponent } from "./chat";
+import { LevelEditor } from "../../modules_level_editor/level_editor"
 interface sceneProps {
     id_curent_user: number;
+    updateDesign: any;
+
 }
 interface sceneState {
     friends_list: any[];
@@ -12,6 +15,7 @@ interface sceneState {
     nick: string;
     nick_interlocutor: string;
     users: any;
+    is_admin: boolean;
 }
 export class Scene extends React.Component<sceneProps, sceneState> {
     interfal_dialog: any;
@@ -27,6 +31,7 @@ export class Scene extends React.Component<sceneProps, sceneState> {
             nick: "",
             nick_interlocutor: "",
             users: [],
+            is_admin: true
         };
     }
     getHistory = () => {
@@ -125,7 +130,7 @@ export class Scene extends React.Component<sceneProps, sceneState> {
             })
                 .then((data) => data.json())
                 .then((result) => {
-                   
+
                     if (result.status == "ok") {
                         //сообщение что успешно все отправлено
                         this.openDialog(this.state.id_sent, this.state.nick_interlocutor);
@@ -148,7 +153,6 @@ export class Scene extends React.Component<sceneProps, sceneState> {
             })
                 .then((data) => data.json())
                 .then((result) => {
-                    console.log("result from server sentMessage", result);
                     if (result.status == "ok") {
                         this.setState({
                             users: result.users,
@@ -158,10 +162,13 @@ export class Scene extends React.Component<sceneProps, sceneState> {
                     }
                 });
         }
-    };
+    }
+
     render() {
+
         return (
             <div className="container__chat" >
+                {this.state.is_admin ? <LevelEditor updateDesign={this.props.updateDesign} /> : ""}
                 <ToolsComponent
                     openDialog={this.openDialog}
                     searchUser={this.searchUser}

@@ -20,6 +20,9 @@ export class Scene {
     furniture_collection: any;
     wall_blocks: any[]; // кеш стен
     id_curent_user: number;
+    size_w: number;
+    size_h: number;
+    furniture: any[];
     constructor(loader, arrImg, config_skins, arrFurniture, id_curent_user) {
         this.loader = loader;
         this.chosePerson = false;
@@ -27,16 +30,13 @@ export class Scene {
         this.config_skins = config_skins;
         this.person_collection = new Collection(arrImg);
         this.furniture_collection = new Collection(arrFurniture, "furniture");
-
+        this.size_w = 14;
+        this.size_h = 10;
         this.wall_blocks = [];
         this.id_curent_user = id_curent_user;
         this.view = new ViewScene(this.person_collection, this.loader, this.furniture_collection);
         this.curentPerson = undefined;
         this.water_blocks = [];
-        // this.ai = ai;
-        // this.ai.initView(this.view);
-        // this.ai.initPersons(this.person_collection, this.syncUnit);
-        this.play();
     }
     updateScene(arr_obj, id_curent_user) {
         // this.person_collection = new Collection(arr_obj);
@@ -55,6 +55,17 @@ export class Scene {
         this.person_collection;
         // this.view = new ViewScene(this.person_collection, this.loader, this.furniture_collection);
     }
+    updateDesign(arr_furniture, size_w = 14, size_h = 10) {
+        this.size_w = size_w;
+        this.size_h = size_h;
+        this.furniture = arr_furniture;
+        console.log("arr_furniture", arr_furniture);
+        this.furniture_collection = new Collection(arr_furniture, "furniture");
+        this.renderArena();
+    }
+    getDesign = () => {
+        return this.furniture;
+    };
     getCoordFromStyle(elem) {
         return parseInt(elem.split("px")[0]);
     }
@@ -161,25 +172,42 @@ export class Scene {
     get(name) {
         return this[name];
     }
+    deleteBlockScene(obj, class_name) {
+        let cache = obj.getElementsByClassName(class_name);
+        [].slice.call(cache).forEach((e) => {
+            e.remove();
+        });
+    }
     renderArena() {
         let scence: any = document.getElementById("scene"),
             block,
+            src,
             posX = 0,
             posY = 0,
             position_block,
             num_rows = 14,
             is_furniture = false,
             curent_unit;
-        for (let j = 0; j < 10; j++) {
-            for (let i = 0; i < num_rows; i++) {
+        // FIX ME тут можно применить оптимизацию из Yappi + sence__block переименовать
+        this.deleteBlockScene(scence, "sence__block");
+        for (let j = 0; j < this.size_h; j++) {
+            for (let i = 0; i < this.size_w; i++) {
                 block = document.createElement("img");
                 block.addEventListener("mouseout", this.onOutBlock);
                 block.addEventListener("mouseover", this.onBlock);
-
                 this.furniture_collection.getCollection().forEach((element) => {
                     if (element.x == i && element.y == j) {
                         is_furniture = true;
-
+                        if (element.furniture.src) {
+                            src = element.furniture.src;
+                        } else {
+                            src = element.furniture.url;
+                        }
+                        block.classList.add("sence__block-interactive");
+                        if (element.furniture.type == "wall") {
+                            block.classList.add("sence__block-wall");
+                        }
+                        block = this.view.renderBlockView(block, posX, posY, i, j, src);
                         block.addEventListener("click", () => {
                             if (element.furniture.type == "table") {
                                 block.classList.add("sence__block-table");
@@ -190,6 +218,7 @@ export class Scene {
                                 curent_unit = this.getActivePerson(this.canvas)[0];
                                 this.workKitchenAction(curent_unit, element);
                             }
+
                             if (element.furniture.type == "game") {
                                 curent_unit = this.getActivePerson(this.canvas)[0];
                                 this.workGameAction(curent_unit, element);
@@ -204,13 +233,14 @@ export class Scene {
 
                 if (!is_furniture) {
                     block.addEventListener("click", this.onMove);
+                    block = this.view.renderBlockView(block, posX, posY, i, j);
                 }
 
                 is_furniture = false;
                 if (j == 6) {
                     num_rows = 8;
                 }
-                block = this.view.renderBlockView(block, posX, posY, i, j);
+
                 if (block.src.indexOf("block1.png") != -1) {
                     position_block = block.getAttribute("data-coord").split(";");
                     this.wall_blocks.push({ x: position_block[0], y: position_block[1] });
@@ -224,7 +254,6 @@ export class Scene {
                 posX += 100;
             }
             posX = 0;
-            // posY += 120;
             posY += 100;
         }
     }
@@ -245,7 +274,6 @@ export class Scene {
         }, 2000);
         if (curent_unit.person.id == this.id_curent_user) {
             this.setCoord2Server(table.x, table.y, this.id_curent_user);
-            let mini_game = new MiniGame();
             this.movePersonByCoord(curent_unit.domPerson, table.x * 100 + "px", table.y * 100 + "px");
         }
     }
@@ -281,7 +309,6 @@ export class Scene {
     loadDragon() {
         let obj = this,
             image_domcache = [];
-
         this.config_skins.forEach((skin) => {
             image_domcache = [];
             skin.children.forEach((elem) => {
@@ -296,7 +323,7 @@ export class Scene {
         });
     }
     play() {
-        this.renderArena();
+        // this.renderArena();
         let cache_skins: any = [],
             tmp: any = {};
         // this.loader.loadElement("./src/images/rip.png");
@@ -357,20 +384,17 @@ export class Scene {
     }
     playNewPerson(person_collection) {
         // костыль, копипаст ужасный подход - 5 часов до дедлайна
-
         let cache_skins: any = [],
             tmp: any = {};
         let load = false;
-        // this.loader.loadElement("./src/images/rip.png");
+
         this.loader.load(person_collection);
-        // this.loadDragon();
+
         if (!load) {
             load = true;
 
             this.config_skins.forEach((skin) => {
                 skin.children.forEach((elem) => {
-                    // this.loader.loadJSON(elem.src_json);
-
                     tmp.cahce_image = [];
                     tmp.name = elem.name;
                     tmp.src_json = elem.src_json;

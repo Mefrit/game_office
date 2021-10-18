@@ -5,14 +5,6 @@ const series = require("gulp"),
 
 const gulp = require("gulp");
 
-const ts = require("gulp-typescript");
-
-const tsProject = ts.createProject("./tsconfig.json");
-
-gulp.task("tsc", function () {
-    return gulp.src(["./src/script/**/*.ts"]).pipe(ts()).pipe(gulp.dest("public/js"));
-});
-
 gulp.task("less", function () {
     return gulp
         .src("./src/style/**/*.less")

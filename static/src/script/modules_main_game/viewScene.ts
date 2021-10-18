@@ -1,5 +1,3 @@
-import { DragonAnimationUpdate } from "./lib/dragon";
-
 // new DragonAnimationUpdate(result.data, element.children, obj.name);
 export class ViewScene {
     arrObjPersons: any;
@@ -97,13 +95,12 @@ export class ViewScene {
             posYblock = element.style.top.split("px")[0];
         });
     }
-    renderBlockView(block, posX, posY, i, j) {
+    renderBlockView(block, posX, posY, i, j, src = "./static/src/images/block1.png") {
         block.setAttribute("data-coord", i + ";" + j);
         block.classList.add("sence__block");
         block.style.left = posX + "px";
         block.style.top = posY + "px";
-        let random = this.randomInteger(0, 40);
-        block.src = "./static/src/images/block1.png";
+        block.src = src;
         this.furniture_collection.getCollection().forEach((element) => {
             if (element.x == i && element.y == j) {
                 block.src = element.person.url;
