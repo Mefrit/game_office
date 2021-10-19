@@ -2,3 +2,4 @@
 .vscode
 **/*.js/**
 public/server
+public/build
