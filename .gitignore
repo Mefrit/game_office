@@ -3,5 +3,5 @@
 **/*.js/**
 **/*.css/**
 public/server
-public/build
+public/*
 static/public
