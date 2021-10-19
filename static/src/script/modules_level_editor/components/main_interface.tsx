@@ -18,153 +18,7 @@ export class LevelEditorInterface extends React.Component<any, any>{
         this.size_h = this.props.design.size_h;
 
         // FIX ME убрать в файл настройки
-        this.categories = [{
-            name: "Интерьер",
-            cache_elements: [
-                {
-                    type: "table",
-                    title: "стол_оффисный_1",
-                    src: "./static/src/images/table.png"
-                }, {
-                    type: "table",
-                    title: "стол_оффисный_2",
-                    src: "./static/src/images/table2.png"
-                }, {
-                    type: "kitchen",
-                    title: "стол",
-                    src: "./static/src/images/plita.png"
-                }, {
-                    type: "kitchen",
-                    title: "элемент кухни",
-                    src: "./static/src/images/wardrobe.png"
-                }, {
-                    type: "kitchen",
-                    title: "холодильник_1",
-                    src: "./static/src/images/icebox_2.png"
-                }, {
-                    type: "kitchen",
-                    title: "холодильник_2",
-                    src: "./static/src/images/icebox_1.png"
-                }, {
-                    type: "wall",
-                    title: "Кресло 1",
-                    src: "./static/src/images/divan1.png"
-                }, {
-                    type: "wall",
-                    title: "Кресло 2",
-                    src: "./static/src/images/divan-abort.png"
-                }
-            ]
-        }, {
-            name: "Стены",
-            cache_elements: [
-                {
-                    type: "wall",
-                    title: "стена горизонтальная",
-                    src: "./static/src/images/walls_gor.png"
-                },
-                {
-                    type: "wall",
-                    title: "стена вертикальная",
-                    src: "./static/src/images/walls.png"
-                },
-                {
-                    type: "wall",
-                    title: "угол",
-                    src: "./static/src/images/walls-angle.png"
-                },
-                {
-                    type: "wall",
-                    title: "угол",
-                    src: "./static/src/images/walls-angle2.png"
-                },
-                {
-                    type: "wall",
-                    title: "угол",
-                    src: "./static/src/images/walls-angle3.png"
-                },
-                {
-                    type: "wall",
-                    title: "угол",
-                    src: "./static/src/images/walls-angle4.png"
-                },
-                {
-                    type: "wall",
-                    title: "двойной угол",
-                    src: "./static/src/images/walls-angle_tripple1.png"
-                },
-                {
-                    type: "wall",
-                    title: "двойной угол",
-                    src: "./static/src/images/walls-angle_tripple2.png"
-                },
-                {
-                    type: "wall",
-                    title: "двойной угол",
-                    src: "./static/src/images/walls-angle_tripple3.png"
-                }, {
-                    type: "wall",
-                    title: "двойной угол",
-                    src: "./static/src/images/walls-angle_tripple4.png"
-                }
-                // walls-angle_tripple4.png
-            ]
-        }, {
-            name: "Функциональные элементы",
-            cache_elements: [
-                {
-                    type: "desck",
-                    title: "Task Boeard_1",
-                    src: "./static/src/images/desck1.png"
-                }, {
-                    type: "desck",
-                    title: "Task Boeard_2",
-                    src: "./static/src/images/desck2.png"
-                }, {
-                    type: "desck",
-                    title: "Task Boeard_3",
-                    src: "./static/src/images/desck3.png"
-                }, {
-                    type: "desck",
-                    title: "Task Boeard_4",
-                    src: "./static/src/images/desck4.png"
-                }
-            ]
-        }, {
-            name: "Игры",
-            cache_elements: [
-                {
-                    type: "game",
-                    title: "Элемент от игры_1",
-                    src: "./static/src/images/game_2.png"
-                },
-                {
-                    type: "game",
-                    title: "Элемент от игры_2",
-                    src: "./static/src/images/game_1.png"
-                },
-                {
-                    type: "game",
-                    title: "Элемент от игры_1",
-                    src: "./static/src/images/game_21.jpg"
-                },
-                {
-                    type: "game",
-                    title: "Элемент от игры_2",
-                    src: "./static/src/images/game_22.jpg"
-                }
-            ]
-        }, {
-            name: "Пол",
-            cache_elements: [
-                {
-                    type: "default",
-                    title: "Пол",
-                    src: "./static/src/images/block1.png"
-                }
-            ]
-        }];
-        console.log(JSON.stringify(this.categories));
+
     }
     componentDidMount() {
         fetch("/?module=office&action=GetLevelEditorCategories", {
@@ -216,7 +70,7 @@ export class LevelEditorInterface extends React.Component<any, any>{
             <div className="interface__header">
 
                 <h1>Interface Level Bulding</h1>
-                <input type="button" value="x" onClick={this.props.changeStateInterface} />
+                <input type="button" className="interface__btn" value="x" onClick={this.props.changeStateInterface} />
             </div>
             <div className="interface__content">
                 <ul className="interface__list_thinks"> {this.renderCategories()}</ul>
@@ -230,7 +84,7 @@ export class LevelEditorInterface extends React.Component<any, any>{
                     size_h={this.size_h}
                 />
             </div>
-            <input type="button" value="Сохранить дизайн" onClick={this.saveВesign} />
+            <input type="button" className="interface__btn" value="Сохранить дизайн" onClick={this.saveВesign} />
         </div>
     }
 }

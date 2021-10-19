@@ -100,20 +100,20 @@ export class BuildArea extends React.Component<any, any>{
                 <div className='area-row'>
                     <table> {this.renderArea()}</table>
                     <div>
-                        <input type="button" value="+" onClick={() => {
+                        <input type="button" className="interface__btn" value="+" onClick={() => {
                             this.changeTableSize("size_w", this.state.size_w + 1);
                         }} />
-                        <input type="button" value="-" onClick={() => {
+                        <input type="button" className="interface__btn" value="-" onClick={() => {
                             this.changeTableSize("size_w", this.state.size_w - 1);
                         }} />
 
                     </div>
                 </div>
                 <div>
-                    <input type="button" value="+" onClick={() => {
+                    <input type="button" className="interface__btn" value="+" onClick={() => {
                         this.changeTableSize("size_h", this.state.size_h + 1);
                     }} />
-                    <input type="button" value="-" onClick={() => {
+                    <input type="button" className="interface__btn" value="-" onClick={() => {
                         this.changeTableSize("size_h", this.state.size_h - 1);
                     }} />
                 </div>

@@ -1,23 +1,25 @@
 .level_editor_container {
     float: right;
+    font-family: "Jura", "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     &__image_build {
         width: 50px;
         cursor: pointer;
     }
 }
 .level_editor {
+    &__interface::before {
+        background-image: url("../../src/images/round.png");
+    }
     &__interface {
-        padding: 20px;
-        background-color: rgba(55, 58, 136, 0.974);
-        width: 1300px;
+        padding: 15px 40px;
+        background-color: #dab177;
+        // border: 22px solid #1f508a;
+        box-shadow: -16px -12px 0px #1f508a;
+        width: 1340px;
         position: absolute;
         left: -225%;
         top: 10%;
         z-index: 120;
-        // display: flex;
-        // justify-content: center;
-        // align-self: center;
-        // align-items: center;
         text-align: center;
         height: 700px;
     }
@@ -39,7 +41,7 @@
     }
     &-chosen {
         width: 95%;
-        background-color: rgba(85, 89, 216, 0.892);
+        border-bottom: 3px solid #1f508a;
     }
     // &__list {
     //     max-height: 200px;
@@ -62,17 +64,25 @@
             transition: 0.6s;
         }
         li:hover {
-            transform: scale(1.05);
+            transform: scale(1.01);
             transition: 0.9s;
         }
     }
     &__title {
         font-size: 20px;
         cursor: pointer;
-        color: rgb(214, 214, 214);
+        color: rgb(31, 31, 31);
     }
 }
 .interface {
+    &__btn {
+        padding: 5px 10px;
+        margin-top: 10px;
+        color: white;
+        min-width: 20px;
+        min-height: 20px;
+        background-color: #1f508a;
+    }
     &__header {
         display: flex;
         flex-direction: row;
@@ -92,24 +102,27 @@
         width: 320px;
         margin-left: 10px;
         margin-right: 5px;
-        border-radius: 5px;
+        border-radius: 1px;
         box-shadow: 0px 0px 5px white;
         list-style: none;
         max-height: 520px;
         padding: 5px;
         overflow: auto;
+        color: black;
+        background-color: white;
+        box-shadow: -16px -12px 0px #1f508a;
     }
 }
 .area {
     width: 80%;
     max-width: 900px;
-    height: 550px;
+    height: 500px;
     overflow: auto;
 
-    background-color: rgba(65, 69, 162, 0.924);
-    border: 1px solid white;
-    border-radius: 15px;
-    margin-left: 10px;
+    background-color: white;
+    box-shadow: -16px -12px 0px #1f508a;
+    border-radius: 2px;
+    margin-left: 25px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -141,7 +154,6 @@
     }
     &__ceils-chosen {
         box-shadow: 0px 0px 3px rgba(255, 255, 255, 0.816);
-        background-color: rgba(69, 139, 243, 0.748);
     }
     &__ceils:hover {
         box-shadow: 0px 0px 10px white;
