@@ -12,6 +12,7 @@ export class Person {
     domPerson: any;
     id: any;
     nick: any;
+    skin: number;
     image: any; // картинка персонажа
     constructor(person) {
         this.person = person;
@@ -19,6 +20,7 @@ export class Person {
         this.y = person.y;
         this.id = person.id;
         this.nick = person.nick;
+        this.skin = person.skin;
         this.moveAction = false;
         this.domPerson = undefined;
         this.animation = [];

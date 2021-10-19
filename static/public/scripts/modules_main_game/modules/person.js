@@ -9,6 +9,7 @@ define(["require", "exports"], function (require, exports) {
             this.y = person.y;
             this.id = person.id;
             this.nick = person.nick;
+            this.skin = person.skin;
             this.moveAction = false;
             this.domPerson = undefined;
             this.animation = [];

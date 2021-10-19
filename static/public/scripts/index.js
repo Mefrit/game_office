@@ -20,6 +20,7 @@ define(["require", "exports", "react", "react-dom", "./modules_main_game/loader"
     var config_skins = [
         {
             class: "perosn1",
+            skin: 1,
             children: [{
                     src_json: "/static/src/images/dragon/StoppingAnim_ske.json",
                     src_images: [
@@ -105,6 +106,183 @@ define(["require", "exports", "react", "react-dom", "./modules_main_game/loader"
                     scale: 0.4
                 },
             ]
+        },
+        {
+            class: "perosn2",
+            skin: 2,
+            children: [{
+                    src_json: "/static/src/images/dragon/StoppingAnim_ske.json",
+                    src_images: [
+                        { name: "body", path: "../static/src/images/dragon/person2/body.png" },
+                        { name: "left_arm_1", path: "../static/src/images/dragon/person2/left_arm_1.png" },
+                        { name: "left_arm_2", path: "../static/src/images/dragon/person2/left_arm_2.png" },
+                        { name: "left_leg_1", path: "../static/src/images/dragon/person2/left_leg_1.png" },
+                        { name: "left_leg_2", path: "../static/src/images/dragon/person2/left_leg_2.png" },
+                        { name: "right_arm_1", path: "../static/src/images/dragon/person2/right_arm_1.png" },
+                        { name: "right_arm_2", path: "../static/src/images/dragon/person2/right_arm_2.png" },
+                        { name: "right_leg_1", path: "../static/src/images/dragon/person2/right_leg_1.png" },
+                        { name: "right_leg_2", path: "../static/src/images/dragon/person2/right_leg_2.png" }
+                    ],
+                    name: "default_perosn1",
+                    class: "man",
+                    scale: 0.4
+                },
+                {
+                    src_json: "/static/src/images/dragon/GameAnim_ske.json",
+                    src_images: [
+                        { name: "body", path: "../static/src/images/dragon/person2/body.png" },
+                        { name: "left_arm_1", path: "../static/src/images/dragon/person2/left_arm_1.png" },
+                        { name: "left_arm_2", path: "../static/src/images/dragon/person2/left_arm_2.png" },
+                        { name: "left_leg_1", path: "../static/src/images/dragon/person2/left_leg_1.png" },
+                        { name: "left_leg_2", path: "../static/src/images/dragon/person2/left_leg_2.png" },
+                        { name: "right_arm_1", path: "../static/src/images/dragon/person2/right_arm_1.png" },
+                        { name: "right_arm_2", path: "../static/src/images/dragon/person2/right_arm_2.png" },
+                        { name: "right_leg_1", path: "../static/src/images/dragon/person2/right_leg_1.png" },
+                        { name: "right_leg_2", path: "../static/src/images/dragon/person2/right_leg_2.png" }
+                    ],
+                    name: "funny_perosn1",
+                    class: "man",
+                    scale: 0.4
+                }, {
+                    src_json: "/static/src/images/dragon/WalkedAnim_ske.json",
+                    src_images: [
+                        { name: "body", path: "../static/src/images/dragon/person2/body.png" },
+                        { name: "left_arm_1", path: "../static/src/images/dragon/person2/left_arm_1.png" },
+                        { name: "left_arm_2", path: "../static/src/images/dragon/person2/left_arm_2.png" },
+                        { name: "left_leg_1", path: "../static/src/images/dragon/person2/left_leg_1.png" },
+                        { name: "left_leg_2", path: "../static/src/images/dragon/person2/left_leg_2.png" },
+                        { name: "right_arm_1", path: "../static/src/images/dragon/person2/right_arm_1.png" },
+                        { name: "right_arm_2", path: "../static/src/images/dragon/person2/right_arm_2.png" },
+                        { name: "right_leg_1", path: "../static/src/images/dragon/person2/right_leg_1.png" },
+                        { name: "right_leg_2", path: "../static/src/images/dragon/person2/right_leg_2.png" }
+                    ],
+                    name: "walking_perosn1",
+                    class: "man",
+                    scale: 0.4
+                },
+                {
+                    src_json: "/static/src/images/dragon/EatingAnim_ske.json",
+                    src_images: [
+                        { name: "body", path: "../static/src/images/dragon/person2/body.png" },
+                        { name: "left_arm_1", path: "../static/src/images/dragon/person2/left_arm_1.png" },
+                        { name: "left_arm_2", path: "../static/src/images/dragon/person2/left_arm_2.png" },
+                        { name: "left_leg_1", path: "../static/src/images/dragon/person2/left_leg_1.png" },
+                        { name: "left_leg_2", path: "../static/src/images/dragon/person2/left_leg_2.png" },
+                        { name: "right_arm_1", path: "../static/src/images/dragon/person2/right_arm_1.png" },
+                        { name: "right_arm_2", path: "../static/src/images/dragon/person2/right_arm_2.png" },
+                        { name: "right_leg_1", path: "../static/src/images/dragon/person2/right_leg_1.png" },
+                        { name: "right_leg_2", path: "../static/src/images/dragon/person2/right_leg_2.png" }
+                    ],
+                    name: "eating_perosn1",
+                    class: "man",
+                    scale: 0.4
+                },
+                {
+                    src_json: "/static/src/images/dragon/WriteAnim_ske.json",
+                    src_images: [
+                        { name: "body", path: "../static/src/images/dragon/person2/body.png" },
+                        { name: "left_arm_1", path: "../static/src/images/dragon/person2/left_arm_1.png" },
+                        { name: "left_arm_2", path: "../static/src/images/dragon/person2/left_arm_2.png" },
+                        { name: "left_leg_1", path: "../static/src/images/dragon/person2/left_leg_1.png" },
+                        { name: "left_leg_2", path: "../static/src/images/dragon/person2/left_leg_2.png" },
+                        { name: "right_arm_1", path: "../static/src/images/dragon/person2/right_arm_1.png" },
+                        { name: "right_arm_2", path: "../static/src/images/dragon/person2/right_arm_2.png" },
+                        { name: "right_leg_1", path: "../static/src/images/dragon/person2/right_leg_1.png" },
+                        { name: "right_leg_2", path: "../static/src/images/dragon/person2/right_leg_2.png" }
+                    ],
+                    name: "work_perosn1",
+                    class: "man",
+                    scale: 0.4
+                }
+            ]
+        }, {
+            class: "perosn2",
+            skin: 3,
+            children: [{
+                    src_json: "/static/src/images/dragon/StoppingAnim_ske.json",
+                    src_images: [
+                        { name: "body", path: "../static/src/images/dragon/person3/body.png" },
+                        { name: "left_arm_1", path: "../static/src/images/dragon/person3/left_arm_1.png" },
+                        { name: "left_arm_2", path: "../static/src/images/dragon/person3/left_arm_2.png" },
+                        { name: "left_leg_1", path: "../static/src/images/dragon/person3/left_leg_1.png" },
+                        { name: "left_leg_2", path: "../static/src/images/dragon/person3/left_leg_2.png" },
+                        { name: "right_arm_1", path: "../static/src/images/dragon/person3/right_arm_1.png" },
+                        { name: "right_arm_2", path: "../static/src/images/dragon/person3/right_arm_2.png" },
+                        { name: "right_leg_1", path: "../static/src/images/dragon/person3/right_leg_1.png" },
+                        { name: "right_leg_2", path: "../static/src/images/dragon/person3/right_leg_2.png" }
+                    ],
+                    name: "default_perosn1",
+                    class: "man",
+                    scale: 0.4
+                },
+                {
+                    src_json: "/static/src/images/dragon/GameAnim_ske.json",
+                    src_images: [
+                        { name: "body", path: "../static/src/images/dragon/person3/body.png" },
+                        { name: "left_arm_1", path: "../static/src/images/dragon/person3/left_arm_1.png" },
+                        { name: "left_arm_2", path: "../static/src/images/dragon/person3/left_arm_2.png" },
+                        { name: "left_leg_1", path: "../static/src/images/dragon/person3/left_leg_1.png" },
+                        { name: "left_leg_2", path: "../static/src/images/dragon/person3/left_leg_2.png" },
+                        { name: "right_arm_1", path: "../static/src/images/dragon/person3/right_arm_1.png" },
+                        { name: "right_arm_2", path: "../static/src/images/dragon/person3/right_arm_2.png" },
+                        { name: "right_leg_1", path: "../static/src/images/dragon/person3/right_leg_1.png" },
+                        { name: "right_leg_2", path: "../static/src/images/dragon/person3/right_leg_2.png" }
+                    ],
+                    name: "funny_perosn1",
+                    class: "man",
+                    scale: 0.4
+                }, {
+                    src_json: "/static/src/images/dragon/WalkedAnim_ske.json",
+                    src_images: [
+                        { name: "body", path: "../static/src/images/dragon/person3/body.png" },
+                        { name: "left_arm_1", path: "../static/src/images/dragon/person3/left_arm_1.png" },
+                        { name: "left_arm_2", path: "../static/src/images/dragon/person3/left_arm_2.png" },
+                        { name: "left_leg_1", path: "../static/src/images/dragon/person3/left_leg_1.png" },
+                        { name: "left_leg_2", path: "../static/src/images/dragon/person3/left_leg_2.png" },
+                        { name: "right_arm_1", path: "../static/src/images/dragon/person3/right_arm_1.png" },
+                        { name: "right_arm_2", path: "../static/src/images/dragon/person3/right_arm_2.png" },
+                        { name: "right_leg_1", path: "../static/src/images/dragon/person3/right_leg_1.png" },
+                        { name: "right_leg_2", path: "../static/src/images/dragon/person3/right_leg_2.png" }
+                    ],
+                    name: "walking_perosn1",
+                    class: "man",
+                    scale: 0.4
+                },
+                {
+                    src_json: "/static/src/images/dragon/EatingAnim_ske.json",
+                    src_images: [
+                        { name: "body", path: "../static/src/images/dragon/person3/body.png" },
+                        { name: "left_arm_1", path: "../static/src/images/dragon/person3/left_arm_1.png" },
+                        { name: "left_arm_2", path: "../static/src/images/dragon/person3/left_arm_2.png" },
+                        { name: "left_leg_1", path: "../static/src/images/dragon/person3/left_leg_1.png" },
+                        { name: "left_leg_2", path: "../static/src/images/dragon/person3/left_leg_2.png" },
+                        { name: "right_arm_1", path: "../static/src/images/dragon/person3/right_arm_1.png" },
+                        { name: "right_arm_2", path: "../static/src/images/dragon/person3/right_arm_2.png" },
+                        { name: "right_leg_1", path: "../static/src/images/dragon/person3/right_leg_1.png" },
+                        { name: "right_leg_2", path: "../static/src/images/dragon/person3/right_leg_2.png" }
+                    ],
+                    name: "eating_perosn1",
+                    class: "man",
+                    scale: 0.4
+                },
+                {
+                    src_json: "/static/src/images/dragon/WriteAnim_ske.json",
+                    src_images: [
+                        { name: "body", path: "../static/src/images/dragon/person3/body.png" },
+                        { name: "left_arm_1", path: "../static/src/images/dragon/person3/left_arm_1.png" },
+                        { name: "left_arm_2", path: "../static/src/images/dragon/person3/left_arm_2.png" },
+                        { name: "left_leg_1", path: "../static/src/images/dragon/person3/left_leg_1.png" },
+                        { name: "left_leg_2", path: "../static/src/images/dragon/person3/left_leg_2.png" },
+                        { name: "right_arm_1", path: "../static/src/images/dragon/person3/right_arm_1.png" },
+                        { name: "right_arm_2", path: "../static/src/images/dragon/person3/right_arm_2.png" },
+                        { name: "right_leg_1", path: "../static/src/images/dragon/person3/right_leg_1.png" },
+                        { name: "right_leg_2", path: "../static/src/images/dragon/person3/right_leg_2.png" }
+                    ],
+                    name: "work_perosn1",
+                    class: "man",
+                    scale: 0.4
+                }
+            ]
         }
     ];
     var Director = (function () {
@@ -115,6 +293,7 @@ define(["require", "exports", "react", "react-dom", "./modules_main_game/loader"
                     var scene = document.getElementById('scene');
                     scene.style.opacity = "1";
                     _this.load = true;
+                    console.log(arrPersons);
                     _this.scene = new scene_1.Scene(_this.loader, arrPersons, _this.config_skins, [], id_curent_user);
                     _this.loadDesign();
                     _this.scene.play();

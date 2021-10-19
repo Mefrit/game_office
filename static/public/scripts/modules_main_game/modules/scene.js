@@ -85,7 +85,6 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
             this.size_w = size_w;
             this.size_h = size_h;
             this.furniture = arr_furniture;
-            console.log("arr_furniture", arr_furniture);
             this.furniture_collection = new person_collection_1.Collection(arr_furniture, "furniture");
             this.renderArena();
         };
@@ -298,6 +297,8 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
                 if (!load) {
                     load = true;
                     _this.config_skins.forEach(function (skin) {
+                        console.log(skin);
+                        cache_skins[skin.skin] = [];
                         skin.children.forEach(function (elem) {
                             tmp.cahce_image = [];
                             tmp.name = elem.name;
@@ -306,7 +307,7 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
                             elem.src_images.forEach(function (img) {
                                 tmp.cahce_image[img.name] = { node: _this.loader.get(img.path) };
                             });
-                            cache_skins.push(tmp);
+                            cache_skins[skin.skin].push(tmp);
                             tmp = {};
                         });
                     });
@@ -314,12 +315,13 @@ define(["require", "exports", "./person", "../viewScene", "./person_collection",
                         var img = _this.loader.get(elem.person.url);
                         var cnvsElem = document.createElement("canvas");
                         cnvsElem = _this.view.renderPlayer(cnvsElem, elem, img);
+                        console.log("n.getCollection().forE", elem);
                         cnvsElem.onclick = _this.onChangePerson;
                         if (elem.person.id == _this.id_curent_user) {
                             cnvsElem.classList.add("curent_user");
                         }
                         elem.initDomPerson(cnvsElem);
-                        cache_skins.forEach(function (skin) {
+                        cache_skins[elem.skin].forEach(function (skin) {
                             var dragon = new dragon_1.DragonAnimationUpdate(_this.loader.get(skin.src_json), skin.cahce_image, skin.name, elem);
                             dragon.updateCanvas(elem.domPerson);
                             if (skin.name == "default_perosn1") {

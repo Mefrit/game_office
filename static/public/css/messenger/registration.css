@@ -6,6 +6,24 @@
   height: 300px;
   margin-top: 400px;
 }
+.reg__skins {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  align-items: center;
+}
+.reg__skins img {
+  margin-bottom: 10px;
+  width: 50px;
+  margin-left: 10px;
+  transition: 0.5s;
+}
+.reg__container_avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 40px;
+  overflow: hidden;
+}
 .reg__showEnter {
   cursor: pointer;
   color: #eeeeee;
@@ -40,6 +58,8 @@
   max-width: 450px;
   min-height: 320px;
   border-radius: 0px 0px 10px 10px;
+  display: flex;
+  align-items: center;
 }
 .container-registration {
   width: 100%;

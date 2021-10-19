@@ -2,7 +2,7 @@ import { Person } from "./person";
 import { ViewScene } from "../viewScene";
 import { Collection } from "./person_collection";
 import { DragonAnimationUpdate } from "../lib/dragon";
-import { MiniGame } from "../lib/miniGame";
+
 import { DesckBoard } from "../lib/deskBoard";
 
 export class Scene {
@@ -59,7 +59,6 @@ export class Scene {
         this.size_w = size_w;
         this.size_h = size_h;
         this.furniture = arr_furniture;
-        console.log("arr_furniture", arr_furniture);
         this.furniture_collection = new Collection(arr_furniture, "furniture");
         this.renderArena();
     }
@@ -323,10 +322,9 @@ export class Scene {
         });
     }
     play() {
-        // this.renderArena();
         let cache_skins: any = [],
             tmp: any = {};
-        // this.loader.loadElement("./src/images/rip.png");
+
         this.loader.load(this.person_collection);
         this.loadDragon();
         let load = false;
@@ -334,9 +332,9 @@ export class Scene {
             if (!load) {
                 load = true;
                 this.config_skins.forEach((skin) => {
+                    console.log(skin);
+                    cache_skins[skin.skin] = [];
                     skin.children.forEach((elem) => {
-                        // this.loader.loadJSON(elem.src_json);
-
                         tmp.cahce_image = [];
                         tmp.name = elem.name;
                         tmp.src_json = elem.src_json;
@@ -344,8 +342,8 @@ export class Scene {
                         elem.src_images.forEach((img) => {
                             tmp.cahce_image[img.name] = { node: this.loader.get(img.path) };
                         });
-
-                        cache_skins.push(tmp);
+                        cache_skins[skin.skin].push(tmp);
+                        // cache_skins.push(tmp);
                         tmp = {};
                     });
                 });
@@ -354,7 +352,7 @@ export class Scene {
                     let img = this.loader.get(elem.person.url);
                     let cnvsElem = document.createElement("canvas");
                     cnvsElem = this.view.renderPlayer(cnvsElem, elem, img);
-
+                    console.log("n.getCollection().forE", elem);
                     cnvsElem.onclick = this.onChangePerson;
                     if (elem.person.id == this.id_curent_user) {
                         cnvsElem.classList.add("curent_user");
@@ -362,7 +360,7 @@ export class Scene {
 
                     elem.initDomPerson(cnvsElem);
                     // когда будем делать графику будет сложнее, тк от этого аподхода придется избавиться
-                    cache_skins.forEach((skin: any) => {
+                    cache_skins[elem.skin].forEach((skin: any) => {
                         var dragon = new DragonAnimationUpdate(
                             this.loader.get(skin.src_json),
                             skin.cahce_image,
@@ -382,8 +380,8 @@ export class Scene {
             }
         });
     }
+    // FIX ME копипаст кода из метода выше
     playNewPerson(person_collection) {
-        // костыль, копипаст ужасный подход - 5 часов до дедлайна
         let cache_skins: any = [],
             tmp: any = {};
         let load = false;

@@ -1,4 +1,5 @@
-export class Person {
+// messages Person delete?????
+export class Person1 {
     person: any;
     chosePerson: boolean;
     arrImg: object[];
@@ -6,6 +7,7 @@ export class Person {
     moveAction: any;
     x: any;
     y: any;
+    skin: number;
     coordPrevPoint: any; // координаты предыдущей точки
     interval_animation: any;
     animation: any[];

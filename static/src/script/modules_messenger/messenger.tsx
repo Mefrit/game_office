@@ -1,6 +1,4 @@
-
-import React = require('react');
-
+import * as React from "react"
 
 import { RegistrationComponent } from "./components/registration";
 import { Scene } from "./components/scene";
@@ -54,6 +52,7 @@ export class App extends React.Component<any, any> {
                             tmp.x = elem[1];
                         }
                         tmp.id = elem[0];
+                        tmp.skin = elem[3];
                         tmp.nick = elem[4];
 
                         return tmp;

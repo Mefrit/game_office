@@ -65,6 +65,7 @@ define(["require", "exports", "react", "./components/registration", "./component
                             tmp.x = elem[1];
                         }
                         tmp.id = elem[0];
+                        tmp.skin = elem[3];
                         tmp.nick = elem[4];
                         return tmp;
                     });

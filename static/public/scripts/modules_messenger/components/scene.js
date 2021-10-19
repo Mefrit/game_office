@@ -59,7 +59,7 @@ define(["require", "exports", "react", "./tools", "./chat", "../../modules_level
                         });
                         _this.interfal_dialog = setInterval(function () {
                             _this.openDialog(id_sent, nick_interlocutor);
-                        }, 3000);
+                        }, 3000000);
                     }
                     else {
                         alert(result.message);
@@ -158,10 +158,10 @@ define(["require", "exports", "react", "./tools", "./chat", "../../modules_level
             this.getHistory();
             setInterval(function () {
                 _this.getHistory();
-            }, 5500);
+            }, 5500000);
             setInterval(function () {
                 _this.getInf();
-            }, 2000);
+            }, 2000000);
         };
         Scene.prototype.render = function () {
             return (React.createElement("div", { className: "container__chat" },

@@ -9,7 +9,24 @@
     flex-direction: column;
     height: 300px;
     margin-top: 400px;
-
+    &__skins {
+        display: flex;
+        flex-direction: column;
+        margin-left: 5px;
+        align-items: center;
+        img {
+            margin-bottom: 10px;
+            width: 50px;
+            margin-left: 10px;
+            transition: 0.5s;
+        }
+    }
+    &__container_avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 40px;
+        overflow: hidden;
+    }
     &__showEnter {
         cursor: pointer;
         color: @pink;
@@ -49,6 +66,8 @@
         max-width: 450px;
         min-height: 320px;
         border-radius: 0px 0px 10px 10px;
+        display: flex;
+        align-items: center;
     }
 }
 // .inputs {

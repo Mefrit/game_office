@@ -1,9 +1,9 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Person = void 0;
-    var Person = (function () {
-        function Person(person) {
+    exports.Person1 = void 0;
+    var Person1 = (function () {
+        function Person1(person) {
             this.person = person;
             this.x = person.x;
             this.y = person.y;
@@ -14,56 +14,56 @@ define(["require", "exports"], function (require, exports) {
             this.image = undefined;
             this.interval_animation;
         }
-        Person.prototype.initDomPerson = function (domPerson) {
+        Person1.prototype.initDomPerson = function (domPerson) {
             this.domPerson = domPerson;
         };
-        Person.prototype.randomInteger = function (min, max) {
+        Person1.prototype.randomInteger = function (min, max) {
             var rand = min - 0.5 + Math.random() * (max - min + 1);
             return Math.round(rand);
         };
-        Person.prototype.getDoomObj = function () {
+        Person1.prototype.getDoomObj = function () {
             return this.domPerson;
         };
-        Person.prototype.setAnimation = function (name, animation) {
+        Person1.prototype.setAnimation = function (name, animation) {
             this.animation[name] = animation;
         };
-        Person.prototype.getAnimation = function (name) {
+        Person1.prototype.getAnimation = function (name) {
             return this.animation[name];
         };
-        Person.prototype.playAnimation = function (name) {
+        Person1.prototype.playAnimation = function (name) {
             this.animation[name].play();
         };
-        Person.prototype.stopAnimation = function (name) {
+        Person1.prototype.stopAnimation = function (name) {
             this.animation[name].stop();
         };
-        Person.prototype.initImage = function (image) {
+        Person1.prototype.initImage = function (image) {
             this.image = image;
         };
-        Person.prototype.setHealth = function (value) {
+        Person1.prototype.setHealth = function (value) {
             this.person.health = parseInt(value);
         };
-        Person.prototype.isArchers = function (unit) {
+        Person1.prototype.isArchers = function (unit) {
             return this.person.class == "archer";
         };
-        Person.prototype.getHealth = function () {
+        Person1.prototype.getHealth = function () {
             return parseInt(this.person.health);
         };
-        Person.prototype.getUrl = function () {
+        Person1.prototype.getUrl = function () {
             return this.person.url;
         };
-        Person.prototype.isNotDied = function () {
+        Person1.prototype.isNotDied = function () {
             return this.person.health <= 12;
         };
-        Person.prototype.getId = function () {
+        Person1.prototype.getId = function () {
             return this.person.id;
         };
-        Person.prototype.getKind = function () {
+        Person1.prototype.getKind = function () {
             return this.person.evil;
         };
-        Person.prototype.removePrevPoint = function () {
+        Person1.prototype.removePrevPoint = function () {
             this.coordPrevPoint = {};
         };
-        Person.prototype.setCoord = function (x, y) {
+        Person1.prototype.setCoord = function (x, y) {
             this.person.x = x;
             this.person.y = y;
             this.x = x;
@@ -71,25 +71,25 @@ define(["require", "exports"], function (require, exports) {
             this.moveAction = true;
             this.coordPrevPoint = { x: x, y: y };
         };
-        Person.prototype.getX = function () {
+        Person1.prototype.getX = function () {
             return parseFloat(this.x);
         };
-        Person.prototype.getY = function () {
+        Person1.prototype.getY = function () {
             return parseFloat(this.y);
         };
-        Person.prototype.getHeight = function () {
+        Person1.prototype.getHeight = function () {
             return parseFloat(this.person.height);
         };
-        Person.prototype.getWidth = function () {
+        Person1.prototype.getWidth = function () {
             return parseFloat(this.person.width);
         };
-        Person.prototype.getMoveAction = function () {
+        Person1.prototype.getMoveAction = function () {
             return this.moveAction;
         };
-        Person.prototype.setMoveAction = function (value) {
+        Person1.prototype.setMoveAction = function (value) {
             this.moveAction = value;
         };
-        return Person;
+        return Person1;
     }());
-    exports.Person = Person;
+    exports.Person1 = Person1;
 });

@@ -1,6 +1,8 @@
 
 from public.server.components.modules.person import Person
 import time
+import json
+import os
 class Module_GeoPosition:
     def __init__(self, props):
         self.db = props["db"]
@@ -22,7 +24,6 @@ class Module_GeoPosition:
             return result
 
     def returnAction(self, action, data):
-        print(data)
         return getattr(self, "action" + action)(self, data)
 
     def deleteOflineUsers(self):
@@ -35,7 +36,6 @@ class Module_GeoPosition:
 
         for row in kik_users:
             cache_id.append(row[0])
-        print(",".join(str(x) for x in cache_id))
         query = """
                 UPDATE users 
                 SET online = %d 
@@ -46,7 +46,7 @@ class Module_GeoPosition:
 
     def getCoordOnlineUsers(self):
         cursor = self.db.cursor()
-        query = """ SELECT id_user,x,y,skin,nick FROM users WHERE online = 1   """ 
+        query = """ SELECT id_user,x, y, skin, nick FROM users WHERE online = 1   """ 
         cursor.execute(query)
         online_users = cursor.fetchall()
     
@@ -66,13 +66,15 @@ class Module_GeoPosition:
         self.db.commit()
         result = {}
         self.deleteOflineUsers()
+       
+  
         online_users = self.getCoordOnlineUsers() 
+        result = {}
         result["status"] = "ok"
         result["online_users"] = online_users
         return result
 
     def actionSetUserCoord(self,obj,data):
-        print(data);
         result = {}
         result["status"] = "ok"
         result["message"] = 'wait'

@@ -18,8 +18,8 @@ class Module_registration:
             user_data = cursor.fetchall()
             if(user_data[0][0] == 0):
                 password = hashlib.md5(data['password'].encode())
-                user_data = (data['nick'],data['login'],password.hexdigest())
-                cursor.execute("INSERT INTO Users (nick, login, password) VALUES ( ?, ? ,? ) ",user_data)
+                user_data = (data['nick'],data['login'],password.hexdigest(),data['skin'])
+                cursor.execute("INSERT INTO Users (nick, login, password,skin) VALUES ( ?, ? ,? ,? ) ",user_data)
                 self.db.commit()      
                 query = " SELECT MAX(id_user)  FROM users"
                 cursor.execute( query )

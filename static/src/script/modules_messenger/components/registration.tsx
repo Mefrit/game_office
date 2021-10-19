@@ -11,6 +11,7 @@ interface registrationState {
     password: string;
     password_repeat: string;
     register: boolean;
+    type_skin: number;
 }
 export class RegistrationComponent extends React.Component<registrationProps, registrationState> {
     constructor(props) {
@@ -21,6 +22,7 @@ export class RegistrationComponent extends React.Component<registrationProps, re
             password: "",
             password_repeat: "",
             register: false,
+            type_skin: 1
         };
     }
     showEnter = (event) => {
@@ -33,6 +35,7 @@ export class RegistrationComponent extends React.Component<registrationProps, re
     };
     onReg = (event) => {
         event.preventDefault();
+        console.log("this.state", this.state);
         if (this.state.password == this.state.password_repeat) {
             fetch("/?module=registration&action=Reg", {
                 method: "POST",
@@ -43,6 +46,7 @@ export class RegistrationComponent extends React.Component<registrationProps, re
                     login: this.state.login,
                     nick: this.state.nick,
                     password: this.state.password,
+                    skin: this.state.type_skin
                 }),
             })
                 .then((data) => data.json())
@@ -89,6 +93,22 @@ export class RegistrationComponent extends React.Component<registrationProps, re
     changeNickName = (event) => {
         this.setState({ nick: event.target.value });
     };
+    changeSkin = (ev) => {
+
+        this.setState({
+            type_skin: ev.target.value
+        });
+    }
+    renderSkinsPerosn() {
+        let src = "./static/src/images/dragon/person" + this.state.type_skin + "/body.png";
+        return <div className="reg__skins">
+            <div className="reg__container_avatar"><img src={src} alt="Skin" /></div>
+            <select onChange={this.changeSkin}>
+                <option value="1">Аватар 1</option>
+                <option value="2">Аватар 2</option>
+                <option value="3">Аватар 3</option>
+            </select></div>
+    }
     render() {
         return (
             <div className="container-registration">
@@ -138,6 +158,7 @@ export class RegistrationComponent extends React.Component<registrationProps, re
                                     value="Зарегистрироваться"
                                 />
                             </form>
+                            {this.renderSkinsPerosn()}
                         </div>
                     ) : (
                         <div className="reg__inf">

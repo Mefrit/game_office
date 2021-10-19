@@ -29,6 +29,7 @@ define(["require", "exports", "react"], function (require, exports, React) {
             };
             _this.onReg = function (event) {
                 event.preventDefault();
+                console.log("this.state", _this.state);
                 if (_this.state.password == _this.state.password_repeat) {
                     fetch("/?module=registration&action=Reg", {
                         method: "POST",
@@ -39,6 +40,7 @@ define(["require", "exports", "react"], function (require, exports, React) {
                             login: _this.state.login,
                             nick: _this.state.nick,
                             password: _this.state.password,
+                            skin: _this.state.type_skin
                         }),
                     })
                         .then(function (data) { return data.json(); })
@@ -87,15 +89,31 @@ define(["require", "exports", "react"], function (require, exports, React) {
             _this.changeNickName = function (event) {
                 _this.setState({ nick: event.target.value });
             };
+            _this.changeSkin = function (ev) {
+                _this.setState({
+                    type_skin: ev.target.value
+                });
+            };
             _this.state = {
                 login: "",
                 nick: "",
                 password: "",
                 password_repeat: "",
                 register: false,
+                type_skin: 1
             };
             return _this;
         }
+        RegistrationComponent.prototype.renderSkinsPerosn = function () {
+            var src = "./static/src/images/dragon/person" + this.state.type_skin + "/body.png";
+            return React.createElement("div", { className: "reg__skins" },
+                React.createElement("div", { className: "reg__container_avatar" },
+                    React.createElement("img", { src: src, alt: "Skin" })),
+                React.createElement("select", { onChange: this.changeSkin },
+                    React.createElement("option", { value: "1" }, "\u0410\u0432\u0430\u0442\u0430\u0440 1"),
+                    React.createElement("option", { value: "2" }, "\u0410\u0432\u0430\u0442\u0430\u0440 2"),
+                    React.createElement("option", { value: "3" }, "\u0410\u0432\u0430\u0442\u0430\u0440 3")));
+        };
         RegistrationComponent.prototype.render = function () {
             return (React.createElement("div", { className: "container-registration" },
                 React.createElement("div", { className: "reg" },
@@ -120,7 +138,8 @@ define(["require", "exports", "react"], function (require, exports, React) {
                                 React.createElement("span", { className: "inputs__label" }, "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C"),
                                 " ",
                                 React.createElement("input", { className: "btn_chat btn_chat-text", onChange: this.changePasswordRepeat, type: "password" })),
-                            React.createElement("input", { type: "button", className: "inputs__reg-btn btn_chat btn_chat-primal   ", onClick: this.onReg, value: "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F" })))) : (React.createElement("div", { className: "reg__inf" },
+                            React.createElement("input", { type: "button", className: "inputs__reg-btn btn_chat btn_chat-primal   ", onClick: this.onReg, value: "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F" })),
+                        this.renderSkinsPerosn())) : (React.createElement("div", { className: "reg__inf" },
                         React.createElement("form", { className: "inputs" },
                             React.createElement("label", null,
                                 React.createElement("span", { className: "inputs__label" }, "\u041B\u043E\u0433\u0438\u043D"),
