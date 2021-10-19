@@ -13,12 +13,7 @@ export class LevelEditor extends React.Component<any, any>{
             design: []
         }
     }
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (prevState.design != this.state.design)
-    //         
-    // }
     changeStateInterface = (ev) => {
-
         this.setState({
             is_open: !this.state.is_open
         });

@@ -38,7 +38,6 @@ class Director {
         this.loader = loader;
         this.arrPersons = arrPersons;
         this.arrFurniture = false;
-        console.log(JSON.stringify(config_skins));
         this.config_skins = config_skins;
         this.start();
     }
@@ -57,34 +56,26 @@ class Director {
                 })
                     .then((data) => data.json())
                     .then((result) => {
-
                         if (result.status == "ok") {
-                            let scene: any = document.getElementById('scene');
-                            scene.style.opacity = "1";
 
-                            this.load = true;
-                            console.log("loadScene", result);
-                            this.scene = new Scene(this.loader, arrPersons, result.config_skins, [], id_curent_user);
-                            this.loadDesign();
-                            this.scene.play();
+                            this.scenePlay(id_curent_user, arrPersons, result.config_skins)
                         } else {
                             alert("ERROR: " + result.message);
                         }
                     });
 
             } else {
-                let scene: any = document.getElementById('scene');
-                scene.style.opacity = "1";
-
-                this.load = true;
-                this.scene = new Scene(this.loader, arrPersons, this.config_skins, [], id_curent_user);
-                this.loadDesign();
-                this.scene.play();
+                this.scenePlay(id_curent_user, arrPersons, this.config_skins)
             }
-
-
         }
-
+    }
+    scenePlay(id_curent_user, arrPersons, config_skins) {
+        let scene: any = document.getElementById('scene');
+        scene.style.opacity = "1";
+        this.load = true;
+        this.scene = new Scene(this.loader, arrPersons, config_skins, [], id_curent_user);
+        this.loadDesign();
+        this.scene.play();
     }
     loadDesign = () => {
 
@@ -99,9 +90,7 @@ class Director {
         })
             .then((data) => data.json())
             .then((result) => {
-
                 let tmp = JSON.parse(result.design);
-                console.log('tmp', tmp);
                 if (result.status == "ok") {
                     this.scene.updateDesign(tmp.design, tmp.size_w, tmp.size_h);
                 } else {
@@ -115,7 +104,7 @@ class Director {
     }
 
     updateDesign = (design) => {
-        console.log("Director design", design);
+
         this.scene.updateDesign(design.design, design.size_w, design.size_h);
     }
 

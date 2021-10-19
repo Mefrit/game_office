@@ -11,6 +11,7 @@ export class LevelEditorInterface extends React.Component<any, any>{
         this.state = {
             chosen_element: false,
             // FIX ME не очень красиво называется
+            categories: [],
             cache_elements: this.props.design.design
         }
         this.size_w = this.props.design.size_w;
@@ -162,7 +163,29 @@ export class LevelEditorInterface extends React.Component<any, any>{
                     src: "./static/src/images/block1.png"
                 }
             ]
-        }]
+        }];
+        console.log(JSON.stringify(this.categories));
+    }
+    componentDidMount() {
+        fetch("/?module=office&action=GetLevelEditorCategories", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+            },
+            body: JSON.stringify({
+                id_office: 1
+            }),
+        })
+            .then((data) => data.json())
+            .then((result) => {
+
+                if (result.status == "ok") {
+                    this.setState({ categories: result.categories });
+                } else {
+                    alert("ERROR: " + result.message);
+                }
+            });
+
     }
     choseElement = (element) => {
         console.log("element", element);
@@ -172,7 +195,7 @@ export class LevelEditorInterface extends React.Component<any, any>{
         });
     }
     renderCategories() {
-        return this.categories.map(elem => {
+        return this.state.categories.map(elem => {
             return <li><ElemOfCategory elem={elem} chosen_src={this.state.chosen_element.src} choseElement={this.choseElement} /></li>
         });
     }
