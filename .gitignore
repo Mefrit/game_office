@@ -4,3 +4,4 @@
 **/*.css/**
 public/server
 public/build
+static/public
