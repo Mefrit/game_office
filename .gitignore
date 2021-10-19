@@ -1,5 +1,6 @@
 **/.vscode/
 .vscode
 **/*.js/**
+**/*.css/**
 public/server
 public/build
