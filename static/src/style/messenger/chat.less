@@ -8,9 +8,13 @@
     justify-content: space-between;
     background-color: @chat-white;
     width: 100%;
-    padding: 10px;
-    border-left: 1px solid @gray;
     color: #000 !important;
+
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    border: 10px solid #061055;
+
     &__logo {
         color: black;
         text-align: center;
@@ -20,15 +24,20 @@
 .interlocutor-inf {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid @gray;
-    min-height: 50px;
+    min-height: 60px;
+
+    background: #6eebff;
+    padding: 10px 0;
+    border-bottom: 10px solid #061055;
+    border-top: 10px solid #061055;
     &__nick {
         margin: 0px;
         padding: 10px;
         //   background-color
     }
     &__profile-img {
-        width: 35px;
+        margin-left: 40px;
+        width: 45px;
     }
 }
 .message-container {

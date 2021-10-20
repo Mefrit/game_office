@@ -95,8 +95,9 @@ export class ChatComponent extends React.Component<chatProps, any> {
     render() {
         return (
             <div className="chat">
+                <div className="container__name-top"></div>
                 <div className="interlocutor-inf">
-                    <img className="interlocutor-inf__profile-img" src="./static/src/images/profile.png" alt="profile" />
+                    <img className="interlocutor-inf__profile-img" src="./static/src/images/chat/point_pink.png" alt="profile" />
                     <h3 className="interlocutor-inf__nick">{this.props.nick_interlocutor}</h3>
                 </div>
                 {this.props.history_message.length == 0 ? (
