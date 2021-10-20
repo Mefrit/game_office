@@ -34,7 +34,7 @@ export class ToolsComponent extends React.Component<toolsProps, toolsState> {
                     }}
                     className={element[0] == this.props.id_sent ? "dialog dialog_active" : "dialog "}
                 >
-                    <img className="dialog__image-profile" src="./static/src/images/profile.png" alt="profile" />
+                    <img className="dialog__image-profile" src="./static/src/images/chat/point_pink.png" alt="profile" />
                     <span className="dialog__author">{element[1]} </span>
                     {show_message_count && !!element[2] ? (
                         <div className="dialog__numb-message"> {element[2]} </div>

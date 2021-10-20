@@ -15,6 +15,22 @@
     width: 100%;
     flex-grow: 1 1;
     position: absolute;
+
+    &__name {
+        &-top {
+            background:
+                url("../../../src/images/chat/top_left.png") no-repeat 0 100%,
+                url("../../../src/images/chat/top_right.png") no-repeat 100% 100%, #2c67cb;
+            background-size: 100px;
+            height: 32px;
+        }
+
+        &>img {
+            width: 100%;
+            border-bottom: 10px solid #061055;
+            border-top: 10px solid #061055;
+        }
+    }
 }
 .container__chat {
     position: absolute;
@@ -24,6 +40,8 @@
     // top: -60px;
     top: -870px;
     background-color: @gray-white;
+
+    border: 10px solid #061055;
 }
 ::-webkit-scrollbar {
     width: 8px;

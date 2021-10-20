@@ -38,21 +38,27 @@
     }
 }
 .tools {
+    padding: 10px 0;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    padding: 10px;
     height: 550px;
     overflow-y: auto;
 
     &__label {
         margin: 5px 0px;
         font-weight: 500;
+        text-align: center;
     }
     &__nick {
         color: @main_blue;
         text-decoration: underline;
         margin: 5px 0px;
+        text-align: center;
+    }
+
+    &__history {
+        padding-left: 0;
     }
 }
 .dialog:hover {
@@ -61,21 +67,28 @@
 .dialog {
     background-color: white;
     padding: 10px 5px;
-    border-radius: 10px;
     display: flex;
     flex-direction: row;
-    margin-bottom: 5px;
-    border: 1px solid @gray;
+    border-top: dashed 5px #2c67cb;
+    border-bottom: dashed 5px #2c67cb;
     align-items: center;
     cursor: pointer;
 
+    &:first-of-type {
+        border-top: 10px solid #061055;
+    }
+
+    &:last-of-type {
+        border-bottom: 10px solid #061055;
+    }
+
     &__image-profile {
-        max-width: 30px;
-        padding-left: 5px;
+        max-width: 40px;
+        margin-left: 15px;
     }
     &_active {
-        background-color: @main_blue;
-        color: @gray-white;
+        background-color: #6eebff;
+        color: #061055;
     }
     &__numb-message {
         background-color: @red;
@@ -87,6 +100,7 @@
         margin-left: 10px;
     }
     &__author {
+        font-size: 20px;
         padding-left: 10px;
     }
 }

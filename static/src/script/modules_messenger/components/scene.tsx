@@ -168,6 +168,10 @@ export class Scene extends React.Component<sceneProps, sceneState> {
     render() {
         return (
             <div className="container__chat" >
+                <div className="container__name">
+                    <div className="container__name-top"></div>
+                    <img src="./static/src/images/chat/chat.png" alt=""/>
+                </div>
                 {this.state.is_admin ? <LevelEditor updateDesign={this.props.updateDesign} /> : ""}
                 <ToolsComponent
                     openDialog={this.openDialog}
