@@ -1,6 +1,6 @@
 .level_editor_container {
     float: right;
-    font-family: "Jura", "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+
     &__image_build {
         width: 50px;
         cursor: pointer;
@@ -83,6 +83,14 @@
         min-height: 20px;
         background-color: #1f508a;
     }
+    &__rings {
+        background-image: url("../../src/images/level_build_rings_white.png");
+        width: 80px;
+        height: 720px;
+        margin-top: -115px;
+        margin-left: -90px;
+    }
+
     &__header {
         display: flex;
         flex-direction: row;
@@ -98,14 +106,15 @@
         flex-direction: row;
     }
     &__list_thinks {
+        margin-top: -1px;
         box-sizing: border-box;
         width: 320px;
         margin-left: 10px;
-        margin-right: 5px;
-        border-radius: 1px;
+        margin-right: 10px;
+        border-radius: 2px;
         box-shadow: 0px 0px 5px white;
         list-style: none;
-        max-height: 520px;
+        height: 500px;
         padding: 5px;
         overflow: auto;
         color: black;

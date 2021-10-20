@@ -1,8 +1,5 @@
-// import * as React from "react";
-// import * as ReactDOM from "react-dom";
-
-import React = require('react');
-import ReactDOM = require('react-dom');
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 class DesckBoardReact extends React.Component<any, any> {
     constructor(props) {

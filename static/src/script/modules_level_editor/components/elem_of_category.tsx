@@ -1,5 +1,6 @@
 
-import React = require('react');
+import React from 'react'
+
 
 
 export class ElemOfCategory extends React.Component<any, any>{

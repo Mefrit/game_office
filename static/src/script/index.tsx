@@ -1,26 +1,15 @@
 
-import React = require('react');
-import ReactDOM = require('react-dom');
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 import { Downloader } from "./modules_main_game/loader";
 import { Scene } from "./modules_main_game/modules/scene";
 import { App } from "./modules_messenger/messenger";
 
 let loader = new Downloader();
 
-
 let arrPersons = [
-    {
-        src: "./static/src/images/hola_1.png",
-        x: 11,
-        y: 3,
-        id: 0,
-    },
-    {
-        src: "./static/src/images/person1.png",
-        x: 4,
-        y: 3,
-        id: 1,
-    },
+
 ];
 let arrFurniture = [];
 // wardrobe

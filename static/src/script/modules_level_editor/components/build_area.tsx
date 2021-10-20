@@ -1,7 +1,7 @@
 
-import React = require('react');
+import React from 'react'
 
-import { getSourceMapRange } from "typescript";
+
 
 
 export class BuildArea extends React.Component<any, any>{

@@ -2,7 +2,7 @@ import { Person } from "./person";
 import { ViewScene } from "../viewScene";
 import { Collection } from "./person_collection";
 import { DragonAnimationUpdate } from "../lib/dragon";
-
+import { SearchWay } from "../lib/searchWayAlgoritm";
 import { DesckBoard } from "../lib/deskBoard";
 
 export class Scene {
@@ -40,8 +40,10 @@ export class Scene {
     }
     updateScene(arr_obj, id_curent_user) {
         // this.person_collection = new Collection(arr_obj);
-        let person: any = {};
+        let person: any = {},
+            cache_point;
         this.id_curent_user = id_curent_user;
+        let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
         arr_obj.forEach((element) => {
             person = {};
             person = this.person_collection.getPersonById(element.id)[0];
@@ -49,8 +51,13 @@ export class Scene {
                 this.playNewPerson(new Collection([new Person(element)]));
                 person = this.person_collection.getPersonById(element.id)[0];
             }
-
-            this.movePersonByCoord(person.domPerson, element.x * 100 + "px", element.y * 100 + "px");
+            // console.log(person);
+            cache_point = way_search.start(person.x, person.y, element.x, element.y);
+            if (person.id != id_curent_user) {
+                // this.movePersonByCoord(person.domPerson, element.x * 100 + "px", element.y * 100 + "px");
+                this.movePersonByCachePoint(person.domPerson, cache_point, 0);
+            }
+            // тут тоже передвижение
         });
         this.person_collection;
         // this.view = new ViewScene(this.person_collection, this.loader, this.furniture_collection);
@@ -88,7 +95,7 @@ export class Scene {
         event.target.classList.remove("block__free");
         event.target.classList.remove("block__nonFree");
     };
-    // знаю что плохо так писать !!!! Но время(((
+
     setCoord2Server(x, y, id_user) {
         fetch("/?module=GeoPosition&action=SetUserCoord", {
             method: "POST",
@@ -107,25 +114,37 @@ export class Scene {
     }
     onMove = (event) => {
         let posX = event.target.style.left,
-            posY = event.target.style.top;
+            posY = event.target.style.top,
+            new_coord_x = parseInt(posX.split("px")) / 100,
+            new_coord_y = parseInt(posY.split("px")) / 100,
+            cache_point: any[] = [];
+
         //\словие что можно ходить в область
         let curent_unit = this.getActivePerson(this.canvas)[0];
-
+        console.log("curent_unit------------------------", curent_unit);
         if (curent_unit.person.id == this.id_curent_user) {
-            this.setCoord2Server(
-                parseInt(posX.split("px")) / 100,
-                parseInt(posY.split("px")) / 100,
-                this.id_curent_user
-            );
+            this.setCoord2Server(new_coord_x, new_coord_y, this.id_curent_user);
+            console.log("! this.furniture_collection", this.furniture_collection);
+            let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
+
+            cache_point = way_search.start(curent_unit.x, curent_unit.y, new_coord_x, new_coord_y);
 
             curent_unit.stopAnimation("default_perosn1");
             curent_unit.playAnimation("walking_perosn1");
-            setTimeout(() => {
-                curent_unit.stopAnimation("walking_perosn1");
-                curent_unit.playAnimation("default_perosn1");
-            }, 1500);
+            console.log(cache_point);
+            // cache_point.forEach((element) => {
+            //     setTimeout(() => {
+            //         this.movePersonByCoord(this.canvas, element[0], element[1]);
+            //     }, 1000);
+            // });
+            // this.movePersonByCachePoint(this.canvas, cache_point);
 
-            this.movePersonByCoord(this.canvas, posX, posY);
+            // setTimeout(() => {
+            //     curent_unit.stopAnimation("walking_perosn1");
+            //     curent_unit.playAnimation("default_perosn1");
+            // }, 1000);
+            this.movePersonByCachePoint(this.canvas, cache_point, 0);
+            // this.movePersonByCoord(this.canvas, posX, posY);
         } else {
             alert("AnotherUser  " + curent_unit.person.id + "   " + this.id_curent_user);
         }
@@ -137,33 +156,32 @@ export class Scene {
             }
         });
     }
+    movePersonByCachePoint(canvas, cache, index) {
+        if (index < cache.length) {
+            let coord = cache[index].split(";");
+            this.movePersonByCoord(canvas, coord[0] * 100 + "px", coord[1] * 100 + "px");
+            console.log(index, cache.length, coord);
+
+            setTimeout((elem) => {
+                return this.movePersonByCachePoint(canvas, cache, index + 1);
+            }, 700);
+        } else {
+            let curent_unit = this.getActivePerson(canvas)[0];
+            curent_unit.stopAnimation("walking_perosn1");
+            curent_unit.playAnimation("default_perosn1");
+        }
+    }
     movePersonByCoord(canvas, posX, posY) {
         let activePerson = [];
         canvas.style.left = parseInt(posX.split("px")[0]) - 30 + "px";
         canvas.style.top = parseInt(posY.split("px")[0]) - 60 + "px";
         canvas.style.transition = "1.6s";
 
-        activePerson = this.person_collection.getCollection().filter((elem: any) => {
+        this.person_collection.getCollection().forEach((elem: any) => {
             if (elem.getId() == canvas.getAttribute("data-id")) {
-                // elem.setCoord(parseInt(posX.split("px")) / 120, parseInt(posY.split("px")) / 120);
                 elem.setCoord(parseInt(posX.split("px")) / 100, parseInt(posY.split("px")) / 100);
-                // elem.setMoveAction(true);
-            }
-            if (!elem.getMoveAction() && !elem.getKind()) {
-                return elem;
             }
         });
-        if (activePerson.length == 0) {
-            // optimizase
-            this.person_collection.getCollection().forEach((elem: any) => {
-                if (!elem.getKind()) {
-                    elem.setMoveAction(false);
-                }
-            });
-            setTimeout(() => {
-                // this.ai.step();
-            }, 200);
-        }
     }
     renderElement(element) {
         this.view.renderElement(element);

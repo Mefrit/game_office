@@ -1,5 +1,5 @@
+import React from 'react'
 
-import React = require('react');
 
 import { ToolsComponent } from "./tools";
 import { ChatComponent } from "./chat";

@@ -1,5 +1,6 @@
 
-import React = require('react');
+import React from 'react'
+
 
 interface chatProps {
     history_message: any[];

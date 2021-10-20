@@ -1,4 +1,5 @@
-import * as React from "react"
+import React from 'react'
+
 
 import { RegistrationComponent } from "./components/registration";
 import { Scene } from "./components/scene";

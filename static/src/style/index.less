@@ -6,6 +6,29 @@ body {
 html {
     width: 100%;
 }
+
+@font-face {
+    font-family: TTOctosquaresCond;
+    font-style: normal;
+    font-weight: normal;
+    src: local("TTOctosquaresCond"), url("../../src/fonts/TTOctosquaresExp-Medium.ttf") format("ttf"),
+        url("../../src/fonts/TTOctosquaresExp-Medium.woff") format("woff"),
+        url("../../src/fonts/TTOctosquaresExp-Medium.eot") format("eot");
+}
+
+// .text-1 {
+//     font-family: "Crimson Text";
+// }
+// @font-face {
+//     font-family: "TTOctosquaresCond";
+//     src: url(../../fonts/TTOctosquaresExp-Regular.otf);
+// }
+
+* {
+    // font-family: Comic Sans MS, Arial, Helvetica, sans-serif;
+    font-family: "TTOctosquaresCond";
+    box-sizing: border-box;
+}
 .canvas {
     width: 100px;
     height: 100px;
@@ -68,12 +91,12 @@ html {
 }
 .container_game {
     display: flex;
-    width: 500px;
+    width: 10px;
     position: absolute;
     left: 950px;
     height: 370px;
     z-index: 100;
-    top: 720px;
+    top: 220px;
     flex-direction: column;
     // background-color: rgba(119, 10, 133, 0.172);
 }

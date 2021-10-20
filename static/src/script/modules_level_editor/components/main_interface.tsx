@@ -1,4 +1,4 @@
-import React = require('react');
+import React from 'react'
 import { ElemOfCategory } from "./elem_of_category";
 import { BuildArea } from "./build_area";
 export class LevelEditorInterface extends React.Component<any, any>{
@@ -17,7 +17,6 @@ export class LevelEditorInterface extends React.Component<any, any>{
         this.size_w = this.props.design.size_w;
         this.size_h = this.props.design.size_h;
 
-        // FIX ME убрать в файл настройки
 
     }
     componentDidMount() {
@@ -73,6 +72,7 @@ export class LevelEditorInterface extends React.Component<any, any>{
                 <input type="button" className="interface__btn" value="x" onClick={this.props.changeStateInterface} />
             </div>
             <div className="interface__content">
+                <div className="interface__rings"></div>
                 <ul className="interface__list_thinks"> {this.renderCategories()}</ul>
 
                 <BuildArea
