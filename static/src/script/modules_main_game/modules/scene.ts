@@ -39,7 +39,6 @@ export class Scene {
         this.water_blocks = [];
     }
     updateScene(arr_obj, id_curent_user) {
-        // this.person_collection = new Collection(arr_obj);
         let person: any = {},
             cache_point;
         this.id_curent_user = id_curent_user;
@@ -51,10 +50,8 @@ export class Scene {
                 this.playNewPerson(new Collection([new Person(element)]));
                 person = this.person_collection.getPersonById(element.id)[0];
             }
-            // console.log(person);
             cache_point = way_search.start(person.x, person.y, element.x, element.y);
             if (person.id != id_curent_user) {
-                // this.movePersonByCoord(person.domPerson, element.x * 100 + "px", element.y * 100 + "px");
                 this.movePersonByCachePoint(person.domPerson, cache_point, 0);
             }
             // тут тоже передвижение
@@ -121,30 +118,17 @@ export class Scene {
 
         //\словие что можно ходить в область
         let curent_unit = this.getActivePerson(this.canvas)[0];
-        console.log("curent_unit------------------------", curent_unit);
+
         if (curent_unit.person.id == this.id_curent_user) {
             this.setCoord2Server(new_coord_x, new_coord_y, this.id_curent_user);
-            console.log("! this.furniture_collection", this.furniture_collection);
             let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
 
             cache_point = way_search.start(curent_unit.x, curent_unit.y, new_coord_x, new_coord_y);
 
             curent_unit.stopAnimation("default_perosn1");
             curent_unit.playAnimation("walking_perosn1");
-            console.log(cache_point);
-            // cache_point.forEach((element) => {
-            //     setTimeout(() => {
-            //         this.movePersonByCoord(this.canvas, element[0], element[1]);
-            //     }, 1000);
-            // });
-            // this.movePersonByCachePoint(this.canvas, cache_point);
 
-            // setTimeout(() => {
-            //     curent_unit.stopAnimation("walking_perosn1");
-            //     curent_unit.playAnimation("default_perosn1");
-            // }, 1000);
             this.movePersonByCachePoint(this.canvas, cache_point, 0);
-            // this.movePersonByCoord(this.canvas, posX, posY);
         } else {
             alert("AnotherUser  " + curent_unit.person.id + "   " + this.id_curent_user);
         }
@@ -172,7 +156,6 @@ export class Scene {
         }
     }
     movePersonByCoord(canvas, posX, posY) {
-        let activePerson = [];
         canvas.style.left = parseInt(posX.split("px")[0]) - 30 + "px";
         canvas.style.top = parseInt(posY.split("px")[0]) - 60 + "px";
         canvas.style.transition = "1.6s";

@@ -1,9 +1,5 @@
 
 import React from 'react'
-
-
-
-
 export class BuildArea extends React.Component<any, any>{
     categories: any[];
     constructor(props) {
@@ -18,7 +14,6 @@ export class BuildArea extends React.Component<any, any>{
             chose_ceil_y: -1
         }
     }
-
     addElelmentInterface2Cache = (chosen_element, cache_interface_elements) => {
         let add = true;
 

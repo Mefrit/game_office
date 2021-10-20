@@ -159,7 +159,6 @@ class DesckBoardReact extends React.Component<any, any> {
 export class DesckBoard {
     data: any;
     constructor(props) {
-
         this.init();
     }
     init() {

@@ -8,18 +8,11 @@ export class SearchWay {
         this.furniture_collection = furniture_collection;
     }
     start(startX, startY, finishX, finishY) {
-        console.log(startX, startY);
-        let blocks = [];
         var fieldArray = new Array(this.size_w); //Создаем матрицу с нужными размерами
 
         for (var i = 0; i < this.size_h; i++) {
             fieldArray[i] = [];
-
             for (var j = 0; j < this.size_w; j++) {
-                // // this.furniture_collection.forEach((element) => {
-                // //     fieldArray[i][j] = 0;
-                // // });
-                // console.log(this.furniture_collection.checkFreeCoord({ x: i, y: j }), i, j);
                 if (this.furniture_collection.checkFreeCoord({ x: j, y: i })) {
                     fieldArray[i][j] = 0;
                 } else {
@@ -28,20 +21,9 @@ export class SearchWay {
             }
         }
 
-        // for (var i = 0; i < this.size_w; i++)
-        //     for (var j = 0; j < this.size_h; j++) {
-        //         if (blocks[i * this.size_h + j].getAttribute("src") == "./static/src/images/block1.png")
-        //             //block1.png - пустое место
-        //             fieldArray[i][j] = 0;
-        //         if (blocks[i * this.size_h + j].getAttribute("src") == "./static/src/images/block2.jpg")
-        //             //block2.jpg - стена
-        //             fieldArray[i][j] = 1;
-        //     }
-
         var currentX = startX;
         var currentY = startY;
         fieldArray[currentY][currentX] = 2; //Точка с которой начинаем, ставим равную 2
-        console.log(fieldArray);
         if (finishX > startX)
             //Если конечная точка находится справа от начальной
             this.recurseRight(fieldArray, Number(finishX), Number(finishY), Number(currentX), Number(currentY));
@@ -245,8 +227,6 @@ export class SearchWay {
         for (var i = road.length - 2; i >= 0; i--) {
             //Проходим путь (количество шагов - значение в конечной точке - 2, так как они посчитаны алгоритмом)
             if (finishY - 1 >= 0 && fieldArray[finishY][finishX] == fieldArray[finishY - 1][finishX] + 1) {
-                //finishY - 1 >= 0 - проверка, чтобы не выйти за границы матрицы ;
-                //fieldArray[finishY][finishX] == fieldArray[finishY - 1][finishX] + 1 - проверка на нужное направление(потому что, когда мы идем назад значение должно на 1 уменьшаться)
                 finishY -= 1;
                 road[i] = finishX + ";" + finishY; //Запоминаем очередную клетку пути
                 continue;
