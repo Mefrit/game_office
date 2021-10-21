@@ -13,4 +13,4 @@
 -   go to ./static
 -   npm install
 -   gulp
--   tsc -w
+-   gulp watch
