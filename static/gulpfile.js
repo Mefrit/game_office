@@ -17,17 +17,16 @@ gulp.task("less", function () {
         .pipe(gulp.dest("./public/css"));
 });
 
-const tsProject = ts.createProject('tsconfig.json');
+const tsProject = ts.createProject("tsconfig.json");
 
-gulp.task("tsc", function() {
-    return gulp.src("./src/script/**/*.ts")
-        .pipe(tsProject())
-        .js.pipe(gulp.dest("public/scripts"));
+gulp.task("tsc", function () {
+    return gulp.src("./src/script/**/*.ts").pipe(tsProject()).js.pipe(gulp.dest("public/scripts"));
 });
-
-gulp.task("default", gulp.series(["less", "tsc"]));
 
 gulp.task("watch", () => {
     watch("src/style/**/*.less", gulp.series(["less"]));
-    watch("src/script/**/*.ts", gulp.series(["tsc"]));
+    // watch("src/script/**/*.ts", gulp.series(["tsc"]));
 });
+
+gulp.task("default", gulp.series(["less", "watch"]));
+// gulp.task("default", gulp.series(["less", "tsc"]));

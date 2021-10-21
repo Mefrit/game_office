@@ -15,7 +15,7 @@ class DesckBoardReact extends React.Component<any, any> {
         let modal: any = document.getElementById("openModal");
         modal.classList.remove("open_modal");
     }
-    componentDidMount() {
+    componentDidMount(): void {
         fetch("/?module=DeskBoard&action=GetRecord", {
             method: "POST",
             headers: {
@@ -159,7 +159,7 @@ class DesckBoardReact extends React.Component<any, any> {
 export class DesckBoard {
     data: any;
     constructor(props) {
-        this.init();
+
     }
     init() {
 

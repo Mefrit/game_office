@@ -4,6 +4,7 @@ import { Collection } from "./person_collection";
 import { DragonAnimationUpdate } from "../lib/dragon";
 import { SearchWay } from "../lib/searchWayAlgoritm";
 import { DesckBoard } from "../lib/deskBoard";
+import { Presentation } from "../lib/presentationBoard";
 
 export class Scene {
     loader: any;
@@ -24,7 +25,7 @@ export class Scene {
     size_h: number;
     chatAplication: any;
     furniture: any[];
-    constructor(loader, arrImg, config_skins, arrFurniture, id_curent_user) {
+    constructor(loader: any, arrImg: any, config_skins: any, arrFurniture: never[], id_curent_user: number) {
         this.loader = loader;
         this.chosePerson = false;
         this.skins = {};
@@ -44,13 +45,13 @@ export class Scene {
         }, 150);
         this.chatAplication = undefined;
     }
-    updateScene(arr_obj, id_curent_user) {
+    updateScene(arr_obj: any[], id_curent_user: number) {
         let person: any = {},
-            cache_point;
+            cache_point: any[];
 
         this.id_curent_user = id_curent_user;
         let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
-        arr_obj.forEach((element) => {
+        arr_obj.forEach((element: { id: any; x: any; y: any }) => {
             person = {};
             person = this.person_collection.getPersonById(element.id)[0];
             if (person == undefined || typeof person == "undefined") {
@@ -71,7 +72,7 @@ export class Scene {
         this.person_collection;
         // this.view = new ViewScene(this.person_collection, this.loader, this.furniture_collection);
     }
-    updateDesign(arr_furniture, size_w = 14, size_h = 10) {
+    updateDesign(arr_furniture: any[], size_w = 14, size_h = 10): void {
         this.size_w = size_w;
         this.size_h = size_h;
         this.furniture = arr_furniture;
@@ -81,23 +82,23 @@ export class Scene {
     getDesign = () => {
         return this.furniture;
     };
-    getCoordFromStyle(elem) {
+    getCoordFromStyle(elem: string) {
         return parseInt(elem.split("px")[0]);
     }
     getPerson() {
         return this.person_collection;
     }
-    onBlock = (event) => {
+    onBlock = (event: { target: any }) => {
         let block = event.target,
-            posX,
-            posY;
+            posX: number,
+            posY: number;
         if (this.canvas != undefined) {
             posX = Math.abs(parseInt(this.canvas.style.left.split("px")[0]) - this.getCoordFromStyle(block.style.left));
             posY = Math.abs(parseInt(this.canvas.style.top.split("px")[0]) - this.getCoordFromStyle(block.style.top));
             block.classList.add("block__free");
         }
     };
-    syncUnit = (data) => {
+    syncUnit = (data: any) => {
         this.person_collection = data;
     };
     onOutBlock = (event) => {
@@ -105,7 +106,7 @@ export class Scene {
         event.target.classList.remove("block__nonFree");
     };
 
-    setCoord2Server(x, y, id_user) {
+    setCoord2Server(x: number, y: number, id_user: number) {
         fetch("/?module=GeoPosition&action=SetUserCoord", {
             method: "POST",
             headers: {
@@ -148,7 +149,7 @@ export class Scene {
             }
         }
     };
-    getActivePerson(canvas) {
+    getActivePerson(canvas: { getAttribute: (arg0: string) => any }) {
         if (canvas) {
             return this.person_collection.getCollection().filter((elem: any) => {
                 if (elem.getId() == canvas.getAttribute("data-id")) {
@@ -158,7 +159,7 @@ export class Scene {
         }
         return [];
     }
-    movePersonByCachePoint(canvas, cache, index) {
+    movePersonByCachePoint(canvas: any, cache: string | any[], index: number) {
         if (index < cache.length) {
             let coord = cache[index].split(";");
             this.movePersonByCoord(canvas, coord[0] * 100 + "px", coord[1] * 100 + "px");
@@ -174,7 +175,11 @@ export class Scene {
             }
         }
     }
-    movePersonByCoord(canvas, posX, posY) {
+    movePersonByCoord(
+        canvas: { style: { left: string; top: string; transition: string }; getAttribute: (arg0: string) => any },
+        posX: any,
+        posY: any
+    ) {
         canvas.style.left = parseInt(posX.split("px")[0]) - 30 + "px";
         canvas.style.top = parseInt(posY.split("px")[0]) - 60 + "px";
         canvas.style.transition = "1.6s";
@@ -185,28 +190,27 @@ export class Scene {
             }
         });
     }
-    renderElement(element) {
+    renderElement(element: any) {
         this.view.renderElement(element);
     }
-    get(name) {
+    get(name: string | number) {
         return this[name];
     }
-    deleteBlockScene(obj, class_name) {
+    deleteBlockScene(obj: { getElementsByClassName: (arg0: any) => any }, class_name: string) {
         let cache = obj.getElementsByClassName(class_name);
-        [].slice.call(cache).forEach((e) => {
+        [].slice.call(cache).forEach((e: { remove: () => void }) => {
             e.remove();
         });
     }
     renderArena() {
         let scence: any = document.getElementById("scene"),
-            block,
-            src,
+            block: any,
+            src: any,
             posX = 0,
             posY = 0,
-            position_block,
-            num_rows = 14,
+            position_block: any[],
             is_furniture = false,
-            curent_unit;
+            curent_unit: any;
 
         // FIX ME тут можно применить оптимизацию из Yappi + sence__block переименовать
         this.deleteBlockScene(scence, "sence__block");
@@ -215,41 +219,46 @@ export class Scene {
                 block = document.createElement("img");
                 block.addEventListener("mouseout", this.onOutBlock);
                 block.addEventListener("mouseover", this.onBlock);
-                this.furniture_collection.getCollection().forEach((element) => {
-                    if (element.x == i && element.y == j) {
-                        is_furniture = true;
-                        if (element.furniture.src) {
-                            src = element.furniture.src;
-                        } else {
-                            src = element.furniture.url;
-                        }
-                        block.classList.add("sence__block-interactive");
-                        if (element.furniture.type == "wall") {
-                            block.classList.add("sence__block-wall");
-                        }
-                        block = this.view.renderBlockView(block, posX, posY, i, j, src);
-                        block.addEventListener("click", () => {
-                            curent_unit = this.getActivePerson(this.canvas)[0];
-                            if (curent_unit) {
-                                if (element.furniture.type == "table") {
-                                    block.classList.add("sence__block-table");
-
-                                    this.workTableAction(curent_unit, element);
-                                }
-                                if (element.furniture.type == "kitchen") {
-                                    this.workKitchenAction(curent_unit, element);
-                                }
-
-                                if (element.furniture.type == "game") {
-                                    this.workGameAction(curent_unit, element);
-                                }
-                                if (element.furniture.type == "desck") {
-                                    this.getDesckInfo(curent_unit, element);
-                                }
+                this.furniture_collection
+                    .getCollection()
+                    .forEach((element: { x: number; y: number; furniture: { src: any; url: any; type: string } }) => {
+                        if (element.x == i && element.y == j) {
+                            is_furniture = true;
+                            if (element.furniture.src) {
+                                src = element.furniture.src;
+                            } else {
+                                src = element.furniture.url;
                             }
-                        });
-                    }
-                });
+                            block.classList.add("sence__block-interactive");
+                            if (element.furniture.type == "wall") {
+                                block.classList.add("sence__block-wall");
+                            }
+                            block = this.view.renderBlockView(block, posX, posY, i, j, src);
+                            block.addEventListener("click", () => {
+                                curent_unit = this.getActivePerson(this.canvas)[0];
+                                if (curent_unit) {
+                                    if (element.furniture.type == "table") {
+                                        block.classList.add("sence__block-table");
+
+                                        this.workTableAction(curent_unit, element);
+                                    }
+                                    if (element.furniture.type == "kitchen") {
+                                        this.workKitchenAction(curent_unit, element);
+                                    }
+
+                                    if (element.furniture.type == "game") {
+                                        this.workGameAction(curent_unit, element);
+                                    }
+                                    if (element.furniture.type == "desck") {
+                                        this.getDesckInfo(curent_unit, element);
+                                    }
+                                    if (element.furniture.type == "presentation") {
+                                        this.startPresentation(curent_unit, element);
+                                    }
+                                }
+                            });
+                        }
+                    });
 
                 if (!is_furniture) {
                     block.addEventListener("click", this.onMove);
@@ -274,15 +283,35 @@ export class Scene {
             posY += 100;
         }
     }
-    getDesckInfo(curent_unit, table) {
-        let desck = new DesckBoard({});
+    startPresentation(curent_unit: { person: { id: number }; domPerson: any }, table: { x: number; y: number }) {
+        let presentation_obj = new Presentation();
+
+        presentation_obj.init();
         if (curent_unit.person.id == this.id_curent_user) {
             this.setCoord2Server(table.x, table.y, this.id_curent_user);
 
             this.movePersonByCoord(curent_unit.domPerson, table.x * 100 + "px", (table.y + 1) * 100 + "px");
         }
     }
-    workGameAction(curent_unit, table) {
+
+    getDesckInfo(curent_unit: { person: { id: number }; domPerson: any }, table: { x: number; y: number }) {
+        let desck = new DesckBoard({});
+        desck.init();
+        if (curent_unit.person.id == this.id_curent_user) {
+            this.setCoord2Server(table.x, table.y, this.id_curent_user);
+
+            this.movePersonByCoord(curent_unit.domPerson, table.x * 100 + "px", (table.y + 1) * 100 + "px");
+        }
+    }
+    workGameAction(
+        curent_unit: {
+            stopAnimation: (arg0: string) => void;
+            playAnimation: (arg0: string) => void;
+            person: { id: number };
+            domPerson: any;
+        },
+        table: { x: number; y: number }
+    ) {
         curent_unit.stopAnimation("default_perosn1");
 
         curent_unit.playAnimation("walking_perosn1");
@@ -295,7 +324,15 @@ export class Scene {
             this.movePersonByCoord(curent_unit.domPerson, table.x * 100 + "px", table.y * 100 + "px");
         }
     }
-    workKitchenAction(curent_unit, table) {
+    workKitchenAction(
+        curent_unit: {
+            stopAnimation: (arg0: string) => void;
+            playAnimation: (arg0: string) => void;
+            person: { id: number };
+            domPerson: any;
+        },
+        table: { x: number; y: number }
+    ): void {
         curent_unit.stopAnimation("default_perosn1");
 
         curent_unit.playAnimation("walking_perosn1");
@@ -309,7 +346,15 @@ export class Scene {
             this.movePersonByCoord(curent_unit.domPerson, table.x * 100 + "px", table.y * 100 + "px");
         }
     }
-    workTableAction(curent_unit, table) {
+    workTableAction(
+        curent_unit: {
+            stopAnimation: (arg0: string) => void;
+            playAnimation: (arg0: string) => void;
+            person: { id: number };
+            domPerson: any;
+        },
+        table: { x: any; y: number }
+    ): void {
         curent_unit.stopAnimation("default_perosn1");
 
         curent_unit.playAnimation("walking_perosn1");
@@ -329,12 +374,12 @@ export class Scene {
     loadDragon() {
         let obj = this,
             image_domcache = [];
-        this.config_skins.forEach((skin) => {
+        this.config_skins.forEach((skin: { children: any[] }) => {
             image_domcache = [];
-            skin.children.forEach((elem) => {
+            skin.children.forEach((elem: { src_json: any; src_images: any[] }) => {
                 this.loader.loadJSON(elem.src_json);
 
-                elem.src_images.forEach((img) => {
+                elem.src_images.forEach((img: { path: any }) => {
                     if (typeof obj.loader.get(img.path) == "undefined") {
                         obj.loader.loadElement(img.path);
                     }
@@ -342,7 +387,7 @@ export class Scene {
             });
         });
     }
-    play() {
+    play(): void {
         let cache_skins: any = [],
             tmp: any = {};
 
@@ -352,14 +397,14 @@ export class Scene {
         this.loader.onReady(() => {
             if (!load) {
                 load = true;
-                this.config_skins.forEach((skin) => {
+                this.config_skins.forEach((skin: { skin: string | number; children: any[] }) => {
                     cache_skins[skin.skin] = [];
-                    skin.children.forEach((elem) => {
+                    skin.children.forEach((elem: { name: any; src_json: any; class: any; src_images: any[] }) => {
                         tmp.cahce_image = [];
                         tmp.name = elem.name;
                         tmp.src_json = elem.src_json;
                         tmp.class = elem.class;
-                        elem.src_images.forEach((img) => {
+                        elem.src_images.forEach((img: { name: string | number; path: any }) => {
                             tmp.cahce_image[img.name] = { node: this.loader.get(img.path) };
                         });
                         cache_skins[skin.skin].push(tmp);
@@ -401,7 +446,7 @@ export class Scene {
         });
     }
     // FIX ME копипаст кода из метода выше
-    playNewPerson(person_collection) {
+    playNewPerson(person_collection: Collection): void {
         let cache_skins: any = [],
             tmp: any = {};
         let load = false;
@@ -411,13 +456,13 @@ export class Scene {
         if (!load) {
             load = true;
 
-            this.config_skins.forEach((skin) => {
-                skin.children.forEach((elem) => {
+            this.config_skins.forEach((skin: { children: any[] }) => {
+                skin.children.forEach((elem: { name: any; src_json: any; class: any; src_images: any[] }) => {
                     tmp.cahce_image = [];
                     tmp.name = elem.name;
                     tmp.src_json = elem.src_json;
                     tmp.class = elem.class;
-                    elem.src_images.forEach((img) => {
+                    elem.src_images.forEach((img: { name: string | number; path: any }) => {
                         tmp.cahce_image[img.name] = { node: this.loader.get(img.path) };
                     });
 
@@ -460,16 +505,21 @@ export class Scene {
             });
         }
     }
-    openModalDialog = (obj) => {
+    openModalDialog = (obj: any) => {
         console.log("obj => ", obj);
     };
-    initChatAplication = (obj) => {
+    initChatAplication = (obj: any) => {
         this.chatAplication = obj;
     };
-    openChat = (id_unit, nick) => {
+    openChat = (id_unit: any, nick: any) => {
         this.chatAplication.openChat(id_unit, nick);
     };
-    initFunctionalUnitInfo(unit_info, canvas, id_unit, nick) {
+    initFunctionalUnitInfo(
+        unit_info: { style: { top: string; left: string }; classList: { add: (arg0: string) => void } },
+        canvas: { style: { top: string; left: string } },
+        id_unit: any,
+        nick: any
+    ): void {
         if (unit_info) {
             unit_info.style.top = parseInt(canvas.style.top.split("px")[0]) - 100 + "px";
             unit_info.style.left = parseInt(canvas.style.left.split("px")[0]) + 100 + "px";
@@ -483,18 +533,18 @@ export class Scene {
             nick_container.innerHTML = nick;
         }
     }
-    onChangePerson = (event) => {
+    onChangePerson = (event: { target: any }) => {
         let canvas = event.target;
         if (this.canvas != undefined) {
             this.view.clearPrev(this.canvas, this.loader);
         }
         let unit_info: any = document.getElementById("unit_info_id");
 
-        let curent_unit = this.getActivePerson(canvas)[0];
-        if (curent_unit) {
-            this.initFunctionalUnitInfo(unit_info, canvas, curent_unit.person.id, curent_unit.nick);
+        let unit = this.getActivePerson(canvas)[0];
 
-            if (curent_unit.person.id == this.id_curent_user) {
+        if (unit) {
+            if (unit.person.id != this.id_curent_user) {
+                this.initFunctionalUnitInfo(unit_info, canvas, unit.person.id, unit.nick);
             }
             this.chosePerson = true;
             this.view.changePersonView(canvas, this.loader);
