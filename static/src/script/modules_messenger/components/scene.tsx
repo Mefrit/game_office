@@ -7,7 +7,9 @@ import { LevelEditor } from "../../modules_level_editor/level_editor"
 interface sceneProps {
     id_curent_user: number;
     updateDesign: any;
-
+    id_user2chat: number
+    chatIsOpen: any;
+    nick_user2chat: string;
 }
 interface sceneState {
     friends_list: any[];
@@ -18,6 +20,7 @@ interface sceneState {
     nick_interlocutor: string;
     users: any;
     is_admin: boolean;
+
 }
 export class Scene extends React.Component<sceneProps, sceneState> {
     interfal_dialog: any;
@@ -82,10 +85,10 @@ export class Scene extends React.Component<sceneProps, sceneState> {
 
         setInterval(() => {
             this.getHistory();
-        }, 5500000);
+        }, 5500);
         setInterval(() => {
             this.getInf();
-        }, 2000000);
+        }, 2000);
     }
     openDialog = (id_sent, nick_interlocutor) => {
 
@@ -100,16 +103,19 @@ export class Scene extends React.Component<sceneProps, sceneState> {
             .then((result) => {
 
                 if (result.status == "ok") {
+                    if (result.history_message.length != this.state.history_message.length || id_sent != this.state.id_sent) {
+                        this.setState({
+                            open_dialog: true,
+                            id_sent: id_sent,
+                            history_message: result.history_message,
+                            nick_interlocutor: nick_interlocutor,
+                        });
+                    }
+
                     clearInterval(this.interfal_dialog);
-                    this.setState({
-                        open_dialog: true,
-                        id_sent: id_sent,
-                        history_message: result.history_message,
-                        nick_interlocutor: nick_interlocutor,
-                    });
                     this.interfal_dialog = setInterval(() => {
                         this.openDialog(id_sent, nick_interlocutor);
-                    }, 3000000);
+                    }, 1000);
                 } else {
                     alert(result.message);
                 }
@@ -166,11 +172,16 @@ export class Scene extends React.Component<sceneProps, sceneState> {
         }
     }
     render() {
+
+        if (this.props.id_user2chat != -1) {
+            this.openDialog(this.props.id_user2chat, this.props.nick_user2chat);
+            this.props.chatIsOpen();
+        }
         return (
             <div className="container__chat" >
                 <div className="container__name">
                     <div className="container__name-top"></div>
-                    <img src="./static/src/images/chat/chat.png" alt=""/>
+                    <img src="./static/src/images/chat/chat.png" alt="" />
                 </div>
                 {this.state.is_admin ? <LevelEditor updateDesign={this.props.updateDesign} /> : ""}
                 <ToolsComponent

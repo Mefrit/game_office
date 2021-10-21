@@ -22,6 +22,7 @@ export class Scene {
     id_curent_user: number;
     size_w: number;
     size_h: number;
+    chatAplication: any;
     furniture: any[];
     constructor(loader, arrImg, config_skins, arrFurniture, id_curent_user) {
         this.loader = loader;
@@ -37,10 +38,16 @@ export class Scene {
         this.view = new ViewScene(this.person_collection, this.loader, this.furniture_collection);
         this.curentPerson = undefined;
         this.water_blocks = [];
+        setTimeout(() => {
+            let curent_unit = this.getActivePerson(this.canvas)[0];
+            curent_unit.stopAnimation("default_perosn1");
+        }, 150);
+        this.chatAplication = undefined;
     }
     updateScene(arr_obj, id_curent_user) {
         let person: any = {},
             cache_point;
+
         this.id_curent_user = id_curent_user;
         let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
         arr_obj.forEach((element) => {
@@ -50,10 +57,15 @@ export class Scene {
                 this.playNewPerson(new Collection([new Person(element)]));
                 person = this.person_collection.getPersonById(element.id)[0];
             }
-            cache_point = way_search.start(person.x, person.y, element.x, element.y);
-            if (person.id != id_curent_user) {
-                this.movePersonByCachePoint(person.domPerson, cache_point, 0);
+            if (person.x != element.x || person.y != element.y) {
+                cache_point = way_search.start(person.x, person.y, element.x, element.y);
+                if (person.id != id_curent_user) {
+                    person.stopAnimation("default_perosn1");
+                    person.playAnimation("walking_perosn1");
+                    this.movePersonByCachePoint(person.domPerson, cache_point, 0);
+                }
             }
+
             // тут тоже передвижение
         });
         this.person_collection;
@@ -115,44 +127,51 @@ export class Scene {
             new_coord_x = parseInt(posX.split("px")) / 100,
             new_coord_y = parseInt(posY.split("px")) / 100,
             cache_point: any[] = [];
-
+        let unit_info = document.getElementById("unit_info_id");
+        unit_info?.classList.remove("unit_info-active");
         //\словие что можно ходить в область
         let curent_unit = this.getActivePerson(this.canvas)[0];
 
-        if (curent_unit.person.id == this.id_curent_user) {
-            this.setCoord2Server(new_coord_x, new_coord_y, this.id_curent_user);
-            let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
+        if (curent_unit) {
+            if (curent_unit.person.id == this.id_curent_user) {
+                this.setCoord2Server(new_coord_x, new_coord_y, this.id_curent_user);
+                let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
 
-            cache_point = way_search.start(curent_unit.x, curent_unit.y, new_coord_x, new_coord_y);
+                cache_point = way_search.start(curent_unit.x, curent_unit.y, new_coord_x, new_coord_y);
 
-            curent_unit.stopAnimation("default_perosn1");
-            curent_unit.playAnimation("walking_perosn1");
+                curent_unit.stopAnimation("default_perosn1");
+                curent_unit.playAnimation("walking_perosn1");
 
-            this.movePersonByCachePoint(this.canvas, cache_point, 0);
-        } else {
-            alert("AnotherUser  " + curent_unit.person.id + "   " + this.id_curent_user);
+                this.movePersonByCachePoint(this.canvas, cache_point, 0);
+            } else {
+                alert("AnotherUser  " + curent_unit.person.id + "   " + this.id_curent_user);
+            }
         }
     };
     getActivePerson(canvas) {
-        return this.person_collection.getCollection().filter((elem: any) => {
-            if (elem.getId() == canvas.getAttribute("data-id")) {
-                return elem;
-            }
-        });
+        if (canvas) {
+            return this.person_collection.getCollection().filter((elem: any) => {
+                if (elem.getId() == canvas.getAttribute("data-id")) {
+                    return elem;
+                }
+            });
+        }
+        return [];
     }
     movePersonByCachePoint(canvas, cache, index) {
         if (index < cache.length) {
             let coord = cache[index].split(";");
             this.movePersonByCoord(canvas, coord[0] * 100 + "px", coord[1] * 100 + "px");
-            console.log(index, cache.length, coord);
 
-            setTimeout((elem) => {
+            setTimeout(() => {
                 return this.movePersonByCachePoint(canvas, cache, index + 1);
-            }, 700);
+            }, 450);
         } else {
             let curent_unit = this.getActivePerson(canvas)[0];
-            curent_unit.stopAnimation("walking_perosn1");
-            curent_unit.playAnimation("default_perosn1");
+            if (curent_unit) {
+                curent_unit.stopAnimation("walking_perosn1");
+                curent_unit.playAnimation("default_perosn1");
+            }
         }
     }
     movePersonByCoord(canvas, posX, posY) {
@@ -188,6 +207,7 @@ export class Scene {
             num_rows = 14,
             is_furniture = false,
             curent_unit;
+
         // FIX ME тут можно применить оптимизацию из Yappi + sence__block переименовать
         this.deleteBlockScene(scence, "sence__block");
         for (let j = 0; j < this.size_h; j++) {
@@ -209,23 +229,23 @@ export class Scene {
                         }
                         block = this.view.renderBlockView(block, posX, posY, i, j, src);
                         block.addEventListener("click", () => {
-                            if (element.furniture.type == "table") {
-                                block.classList.add("sence__block-table");
-                                curent_unit = this.getActivePerson(this.canvas)[0];
-                                this.workTableAction(curent_unit, element);
-                            }
-                            if (element.furniture.type == "kitchen") {
-                                curent_unit = this.getActivePerson(this.canvas)[0];
-                                this.workKitchenAction(curent_unit, element);
-                            }
+                            curent_unit = this.getActivePerson(this.canvas)[0];
+                            if (curent_unit) {
+                                if (element.furniture.type == "table") {
+                                    block.classList.add("sence__block-table");
 
-                            if (element.furniture.type == "game") {
-                                curent_unit = this.getActivePerson(this.canvas)[0];
-                                this.workGameAction(curent_unit, element);
-                            }
-                            if (element.furniture.type == "desck") {
-                                curent_unit = this.getActivePerson(this.canvas)[0];
-                                this.getDesckInfo(curent_unit, element);
+                                    this.workTableAction(curent_unit, element);
+                                }
+                                if (element.furniture.type == "kitchen") {
+                                    this.workKitchenAction(curent_unit, element);
+                                }
+
+                                if (element.furniture.type == "game") {
+                                    this.workGameAction(curent_unit, element);
+                                }
+                                if (element.furniture.type == "desck") {
+                                    this.getDesckInfo(curent_unit, element);
+                                }
                             }
                         });
                     }
@@ -237,9 +257,6 @@ export class Scene {
                 }
 
                 is_furniture = false;
-                if (j == 6) {
-                    num_rows = 8;
-                }
 
                 if (block.src.indexOf("block1.png") != -1) {
                     position_block = block.getAttribute("data-coord").split(";");
@@ -267,6 +284,7 @@ export class Scene {
     }
     workGameAction(curent_unit, table) {
         curent_unit.stopAnimation("default_perosn1");
+
         curent_unit.playAnimation("walking_perosn1");
         setTimeout(() => {
             curent_unit.stopAnimation("walking_perosn1");
@@ -279,6 +297,7 @@ export class Scene {
     }
     workKitchenAction(curent_unit, table) {
         curent_unit.stopAnimation("default_perosn1");
+
         curent_unit.playAnimation("walking_perosn1");
         setTimeout(() => {
             curent_unit.stopAnimation("walking_perosn1");
@@ -292,6 +311,7 @@ export class Scene {
     }
     workTableAction(curent_unit, table) {
         curent_unit.stopAnimation("default_perosn1");
+
         curent_unit.playAnimation("walking_perosn1");
         setTimeout(() => {
             curent_unit.stopAnimation("walking_perosn1");
@@ -333,7 +353,6 @@ export class Scene {
             if (!load) {
                 load = true;
                 this.config_skins.forEach((skin) => {
-                    console.log(skin);
                     cache_skins[skin.skin] = [];
                     skin.children.forEach((elem) => {
                         tmp.cahce_image = [];
@@ -353,7 +372,7 @@ export class Scene {
                     let img = this.loader.get(elem.person.url);
                     let cnvsElem = document.createElement("canvas");
                     cnvsElem = this.view.renderPlayer(cnvsElem, elem, img);
-                    console.log("n.getCollection().forE", elem);
+
                     cnvsElem.onclick = this.onChangePerson;
                     if (elem.person.id == this.id_curent_user) {
                         cnvsElem.classList.add("curent_user");
@@ -441,16 +460,46 @@ export class Scene {
             });
         }
     }
+    openModalDialog = (obj) => {
+        console.log("obj => ", obj);
+    };
+    initChatAplication = (obj) => {
+        this.chatAplication = obj;
+    };
+    openChat = (id_unit, nick) => {
+        this.chatAplication.openChat(id_unit, nick);
+    };
+    initFunctionalUnitInfo(unit_info, canvas, id_unit, nick) {
+        if (unit_info) {
+            unit_info.style.top = parseInt(canvas.style.top.split("px")[0]) - 100 + "px";
+            unit_info.style.left = parseInt(canvas.style.left.split("px")[0]) + 100 + "px";
+            unit_info?.classList.add("unit_info-active");
+            let sent = document.getElementById("unit_info_sent_message_id");
 
+            sent?.addEventListener("click", () => {
+                this.openChat(id_unit, nick);
+            });
+            let nick_container: any = document.getElementById("unit_info_nick_id");
+            nick_container.innerHTML = nick;
+        }
+    }
     onChangePerson = (event) => {
         let canvas = event.target;
         if (this.canvas != undefined) {
             this.view.clearPrev(this.canvas, this.loader);
         }
-        this.chosePerson = true;
-        this.view.changePersonView(canvas, this.loader);
-        this.canvas = canvas;
-        this.view.showAvailabeMovies(this.canvas);
+        let unit_info: any = document.getElementById("unit_info_id");
+
+        let curent_unit = this.getActivePerson(canvas)[0];
+        if (curent_unit) {
+            this.initFunctionalUnitInfo(unit_info, canvas, curent_unit.person.id, curent_unit.nick);
+
+            if (curent_unit.person.id == this.id_curent_user) {
+            }
+            this.chosePerson = true;
+            this.view.changePersonView(canvas, this.loader);
+            this.canvas = canvas;
+        }
     };
     renderAiPerson() {}
 }

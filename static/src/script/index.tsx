@@ -13,7 +13,7 @@ let arrPersons = [
 ];
 let arrFurniture = [];
 // wardrobe
-class Director {
+class Director extends React.Component<any, any> {
     scene: any;
     ai: any;
     load: boolean;
@@ -22,13 +22,16 @@ class Director {
     loader: any;
     arrFurniture: any;
     config_skins: any;
-    constructor(loader, arrPersons, arrFurniture, config_skins = []) {
+    constructor(props) {
+        super(props);
         this.load = false;
-        this.loader = loader;
-        this.arrPersons = arrPersons;
+        this.loader = props.loader;
+        this.arrPersons = props.arrPersons;
         this.arrFurniture = false;
-        this.config_skins = config_skins;
-        this.start();
+        this.config_skins = props.config_skins;
+        this.state = {
+            is_ready: false
+        }
     }
     loadScene = (arrPersons, id_curent_user) => {
         // FIX ME убрать копипаст
@@ -48,6 +51,7 @@ class Director {
                         if (result.status == "ok") {
 
                             this.scenePlay(id_curent_user, arrPersons, result.config_skins)
+                            this.setState({ is_ready: true });
                         } else {
                             alert("ERROR: " + result.message);
                         }
@@ -88,21 +92,23 @@ class Director {
             });
 
     }
+    initChatAplication = (obj) => {
+        this.scene.initChatAplication(obj);
+    }
     updateScene = (arrPersons, id_curent_user) => {
         this.scene.updateScene(arrPersons, id_curent_user);
     }
-
     updateDesign = (design) => {
-
         this.scene.updateDesign(design.design, design.size_w, design.size_h);
     }
 
-    start() {
-        let ROOT = document.getElementById("root");
-        ReactDOM.render(<App loadScene={this.loadScene} updateScene={this.updateScene} updateDesign={this.updateDesign} />, ROOT);
+    render() {
+        return <App is_ready={this.state.is_ready} initChatAplication={this.initChatAplication} loadScene={this.loadScene} updateScene={this.updateScene} updateDesign={this.updateDesign} />
     }
     startAI = () => {
         this.ai.step();
     };
 }
-new Director(loader, arrPersons, arrFurniture);
+let ROOT = document.getElementById("root");
+ReactDOM.render(<Director loader={loader} arrPersons={arrPersons} config_skins={arrFurniture} />, ROOT);
+// new Director(loader, arrPersons, arrFurniture);

@@ -79,22 +79,7 @@ export class ViewScene {
         id = { id: canvas.getAttribute("data-id") };
         // this.changeHealth(ctx, { person: id });
     }
-    showAvailabeMovies(canvas) {
-        let posX = canvas.style.left.split("px")[0],
-            posY = canvas.style.top.split("px")[0],
-            arrBlocks: any = document.getElementsByClassName("sence__block"),
-            radius,
-            posXblock,
-            posYblock;
 
-        radius = Math.sqrt(posX * posX + posY * posY);
-        arrBlocks = [].slice.call(arrBlocks);
-
-        arrBlocks.forEach((element) => {
-            posXblock = element.style.left.split("px")[0];
-            posYblock = element.style.top.split("px")[0];
-        });
-    }
     renderBlockView(block, posX, posY, i, j, src = "./static/src/images/block1.png") {
         block.setAttribute("data-coord", i + ";" + j);
         block.classList.add("sence__block");
