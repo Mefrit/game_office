@@ -8,29 +8,7 @@ class DesckBoardReact extends React.Component<any, any> {
         //FIX ME переписать на сокеты
         super(props);
         this.is_admin = true;
-        // this.socket = null;
-        // this.socket = io.connect('http://' + document.domain + ':' + location.port);
-        this.socket = io.connect("http://localhost:5000");
-        this.socket.on('after connect', function (data) {
-            console.log("after connect", data);
-        });
-        this.socket.on('chat message', function (msg) {
-            alert(msg)
-        });
 
-        this.socket.on('output', function (msg) {
-            alert(msg)
-
-        });
-        this.socket.on('connect', function () {
-            console.log("Connected to WS server");
-
-            console.log(this.socket.connected);
-
-        });
-        this.socket.on('any event', function (msg) {
-            console.log("any event", msg);
-        });
         this.state = {
             list_presentations: [],
             curent_url: "",
@@ -125,18 +103,9 @@ class DesckBoardReact extends React.Component<any, any> {
         })
     }
     sokets = () => {
-        // this.socket = io.connect('http://' + document.domain + ':' + location.port + "/chat");
 
-        console.log(this.socket);
         this.socket.emit('chat message', '123123');
-        // this.socket.on('connect', function (data) {
-        //     console.log("connect", data);
-        //     this.socket.emit('send_message', { message: "test1" });
-        //     this.socket.emit('my event', { message: "test2" });
-        //     this.socket.emit('new user', { message: "test3" });
-        //     this.socket.emit('send message', { 'message': "message", 'channel': "channel" });
-        //     this.socket.emit('send-msg', "123123");
-        // });
+
 
         console.log("HEREEE1");
     }
@@ -161,7 +130,6 @@ class DesckBoardReact extends React.Component<any, any> {
 export class Presentation {
     data: any;
     constructor() {
-
     }
     init() {
 
