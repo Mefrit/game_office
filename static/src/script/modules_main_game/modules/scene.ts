@@ -47,7 +47,7 @@ export class Scene {
     }
     updateScene(arr_obj: any[], id_curent_user: number) {
         let person: any = {},
-            cache_point: any[];
+            cache_point: any;
 
         this.id_curent_user = id_curent_user;
         let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
@@ -59,10 +59,11 @@ export class Scene {
                 person = this.person_collection.getPersonById(element.id)[0];
             }
             if (person.x != element.x || person.y != element.y) {
-                cache_point = way_search.start(person.x, person.y, element.x, element.y);
                 if (person.id != id_curent_user) {
+                    cache_point = way_search.start(person.x, person.y, element.x, element.y);
                     person.stopAnimation("default_perosn1");
                     person.playAnimation("walking_perosn1");
+                    console.log("HERE 111 \n\n");
                     this.movePersonByCachePoint(person.domPerson, cache_point, 0);
                 }
             }
@@ -137,11 +138,7 @@ export class Scene {
             if (curent_unit.person.id == this.id_curent_user) {
                 this.setCoord2Server(new_coord_x, new_coord_y, this.id_curent_user);
                 let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
-
                 cache_point = way_search.start(curent_unit.x, curent_unit.y, new_coord_x, new_coord_y);
-
-                curent_unit.stopAnimation("default_perosn1");
-                curent_unit.playAnimation("walking_perosn1");
 
                 this.movePersonByCachePoint(this.canvas, cache_point, 0);
             } else {
@@ -159,19 +156,19 @@ export class Scene {
         }
         return [];
     }
-    movePersonByCachePoint(canvas: any, cache: string | any[], index: number) {
+    movePersonByCachePoint(canvas: any, cache: string | any[], index: number, action_end = "default_perosn1") {
         if (index < cache.length) {
             let coord = cache[index].split(";");
             this.movePersonByCoord(canvas, coord[0] * 100 + "px", coord[1] * 100 + "px");
 
             setTimeout(() => {
-                return this.movePersonByCachePoint(canvas, cache, index + 1);
+                return this.movePersonByCachePoint(canvas, cache, index + 1, action_end);
             }, 450);
         } else {
             let curent_unit = this.getActivePerson(canvas)[0];
             if (curent_unit) {
                 curent_unit.stopAnimation("walking_perosn1");
-                curent_unit.playAnimation("default_perosn1");
+                curent_unit.playAnimation(action_end);
             }
         }
     }
@@ -264,7 +261,6 @@ export class Scene {
                     block.addEventListener("click", this.onMove);
                     block = this.view.renderBlockView(block, posX, posY, i, j);
                 }
-
                 is_furniture = false;
 
                 if (block.src.indexOf("block1.png") != -1) {
@@ -285,11 +281,9 @@ export class Scene {
     }
     startPresentation(curent_unit: { person: { id: number }; domPerson: any }, table: { x: number; y: number }) {
         let presentation_obj = new Presentation();
-
         presentation_obj.init();
         if (curent_unit.person.id == this.id_curent_user) {
             this.setCoord2Server(table.x, table.y, this.id_curent_user);
-
             this.movePersonByCoord(curent_unit.domPerson, table.x * 100 + "px", (table.y + 1) * 100 + "px");
         }
     }
@@ -303,71 +297,37 @@ export class Scene {
             this.movePersonByCoord(curent_unit.domPerson, table.x * 100 + "px", (table.y + 1) * 100 + "px");
         }
     }
-    workGameAction(
-        curent_unit: {
-            stopAnimation: (arg0: string) => void;
-            playAnimation: (arg0: string) => void;
-            person: { id: number };
-            domPerson: any;
-        },
-        table: { x: number; y: number }
-    ) {
-        curent_unit.stopAnimation("default_perosn1");
-
-        curent_unit.playAnimation("walking_perosn1");
-        setTimeout(() => {
-            curent_unit.stopAnimation("walking_perosn1");
-            curent_unit.playAnimation("funny_perosn1");
-        }, 2000);
+    workGameAction(curent_unit, table: { x: number; y: number }) {
         if (curent_unit.person.id == this.id_curent_user) {
             this.setCoord2Server(table.x, table.y, this.id_curent_user);
-            this.movePersonByCoord(curent_unit.domPerson, table.x * 100 + "px", table.y * 100 + "px");
+            let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
+            let cache_point = way_search.start(curent_unit.x, curent_unit.y, table.x, table.y);
+            curent_unit.stopAnimation("default_perosn1");
+            curent_unit.playAnimation("walking_perosn1");
+
+            this.movePersonByCachePoint(this.canvas, cache_point, 0, "funny_perosn1");
         }
     }
-    workKitchenAction(
-        curent_unit: {
-            stopAnimation: (arg0: string) => void;
-            playAnimation: (arg0: string) => void;
-            person: { id: number };
-            domPerson: any;
-        },
-        table: { x: number; y: number }
-    ): void {
-        curent_unit.stopAnimation("default_perosn1");
-
-        curent_unit.playAnimation("walking_perosn1");
-        setTimeout(() => {
-            curent_unit.stopAnimation("walking_perosn1");
-            curent_unit.playAnimation("eating_perosn1");
-        }, 2000);
+    workKitchenAction(curent_unit, table: { x: number; y: number }): void {
         if (curent_unit.person.id == this.id_curent_user) {
             this.setCoord2Server(table.x, table.y, this.id_curent_user);
+            let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
+            let cache_point = way_search.start(curent_unit.x, curent_unit.y, table.x, table.y);
+            curent_unit.stopAnimation("default_perosn1");
+            curent_unit.playAnimation("walking_perosn1");
 
-            this.movePersonByCoord(curent_unit.domPerson, table.x * 100 + "px", table.y * 100 + "px");
+            this.movePersonByCachePoint(this.canvas, cache_point, 0, "eating_perosn1");
         }
     }
-    workTableAction(
-        curent_unit: {
-            stopAnimation: (arg0: string) => void;
-            playAnimation: (arg0: string) => void;
-            person: { id: number };
-            domPerson: any;
-        },
-        table: { x: any; y: number }
-    ): void {
-        curent_unit.stopAnimation("default_perosn1");
-
-        curent_unit.playAnimation("walking_perosn1");
-        setTimeout(() => {
-            curent_unit.stopAnimation("walking_perosn1");
-            curent_unit.playAnimation("work_perosn1");
-        }, 2000);
-
-        let posX = table.x;
+    workTableAction(curent_unit, table: { x: any; y: number }): void {
         if (curent_unit.person.id == this.id_curent_user) {
             this.setCoord2Server(table.x, table.y, this.id_curent_user);
-
-            this.movePersonByCoord(curent_unit.domPerson, posX * 100 + "px", table.y * 100 - 20 + "px");
+            let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
+            let cache_point = way_search.start(curent_unit.x, curent_unit.y, table.x, table.y);
+            curent_unit.stopAnimation("default_perosn1");
+            curent_unit.playAnimation("walking_perosn1");
+            console.log("HERE 444 \n\n");
+            this.movePersonByCachePoint(this.canvas, cache_point, 0, "work_perosn1");
         }
     }
     setAIperson() {}

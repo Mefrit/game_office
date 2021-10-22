@@ -9,9 +9,13 @@ export class SearchWay {
     }
     start(startX, startY, finishX, finishY) {
         var fieldArray = new Array(this.size_w); //Создаем матрицу с нужными размерами
-
+        startY = Math.round(startY);
+        startX = Math.round(startX);
+        finishY = Math.round(finishY);
+        finishX = Math.round(finishX);
         for (var i = 0; i < this.size_h; i++) {
             fieldArray[i] = [];
+            console.log(i, this.size_h);
             for (var j = 0; j < this.size_w; j++) {
                 if (this.furniture_collection.checkFreeCoord({ x: j, y: i })) {
                     fieldArray[i][j] = 0;
@@ -23,6 +27,9 @@ export class SearchWay {
 
         var currentX = startX;
         var currentY = startY;
+        console.log("!!!! SearchWay fieldArray", startX, startY,"to", finishX, finishY ,fieldArray);
+        fieldArray[finishY][finishX] = 0;
+
         fieldArray[currentY][currentX] = 2; //Точка с которой начинаем, ставим равную 2
         if (finishX > startX)
             //Если конечная точка находится справа от начальной
@@ -38,7 +45,13 @@ export class SearchWay {
 
         //В fieldArray построится дорога
 
-        return this.makeRoad(fieldArray, Number(finishX), Number(finishY)); //Создаем массив координат, по которым нужно двигаться до конечной точки
+        if (fieldArray[finishY][finishX] - 2 >= 0) {
+            console.log("makeRoad => ",this.makeRoad(fieldArray, Number(finishX), Number(finishY)););
+            return this.makeRoad(fieldArray, Number(finishX), Number(finishY));
+        }
+
+        return [[finishX + ";" + finishY]];
+        //Создаем массив координат, по которым нужно двигаться до конечной точки
     }
     recurseRight(fieldArray, finishX, finishY, currentX, currentY) {
         if (finishX == currentX && finishY == currentY)
