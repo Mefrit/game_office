@@ -305,9 +305,9 @@ export class Scene {
     workGameAction(curent_unit, table: { x: number; y: number }, game_type: string) {
         if (curent_unit.person.id == this.id_curent_user) {
             this.setCoord2Server(table.x, table.y, this.id_curent_user);
-            if (game_type == 'game_tictactoe') {
+            if (game_type == "game_tictactoe") {
                 new TicTacToe();
-            } else if (game_type == 'game_tetris') {
+            } else if (game_type == "game_tetris") {
                 new Tetris();
             }
             let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);

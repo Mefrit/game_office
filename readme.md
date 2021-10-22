@@ -14,3 +14,4 @@
 -   npm install
 -   gulp
 -   gulp watch
+    open localhost:5000 in your browser
