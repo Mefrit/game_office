@@ -3,6 +3,8 @@ import { ViewScene } from "../viewScene";
 import { Collection } from "./person_collection";
 import { DragonAnimationUpdate } from "../lib/dragon";
 import { SearchWay } from "../lib/searchWayAlgoritm";
+import { TicTacToe } from "../lib/ticTacToe";
+import { Tetris } from "../lib/tetris";
 import { DesckBoard } from "../lib/deskBoard";
 import { Presentation } from "../lib/presentationBoard";
 
@@ -243,8 +245,11 @@ export class Scene {
                                         this.workKitchenAction(curent_unit, element);
                                     }
 
-                                    if (element.furniture.type == "game") {
-                                        this.workGameAction(curent_unit, element);
+                                    if (element.furniture.type == "game_tictactoe") {
+                                        this.workGameAction(curent_unit, element, element.furniture.type);
+                                    }
+                                    if (element.furniture.type == "game_tetris") {
+                                        this.workGameAction(curent_unit, element, element.furniture.type);
                                     }
                                     if (element.furniture.type == "desck") {
                                         this.getDesckInfo(curent_unit, element);
@@ -297,9 +302,14 @@ export class Scene {
             this.movePersonByCoord(curent_unit.domPerson, table.x * 100 + "px", (table.y + 1) * 100 + "px");
         }
     }
-    workGameAction(curent_unit, table: { x: number; y: number }) {
+    workGameAction(curent_unit, table: { x: number; y: number }, game_type: string) {
         if (curent_unit.person.id == this.id_curent_user) {
             this.setCoord2Server(table.x, table.y, this.id_curent_user);
+            if (game_type == 'game_tictactoe') {
+                new TicTacToe();
+            } else if (game_type == 'game_tetris') {
+                new Tetris();
+            }
             let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
             let cache_point = way_search.start(curent_unit.x, curent_unit.y, table.x, table.y);
             curent_unit.stopAnimation("default_perosn1");

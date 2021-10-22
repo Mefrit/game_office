@@ -85,14 +85,27 @@ html {
     }
 }
 .container_game {
-    display: flex;
-    width: 10px;
+    // display: flex;
+    display: none;
+    width: 300px;
     position: absolute;
     left: 950px;
     height: 370px;
     z-index: 100;
     top: 220px;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: stretch;
+    flex-wrap: wrap;
+
+    &_start {
+        display: flex;
+    }
+
+    &_rules {
+        background: black;
+        color: white;
+        width: 100%;
+    }
 }
 .game {
     &__block {
