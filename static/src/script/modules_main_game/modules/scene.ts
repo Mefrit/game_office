@@ -41,10 +41,7 @@ export class Scene {
         this.view = new ViewScene(this.person_collection, this.loader, this.furniture_collection);
         this.curentPerson = undefined;
         this.water_blocks = [];
-        setTimeout(() => {
-            let curent_unit = this.getActivePerson(this.canvas)[0];
-            curent_unit.stopAnimation("default_perosn1");
-        }, 150);
+
         this.chatAplication = undefined;
     }
     updateScene(arr_obj: any[], id_curent_user: number) {
@@ -141,7 +138,7 @@ export class Scene {
                 this.setCoord2Server(new_coord_x, new_coord_y, this.id_curent_user);
                 let way_search = new SearchWay(this.size_w, this.size_h, this.furniture_collection);
                 cache_point = way_search.start(curent_unit.x, curent_unit.y, new_coord_x, new_coord_y);
-
+                curent_unit.playAnimation("walking_perosn1");
                 this.movePersonByCachePoint(this.canvas, cache_point, 0);
             } else {
                 alert("AnotherUser  " + curent_unit.person.id + "   " + this.id_curent_user);
@@ -294,7 +291,7 @@ export class Scene {
     }
 
     getDesckInfo(curent_unit: { person: { id: number }; domPerson: any }, table: { x: number; y: number }) {
-        let desck = new DesckBoard({});
+        let desck = new DesckBoard(curent_unit.person.id);
         desck.init();
         if (curent_unit.person.id == this.id_curent_user) {
             this.setCoord2Server(table.x, table.y, this.id_curent_user);

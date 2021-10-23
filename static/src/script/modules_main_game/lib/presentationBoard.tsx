@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import * as io from 'socket.io-client';
-class DesckBoardReact extends React.Component<any, any> {
+class PresentationReact extends React.Component<any, any> {
     is_admin: boolean;
     socket: any
     constructor(props: any) {
@@ -90,9 +90,7 @@ class DesckBoardReact extends React.Component<any, any> {
                     <img src={this.state.curent_url} alt="Slide" />
                     <input type="button" value=">" onClick={() => { this.changeSlide(this.state.num_slide + 1) }} />
                 </div >}
-
         </div >
-
     }
     chosePresentation = (ev: { target: { value: any; }; }) => {
         this.loadPresentation(ev.target.value, 0);
@@ -103,10 +101,7 @@ class DesckBoardReact extends React.Component<any, any> {
         })
     }
     sokets = () => {
-
         this.socket.emit('chat message', '123123');
-
-
         console.log("HEREEE1");
     }
     render() {
@@ -137,6 +132,6 @@ export class Presentation {
         modal.classList.add("open_modal");
         let modal_content = document.getElementById("modal-content-id");
         // запрос на данные
-        ReactDOM.render(<DesckBoardReact />, modal_content);
+        ReactDOM.render(<PresentationReact />, modal_content);
     }
 }

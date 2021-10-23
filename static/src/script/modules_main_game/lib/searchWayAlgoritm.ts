@@ -15,7 +15,6 @@ export class SearchWay {
         finishX = Math.round(finishX);
         for (var i = 0; i < this.size_h; i++) {
             fieldArray[i] = [];
-            console.log(i, this.size_h);
             for (var j = 0; j < this.size_w; j++) {
                 if (this.furniture_collection.checkFreeCoord({ x: j, y: i })) {
                     fieldArray[i][j] = 0;
@@ -27,7 +26,6 @@ export class SearchWay {
 
         var currentX = startX;
         var currentY = startY;
-        console.log("!!!! SearchWay fieldArray", startX, startY,"to", finishX, finishY ,fieldArray);
         fieldArray[finishY][finishX] = 0;
 
         fieldArray[currentY][currentX] = 2; //Точка с которой начинаем, ставим равную 2
@@ -46,7 +44,6 @@ export class SearchWay {
         //В fieldArray построится дорога
 
         if (fieldArray[finishY][finishX] - 2 >= 0) {
-            console.log("makeRoad => ",this.makeRoad(fieldArray, Number(finishX), Number(finishY)););
             return this.makeRoad(fieldArray, Number(finishX), Number(finishY));
         }
 

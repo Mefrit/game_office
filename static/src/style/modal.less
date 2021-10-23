@@ -1,4 +1,5 @@
-.modal {
+.modal,
+.modal__daskboard {
     position: fixed; /* фиксированное положение */
     top: 0;
     right: 0;
@@ -33,6 +34,7 @@
         margin: 30px auto; /* для отображения модального окна по центру */
     }
 }
+
 /* свойства для блока, содержащего контент модального окна */
 .modal-content {
     position: relative;
@@ -51,6 +53,10 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.3rem;
     outline: 0;
+}
+.modal-content-deskboard {
+    width: 850px;
+    height: 700px;
 }
 @media (min-width: 768px) {
     .modal-content {
