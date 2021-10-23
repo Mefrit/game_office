@@ -14,10 +14,15 @@ interface chatState {
 export class ChatComponent extends React.Component<chatProps, any> {
     constructor(props) {
         super(props);
-
         this.state = {
             content: "",
+            isOpen: true
         };
+    }
+    componentDidUpdate(prevprops) {
+        if (this.props.history_message.length !== prevprops.history_message.length) {
+            this.setState({isOpen: ((this.props.history_message.length == 0) ? false : true)});
+        }
     }
     renderHistory() {
         return this.props.history_message.map((elem) => {
@@ -92,10 +97,17 @@ export class ChatComponent extends React.Component<chatProps, any> {
             </div>
         );
     }
+    closeChat = e => {
+        e.preventDefault();
+        this.setState({isOpen: false});
+    }
     render() {
         return (
-            <div className="chat">
-                <div className="container__name-top"></div>
+            <div className={(this.state.isOpen) ? "chat chat_open" : "chat chat_close"}>
+                <div className="chat__header">
+                    <div className="container__name-top chat__header-name"></div>
+                    <input type="button" className="interface__btn chat__header-button" value="x" onClick={this.closeChat}></input>
+                </div>
                 <div className="interlocutor-inf">
                     <img className="interlocutor-inf__profile-img" src="./static/src/images/chat/point_pink.png" alt="profile" />
                     <h3 className="interlocutor-inf__nick">{this.props.nick_interlocutor}</h3>

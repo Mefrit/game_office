@@ -3,9 +3,12 @@
 @white: white;
 @gray: #ccc;
 .chat {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    position: absolute;
+    right: 440px;
+    height: 500px;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-between;
     background-color: @chat-white;
     width: 100%;
     color: #000 !important;
@@ -15,15 +18,40 @@
     background-color: #fafafa;
     border: 10px solid #061055;
 
+    &_open {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    &_close {
+        display: none;
+    }
+
     &__logo {
         color: black;
         text-align: center;
         padding-left: 20px;
     }
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        &-name {
+            width: 100%;
+        }
+
+        &-button {
+            margin: 0 !important;
+        }
+    }
 }
 .interlocutor-inf {
     display: flex;
     flex-direction: row;
+    align-items: center;
     min-height: 60px;
 
     background: #6eebff;
@@ -44,6 +72,7 @@
     margin-top: 30px;
     max-width: 700px;
     max-height: 70%;
+    height: 100%;
     overflow-y: auto;
 }
 .message-page {
@@ -72,11 +101,13 @@
 }
 .sent-interface {
     border-top: 1px solid @gray;
-    padding: 40px 0px;
+    // padding: 40px 0px;
+    padding: 10px 5px;
     display: flex;
     flex-direction: row;
     align-content: center;
     align-items: center;
+    justify-content: space-around;
     &__image-sent {
         width: 40px;
         margin-left: 40px;
