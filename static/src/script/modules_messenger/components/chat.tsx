@@ -8,6 +8,7 @@ interface chatProps {
     id_curent_user: number | string;
     nick_interlocutor: string;
     open_dialog: any;
+    changeDialog: any;
 }
 interface chatState {
     content: string;
@@ -104,7 +105,7 @@ export class ChatComponent extends React.Component<chatProps, any> {
     }
     closeChat = e => {
         e.preventDefault();
-
+        this.props.changeDialog(false);
         this.setState({ isOpen: false });
     }
     render() {

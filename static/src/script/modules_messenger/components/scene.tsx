@@ -91,7 +91,6 @@ export class Scene extends React.Component<sceneProps, sceneState> {
         }, 2000);
     }
     openDialog = (id_sent, nick_interlocutor) => {
-        console.log("openDialog", id_sent, nick_interlocutor);
         fetch("/?module=dialog&action=Open", {
             method: "POST",
             headers: {
@@ -171,7 +170,11 @@ export class Scene extends React.Component<sceneProps, sceneState> {
                 });
         }
     }
-
+    changeDialog = (value) => {
+        clearInterval(this.interfal_dialog);
+        this.props.chatIsOpen();
+        this.setState({ open_dialog: value, id_sent: -1, nick: "" });
+    }
     render() {
 
         if (this.props.id_user2chat != -1) {
@@ -200,7 +203,7 @@ export class Scene extends React.Component<sceneProps, sceneState> {
                         history_message={this.state.open_dialog ? this.state.history_message : []}
                         sentMessage={this.sentMessage}
                         open_dialog={this.state.open_dialog}
-
+                        changeDialog={this.changeDialog}
                         id_curent_user={this.props.id_curent_user}
                         nick_interlocutor={this.state.nick_interlocutor}
                     />

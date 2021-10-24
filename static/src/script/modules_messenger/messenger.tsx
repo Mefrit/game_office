@@ -83,11 +83,8 @@ export class App extends React.Component<any, any> {
                         if (!this.load_scene) {
                             this.load_scene = true;
                             this.props.loadScene(arrPersons, this.state.id_curent_user);
-
                         }
-
                     }
-
                 } else {
                     alert("ERROR " + result.message);
                 }
