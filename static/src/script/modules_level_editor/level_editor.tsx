@@ -1,6 +1,7 @@
 
 
-import React = require('react');
+import React from 'react'
+
 
 import { LevelEditorInterface } from './components/main_interface'
 
@@ -30,14 +31,11 @@ export class LevelEditor extends React.Component<any, any>{
         })
             .then((data) => data.json())
             .then((result) => {
-                console.log("LevelEditor", result);
                 if (result.status == "ok") {
-                    // 
-                    console.log("JSON.parse(result.design) level", JSON.parse(result.design));
+
                     this.setState({
                         design: JSON.parse(result.design)
                     });
-                    console.log("OK");
                 } else {
                     alert(result.message);
                 }
@@ -81,7 +79,8 @@ export class LevelEditor extends React.Component<any, any>{
             {!this.state.is_open ?
                 <img className="level_editor_container__image_build" src="./static/src/images/build.png" onClick={this.changeStateInterface} alt="" />
                 :
-                <LevelEditorInterface changeStateInterface={this.changeStateInterface} design={this.state.design} saveВesign={this.saveВesign} />}
+                <LevelEditorInterface changeStateInterface={this.changeStateInterface} design={this.state.design} saveВesign={this.saveВesign} />
+            }
         </div>
     }
 }

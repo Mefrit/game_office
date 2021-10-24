@@ -41,8 +41,6 @@ export class LevelEditorInterface extends React.Component<any, any>{
 
     }
     choseElement = (element) => {
-        console.log("element", element);
-
         this.setState({
             chosen_element: element
         });
@@ -61,7 +59,6 @@ export class LevelEditorInterface extends React.Component<any, any>{
         this.props.saveВesign({ design: this.state.cache_elements, size_w: this.size_w, size_h: this.size_h });
     }
     updateSizeArea = (name, value) => {
-        console.log("updateSizeArea", name, value);
         this[name] = value;
     }
     render() {

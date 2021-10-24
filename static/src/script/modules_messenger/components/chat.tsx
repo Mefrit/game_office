@@ -7,6 +7,7 @@ interface chatProps {
     sentMessage: (value: string) => void;
     id_curent_user: number | string;
     nick_interlocutor: string;
+    open_dialog: any;
 }
 interface chatState {
     content: string;
@@ -20,8 +21,12 @@ export class ChatComponent extends React.Component<chatProps, any> {
         };
     }
     componentDidUpdate(prevprops) {
-        if (this.props.history_message.length !== prevprops.history_message.length) {
-            this.setState({isOpen: ((this.props.history_message.length == 0) ? false : true)});
+        // if (this.props.history_message.length !== prevprops.history_message.length) {
+        //     this.setState({ isOpen: ((this.props.history_message.length == 0) ? false : true) });
+        // }
+        console.log("this.props.open_dialog && !this.state.isOpen ", this.props.open_dialog && !this.state.isOpen);
+        if (this.props.open_dialog && !this.state.isOpen) {
+            this.setState({ isOpen: this.props.open_dialog });
         }
     }
     renderHistory() {
@@ -99,11 +104,12 @@ export class ChatComponent extends React.Component<chatProps, any> {
     }
     closeChat = e => {
         e.preventDefault();
-        this.setState({isOpen: false});
+
+        this.setState({ isOpen: false });
     }
     render() {
         return (
-            <div className={(this.state.isOpen) ? "chat chat_open" : "chat chat_close"}>
+            <div className={this.state.isOpen ? "chat chat_open" : "chat chat_close"}>
                 <div className="chat__header">
                     <div className="container__name-top chat__header-name"></div>
                     <input type="button" className="interface__btn chat__header-button" value="x" onClick={this.closeChat}></input>

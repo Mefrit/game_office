@@ -74,8 +74,7 @@ class PresentationReact extends React.Component<any, any> {
     }
 
     changeSlide = (num_slide: number) => {
-        console.log("nnot socker((( ");
-        this.socket.emit('send-msg', "123123");
+        // this.socket.emit('send-msg', "123123");
         if (num_slide >= 0 && num_slide <= this.state.count_slides) {
             this.loadPresentation(this.state.id_presentation, num_slide);
         }
@@ -83,7 +82,7 @@ class PresentationReact extends React.Component<any, any> {
     renderWindow() {
         return <div className="presentation">
             {this.state.curent_url == "" ?
-                <h3>Выберите презентацию</h3>
+                <h4>Выберите презентацию</h4>
                 :
                 <div className="presentation__interface" >
                     <input type="button" value="<" onClick={() => { this.changeSlide(this.state.num_slide - 1) }} />
@@ -102,16 +101,18 @@ class PresentationReact extends React.Component<any, any> {
     }
     sokets = () => {
         this.socket.emit('chat message', '123123');
-        console.log("HEREEE1");
     }
     render() {
-        return <div className="modal-content">
+        return <div className="modal-content  modal-content-presentation">
             <div className="modal-content__header">
-                <h3>Список презентаций</h3>
+                <div className='presentation-header'>
+                    <h3>Список презентаций</h3>
 
-                {/* <input type="button" value="sent" onClick={this.sokets} /> */}
-                <input type="button" className="modal-content__cancel" onClick={this.close} value="x" />
-                <select onChange={this.chosePresentation} name="" id="">
+                    {/* <input type="button" value="sent" onClick={this.sokets} /> */}
+                    <input type="button" className="modal-content__cancel" onClick={this.close} value="x" />
+                </div>
+
+                <select className='presentation-list' onChange={this.chosePresentation} name="" id="">
                     <option disabled selected value="#">Список презентаций</option>
                     {this.renderListPresentation()}
 
@@ -127,7 +128,6 @@ export class Presentation {
     constructor() {
     }
     init() {
-
         let modal: any = document.getElementById("openModal");
         modal.classList.add("open_modal");
         let modal_content = document.getElementById("modal-content-id");

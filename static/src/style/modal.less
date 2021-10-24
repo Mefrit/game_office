@@ -51,12 +51,17 @@
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0.3rem;
+    border-radius: 2px;
     outline: 0;
 }
+.modal-content-presentation {
+    border-radius: 2px;
+    border: 8px solid #2c67cb;
+    height: 440px;
+}
 .modal-content-deskboard {
-    width: 850px;
-    height: 700px;
+    width: 650px;
+    height: 900px;
 }
 @media (min-width: 768px) {
     .modal-content {
@@ -119,15 +124,23 @@
     overflow: auto;
 }
 .modal-content {
-    width: 500px;
-    height: 500px;
     &__cancel {
+        background-color: #2c67cb;
+        color: rgb(255, 255, 255);
+        padding: 5px;
+        margin: 0px 5px;
         width: 30px;
+        border: 0px;
+        border-radius: 2px;
     }
     &__task-container {
-        height: 300px;
+        height: 650px;
         overflow: auto;
+        text-align: center;
+        margin-bottom: 10px;
         padding: 5px;
+        border-bottom: 1px solid #2c67cb;
+        padding: 5px 0px;
     }
 }
 .interface {
@@ -137,40 +150,83 @@
     margin-top: 10px;
     padding: 10px;
     display: flex;
-    background-color: rgb(199, 199, 199);
+    background-color: #2c67cb;
     flex-direction: column;
+    label {
+        color: white;
+        width: 300px;
+    }
     &__taskInfo {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 5px;
     }
     &__description-container {
         display: flex;
+        margin-top: 10px;
         flex-direction: column;
+        width: 100% !important;
     }
     &__description {
         margin-top: 10px;
         height: 70px;
+        width: 100%;
     }
     &__btn-add {
-        padding: 10px;
+        background-color: #ffffff;
+        color: #040404;
+        padding: 5px;
+        margin: 0px 5px;
+        width: 150xp;
+        margin-top: 10px;
+        border: 0px;
+        border-radius: 2px;
     }
 }
 .task {
     display: flex;
     border: 1px solid black;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 5px;
-    margin-left: 5px;
+    border-radius: 2px;
+    height: 320px;
+
+    float: left;
+    margin: 10px;
+    padding: 2px;
+    &__name-top {
+        background: url(../../src/images/chat/top_left.png) no-repeat 0 100%,
+            url(../../src/images/chat/top_right.png) no-repeat 100% 100%, #2c67cb;
+        background-size: 100px;
+        height: 32px;
+    }
+    label {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    width: 300px;
     flex-direction: column;
     &__info {
         display: flex;
         justify-content: space-around;
-        flex-direction: row;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
     }
     &__description {
+        overflow: auto;
         width: 90%;
         display: flex;
         margin-left: 10px;
+    }
+    &__close_task {
+        background-color: #2c67cb;
+        color: rgb(255, 255, 255);
+        padding: 5px;
+        margin: 0px 5px;
+
+        border-radius: 2px;
+        border: 0px;
     }
 }

@@ -1,9 +1,12 @@
 .level_editor_container {
     height: 50px;
     float: right;
+    z-index: 110;
+
     &__image_build {
         width: 50px;
         cursor: pointer;
+        margin-left: 330px;
     }
 }
 .level_editor {
@@ -12,16 +15,17 @@
     }
     &__interface {
         padding: 15px 40px;
-        background-color: #dab177;
+        background-color: white;
         // border: 22px solid #1f508a;
-        box-shadow: -16px -12px 0px #1f508a;
+
         width: 1340px;
         position: absolute;
-        left: -225%;
-        top: 10%;
+        left: -295%;
+        top: 5%;
         z-index: 120;
         text-align: center;
         height: 700px;
+        box-shadow: -16px -12px 0px #2c67cb, 0px 0px 8000px black;
     }
 }
 
@@ -41,7 +45,7 @@
     }
     &-chosen {
         width: 95%;
-        border-bottom: 3px solid #1f508a;
+        border-bottom: 3px solid #2c67cb;
     }
     // &__list {
     //     max-height: 200px;
@@ -74,6 +78,7 @@
         color: rgb(31, 31, 31);
     }
 }
+
 .interface {
     &__btn {
         padding: 5px 10px;
@@ -81,10 +86,10 @@
         color: white;
         min-width: 20px;
         min-height: 20px;
-        background-color: #1f508a;
+        background-color: #2c67cb;
     }
     &__rings {
-        background-image: url("../../src/images/level_build_rings_white.png");
+        background-image: url("../../src/images/level_build_rings.png");
         width: 80px;
         height: 720px;
         margin-top: -115px;
@@ -119,8 +124,9 @@
         padding: 5px;
         overflow: auto;
         color: black;
-        background-color: white;
-        box-shadow: -16px -12px 0px #1f508a;
+        background-color: #2c66cb33;
+
+        box-shadow: -16px -12px 0px #2c67cb;
     }
 }
 .area {
@@ -129,8 +135,8 @@
     height: 500px;
     overflow: auto;
 
-    background-color: white;
-    box-shadow: -16px -12px 0px #1f508a;
+    background-color: #2c66cb33;
+    box-shadow: -16px -12px 0px #2c67cb;
     border-radius: 2px;
     margin-left: 25px;
     padding: 10px;
@@ -156,7 +162,7 @@
             margin-top: -4px;
             cursor: pointer;
         }
-        background-color: #3f5062;
+        background-color: #2c67cb;
         width: 50px;
         height: 50px;
         margin-top: -5px;

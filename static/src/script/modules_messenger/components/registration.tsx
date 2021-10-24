@@ -36,7 +36,7 @@ export class RegistrationComponent extends React.Component<registrationProps, re
     };
     onReg = (event) => {
         event.preventDefault();
-        console.log("this.state", this.state);
+
         if (this.state.password == this.state.password_repeat) {
             fetch("/?module=registration&action=Reg", {
                 method: "POST",
@@ -52,7 +52,6 @@ export class RegistrationComponent extends React.Component<registrationProps, re
             })
                 .then((data) => data.json())
                 .then((result) => {
-                    console.log("result from server onReg", result);
                     if (result.status == "ok") {
                         this.props.setEnter(result.id_curent_user);
                     } else {
@@ -152,6 +151,10 @@ export class RegistrationComponent extends React.Component<registrationProps, re
                                         type="password"
                                     />
                                 </label>
+                                <label>
+                                    <span className="inputs__label">Аватар персонажа</span>{" "}
+                                    {this.renderSkinsPerosn()}
+                                </label>
                                 <input
                                     type="button"
                                     className="inputs__reg-btn btn_chat btn_chat-primal   "
@@ -159,7 +162,7 @@ export class RegistrationComponent extends React.Component<registrationProps, re
                                     value="Зарегистрироваться"
                                 />
                             </form>
-                            {this.renderSkinsPerosn()}
+
                         </div>
                     ) : (
                         <div className="reg__inf">

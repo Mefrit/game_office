@@ -95,17 +95,20 @@ class DesckBoardReact extends React.Component<any, any> {
     rendertask() {
         return this.state.tasks.map(elem => {
             return <div className="task">
+                <div className="task__name-top"></div>
                 <div className="task__info">
                     <span className="modal-content__owner">Кому - {this.getNickById(elem.id_owner, this.state.users)}</span>
                     <span className="modal-content__title">Название -{elem.title}</span>
 
 
                 </div>
+
                 <label>Дедлайн: <input type="date" value={elem.time_end} /></label>
                 <label>Оцениваемая сложность: <h5>{elem.price}</h5></label>
+
                 {
                     this.id_customer == elem.id_customer ?
-                        <input type="button" onClick={() => { this.deleteTask(elem.id) }} value="Закрыть задачу" /> : ""}
+                        <input type="button" className="task__close_task" onClick={() => { this.deleteTask(elem.id) }} value="Закрыть задачу" /> : ""}
                 <span>Описание</span>
                 <p className="task__description">
                     {elem.description}
@@ -185,7 +188,9 @@ class DesckBoardReact extends React.Component<any, any> {
 
     renderInterface() {
         return <div className="interface">
+
             <div className="interface__taskInfo">
+
 
                 {/* <label>Предать задачу: <input type="text" value={this.state.owner} onChange={this.changeOwner} className="interface__owner" /></label> */}
                 <label>Предать задачу:  <select className="interface__owner" onChange={this.changeOwner} >
@@ -193,10 +198,10 @@ class DesckBoardReact extends React.Component<any, any> {
                 </select></label>
                 <label>Название задачи: <input type="text" value={this.state.title} onChange={this.changeTitle} className="interface__owner" /></label>
             </div>
-
-            <label>Оценка сложности задачи: <input type="number" max="5" min="0" value={this.state.price} onChange={this.changePrice} className="interface__owner" /> XP</label>
-            <label>Дедлайн для задачи: <input type="date" value={this.state.time_end} onChange={this.changeData} className="interface__owner" /></label>
-
+            <div className="interface__taskInfo">
+                <label>Оценка сложности задачи: <input type="number" max="5" min="0" value={this.state.price} onChange={this.changePrice} className="interface__owner" /> XP</label>
+                <label>Дедлайн для задачи: <input type="date" value={this.state.time_end} onChange={this.changeData} className="interface__owner" /></label>
+            </div>
             <label className="interface__description-container" >
                 Описание  задачи
                 <textarea value={this.state.description} className="interface__description" onChange={this.changeDescription} id="" ></textarea>
@@ -207,7 +212,7 @@ class DesckBoardReact extends React.Component<any, any> {
     }
     render() {
         return <div className="modal-content modal-content-deskboard">
-            < div className="modal-content__header" >
+            < div className="modal-content__header modal-content__header-tasks" >
                 <h3>Задачи</h3>
                 <input type="button" className="modal-content__cancel" onClick={this.close} value="x" />
             </div >
