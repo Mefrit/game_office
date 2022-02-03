@@ -22,10 +22,6 @@ export class ChatComponent extends React.Component<chatProps, any> {
         };
     }
     componentDidUpdate(prevprops) {
-        // if (this.props.history_message.length !== prevprops.history_message.length) {
-        //     this.setState({ isOpen: ((this.props.history_message.length == 0) ? false : true) });
-        // }
-        console.log("this.props.open_dialog && !this.state.isOpen ", this.props.open_dialog && !this.state.isOpen);
         if (this.props.open_dialog && !this.state.isOpen) {
             this.setState({ isOpen: this.props.open_dialog });
         }
@@ -93,7 +89,6 @@ export class ChatComponent extends React.Component<chatProps, any> {
                     placeholder="Поле для ввода"
                     value={this.state.content}
                 />
-
                 <img
                     className="sent-interface__image-sent"
                     src="./static/src/images/sent.png"

@@ -1,6 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import * as io from 'socket.io-client';
+import { io } from 'socket.io-client'
+// const io = require("socket.io")({
+//     serveClient: false
+// });
+
+
 class PresentationReact extends React.Component<any, any> {
     is_admin: boolean;
     socket: any
@@ -8,7 +13,6 @@ class PresentationReact extends React.Component<any, any> {
         //FIX ME переписать на сокеты
         super(props);
         this.is_admin = true;
-
         this.state = {
             list_presentations: [],
             curent_url: "",
@@ -44,7 +48,6 @@ class PresentationReact extends React.Component<any, any> {
                 }
             });
     }
-
     checkChangeSlide = (id_presentation: any, num_slide = this.state.num_slide) => {
         fetch("/?module=PresentationBoard&action=GetUrlByNum", {
             method: "POST",
@@ -72,7 +75,6 @@ class PresentationReact extends React.Component<any, any> {
             list_presentations: [{ id_presentation: 1, title: "Котики" }, { id_presentation: 1, title: "Котики 2" }]
         });
     }
-
     changeSlide = (num_slide: number) => {
         // this.socket.emit('send-msg', "123123");
         if (num_slide >= 0 && num_slide <= this.state.count_slides) {
@@ -107,15 +109,12 @@ class PresentationReact extends React.Component<any, any> {
             <div className="modal-content__header">
                 <div className='presentation-header'>
                     <h3>Список презентаций</h3>
-
                     {/* <input type="button" value="sent" onClick={this.sokets} /> */}
                     <input type="button" className="modal-content__cancel" onClick={this.close} value="x" />
                 </div>
-
                 <select className='presentation-list' onChange={this.chosePresentation} name="" id="">
                     <option disabled selected value="#">Список презентаций</option>
                     {this.renderListPresentation()}
-
                 </select>
             </div>
             {this.renderWindow()}
@@ -127,7 +126,49 @@ export class Presentation {
     data: any;
     constructor() {
     }
+
     init() {
+        // let socket = io({ autoConnect: false });
+
+        // var socket_io = io.connect('http://localhost:5000');
+        // var socket_io = io();
+        // // console.log("connection !!!!!! ", socket);
+        // console.log('init1!!!!!!!!!!! ', socket_io);
+        // socket_io.on('connect', function () {
+        //     console.log('iconnexct !!!!!!!!! ', socket_io);
+        //     socket_io.emit('test', { data: 'connected to the SocketServer...' });
+        // });
+        // socket_io.emit('test', { data: 'connected to the SocketServer...' });
+        // socket_io.on('connection', (socket) => {
+        //     console.log('a user connected !!!!!!!');
+        //     socket.on('disconnect', () => {
+        //         console.log('user disconnected');
+
+        //     });
+        //     socket.emit('test', { test: "Hello" }); // emit an event to all connected sockets
+        //     socket.on('test_client', (socket) => {
+        //         console.log('test_client 1');
+        //         // socket.emit('test', /* … */); // emit an event to all connected sockets
+        //     });
+        // });
+        // socket_io.on('test_client', (socket) => {
+        //     console.log('test_client 2');
+        //     // socket.emit('test', /* … */); // emit an event to all connected sockets
+        // });
+        // socket_io.on('test', (socket) => {
+        //     console.log("Test");
+        // });
+        // socket_io.on('test', (socket) => {
+        //     console.log("Test");
+        // });
+        // socket_io.emit('test', { test: "Hello" });
+        // io.on('connection', socket => {
+        //     socket.emit('request', /* … */); // emit an event to the socket
+        //     io.emit('broadcast', /* … */); // emit an event to all connected sockets
+        //     socket.on('reply', () => { /* … */ }); // listen to the event
+        // });
+
+
         let modal: any = document.getElementById("openModal");
         modal.classList.add("open_modal");
         let modal_content = document.getElementById("modal-content-id");
