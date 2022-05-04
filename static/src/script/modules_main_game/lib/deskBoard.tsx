@@ -99,13 +99,9 @@ class DesckBoardReact extends React.Component<any, any> {
                 <div className="task__info">
                     <span className="modal-content__owner">Кому - {this.getNickById(elem.id_owner, this.state.users)}</span>
                     <span className="modal-content__title">Название -{elem.title}</span>
-
-
                 </div>
-
                 <label>Дедлайн: <input type="date" value={elem.time_end} /></label>
                 <label>Оцениваемая сложность: <h5>{elem.price}</h5></label>
-
                 {
                     this.id_customer == elem.id_customer ?
                         <input type="button" className="task__close_task" onClick={() => { this.deleteTask(elem.id) }} value="Закрыть задачу" /> : ""}
@@ -113,7 +109,6 @@ class DesckBoardReact extends React.Component<any, any> {
                 <p className="task__description">
                     {elem.description}
                 </p>
-
             </div>
         })
     }
@@ -188,11 +183,7 @@ class DesckBoardReact extends React.Component<any, any> {
 
     renderInterface() {
         return <div className="interface">
-
             <div className="interface__taskInfo">
-
-
-                {/* <label>Предать задачу: <input type="text" value={this.state.owner} onChange={this.changeOwner} className="interface__owner" /></label> */}
                 <label>Предать задачу:  <select className="interface__owner" onChange={this.changeOwner} >
                     {this.renderUses(this.state.users)}
                 </select></label>

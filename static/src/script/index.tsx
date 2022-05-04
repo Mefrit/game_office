@@ -33,31 +33,6 @@ class Director extends React.Component<any, any> {
         this.state = {
             is_ready: false
         }
-        // var socket = io.connect('http://localhost:5000');
-        // console.log("sqfdgdfg!");
-        // socket.on('connect', function () {
-        //     console.log("User has connected!");
-        //     socket.send('User has connected!');
-        // });
-
-        // socket.on('message', function (msg) {
-        //     console.log("User has connected!");
-        //     console.log('Rmessagee');
-        // });
-        // setTimeout(() => { socket.send("TEST"); }, 10)
-        // var socket_io = io();
-        // // console.log("connection !!!!!! ", socket);
-        // console.log('sockets ', socket_io);
-        // console.log('init1!!!!!!!!!!! ', socket_io);
-        // socket_io.on('connect', () => {
-        //     console.log('iconnexct !!!!!!!!! ', socket_io);
-        //     socket_io.emit('test', { data: 'connected to the SocketServer...' });
-        // });
-        // socket_io.on('disconnect', () => {
-        //     console.log('disconnect, socket_io');
-        //     socket_io.emit('test', { data: 'connected to the SocketServer...' });
-        // });
-        // socket_io.emit('test', { data: 'connected to the SocketServer...' });
     }
     loadScene = (arrPersons, id_curent_user) => {
         // FIX ME убрать копипаст
@@ -137,4 +112,3 @@ class Director extends React.Component<any, any> {
 }
 let ROOT = document.getElementById("root");
 ReactDOM.render(<Director loader={loader} arrPersons={arrPersons} config_skins={arrFurniture} />, ROOT);
-// new Director(loader, arrPersons, arrFurniture);

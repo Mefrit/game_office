@@ -46,11 +46,10 @@ export class Person {
         return this.animation[name];
     }
     playAnimation(name) {
-        console.log("playAnimation   ", name);
+
         this.animation[name].play();
     }
     stopAnimation(name) {
-        console.log("stopAnimation  ", name);
         this.animation[name].stop();
     }
     initImage(image) {

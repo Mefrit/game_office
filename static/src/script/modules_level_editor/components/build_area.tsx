@@ -4,7 +4,6 @@ export class BuildArea extends React.Component<any, any>{
     categories: any[];
     constructor(props) {
         super(props);
-        console.log('BuildArea => ', this.props);
         this.state = {
             cache_interface_elements: this.props.cache_interface_elements,
             chosen_ceil: false,
@@ -34,9 +33,7 @@ export class BuildArea extends React.Component<any, any>{
             chosen_element_from_props.x = x;
             chosen_element_from_props.y = y;
             chosen_element_from_props.id = x + "_" + y * 10;
-            console.log('chosen_element_from_props', chosen_element_from_props);
             cache_interface_elements = this.addElelmentInterface2Cache(chosen_element_from_props, cache_interface_elements);
-
         }
         this.props.setCacheElements(cache_interface_elements);
         this.setState({
